@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Exceptions\SessionExtensions.cs" />
+    <Compile Remove="Helper\ImageHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <None Remove="CodeTemplate\IRepositoryTemplate.txt" />
+    <None Remove="CodeTemplate\IServicesTemplate.txt" />
+    <None Remove="CodeTemplate\ModelTemplate.txt" />
+    <None Remove="CodeTemplate\RepositoryTemplate.txt" />
+    <None Remove="CodeTemplate\ServiceTemplate.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CodeTemplate\IRepositoryTemplate.txt" />
+    <EmbeddedResource Include="CodeTemplate\IServicesTemplate.txt" />
+    <EmbeddedResource Include="CodeTemplate\ModelTemplate.txt" />
+    <EmbeddedResource Include="CodeTemplate\RepositoryTemplate.txt" />
+    <EmbeddedResource Include="CodeTemplate\ServiceTemplate.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+>>>>>>> 8723cb5... 添加 CodeGenerator
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+    <PackageReference Include="Dapper" Version="2.0.4" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+=======
+>>>>>>> e7f3251... 继续
+=======
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+>>>>>>> d728de5... text
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
+  </ItemGroup>
+
+</Project>

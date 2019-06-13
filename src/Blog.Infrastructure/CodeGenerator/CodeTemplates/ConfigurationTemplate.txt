@@ -1,0 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using YDQZ.Core.Entities;
+
+namespace {TemplateNamespace}.EntityConfigurations
+{
+	public class {ClassName}Configuration : IEntityTypeConfiguration<{ClassName}>
+	{
+		public void Configure(EntityTypeBuilder<{ClassName}> builder)
+        {
+			
+        }
+	}
+}

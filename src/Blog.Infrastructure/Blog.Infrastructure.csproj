@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\MediaTypeExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="CodeGenerator\CodeTemplates\ConfigurationTemplate.txt" />
+    <None Remove="CodeGenerator\CodeTemplates\DBContextTemplate.txt" />
+    <None Remove="CodeGenerator\CodeTemplates\IRepositoryTemplate.txt" />
+    <None Remove="CodeGenerator\CodeTemplates\ModelTemplate.txt" />
+    <None Remove="CodeGenerator\CodeTemplates\ParametersTemplate.txt" />
+    <None Remove="CodeGenerator\CodeTemplates\RepositoryTemplate.txt" />
+    <None Remove="CodeGenerator\CodeTemplates\ResourceTemplate.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\ConfigurationTemplate.txt" />
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\DBContextTemplate.txt" />
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\IRepositoryTemplate.txt" />
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\ModelTemplate.txt" />
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\ParametersTemplate.txt" />
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\RepositoryTemplate.txt" />
+    <EmbeddedResource Include="CodeGenerator\CodeTemplates\ResourceTemplate.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CodeGenerator\CodeGenerateModels\" />
+    <Folder Include="Database\EntityConfigurations\" />
+    <Folder Include="Services\" />
+    <Folder Include="ResultModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.5.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.1-preview1-final" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1ff30bd... 增加blog首页和文章页
+    <Compile Remove="Migrations\20190806141151_cheshi.cs" />
+    <Compile Remove="Migrations\20190806141151_cheshi.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+<<<<<<< HEAD
+=======
+>>>>>>> e7f3251... 继续
+=======
+>>>>>>> 1ff30bd... 增加blog首页和文章页
+=======
+>>>>>>> 8723cb5... 添加 CodeGenerator
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WyBlog.Entities\WyBlog.Entities.csproj" />
+    <ProjectReference Include="..\WyBlog.IRepository\WyBlog.IRepository.csproj" />
+  </ItemGroup>
+
+</Project>

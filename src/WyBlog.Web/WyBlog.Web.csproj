@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+<<<<<<< HEAD
+    <Compile Remove="Controllers\Api\SignatureController.cs" />
+  </ItemGroup>
+<<<<<<< HEAD:src/WyBlog.Web/WyBlog.Web.csproj
+
+  <ItemGroup>
+=======
+>>>>>>> 972fd8d... 换源
+    <Content Remove="wwwroot\css\Index.min.css" />
+    <Content Remove="wwwroot\css\master.css" />
+    <Content Remove="wwwroot\libs.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+=======
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\Index.min.css" />
+    <Content Remove="wwwroot\css\master.css" />
+    <Content Remove="wwwroot\libs.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Dockerfile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+<<<<<<< HEAD
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> e7f3251... 继续:src/WyBlog.Web/WyBlog.Web.csproj
+=======
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+>>>>>>> 41fd800... EF Core 迁移数据库
+=======
+>>>>>>> 1ff30bd... 增加blog首页和文章页
+=======
+>>>>>>> d728de5... text
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0006" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD:src/WyBlog.Web/WyBlog.Web.csproj
+=======
+    <Folder Include="Controllers\Admin\" />
+>>>>>>> e7f3251... 继续:src/WyBlog.Web/WyBlog.Web.csproj
+=======
+>>>>>>> fb48ab8... 完善前端资源压缩
+    <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\libs\" />
+    <Folder Include="Validation\" />
+    <Folder Include="PropertyMapping\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WyBlog.Core\WyBlog.Core.csproj" />
+    <ProjectReference Include="..\WyBlog.Dtos\WyBlog.Dtos.csproj" />
+    <ProjectReference Include="..\WyBlog.Entities\WyBlog.Entities.csproj" />
+    <ProjectReference Include="..\WyBlog.IRepository\WyBlog.IRepository.csproj" />
+    <ProjectReference Include="..\WyBlog.IServices\WyBlog.IServices.csproj" />
+    <ProjectReference Include="..\WyBlog.Repository.MySql\WyBlog.Repository.MySql.csproj" />
+    <ProjectReference Include="..\WyBlog.Services\WyBlog.Services.csproj" />
+  </ItemGroup>
+
+</Project>

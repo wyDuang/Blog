@@ -1,0 +1,41 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:63379",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "WyBlog.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+<<<<<<< HEAD
+<<<<<<< HEAD:src/WyBlog.Web/Properties/launchSettings.json
+=======
+      "applicationUrl": "http://localhost:5000",
+>>>>>>> e7f3251... 继续:src/WyBlog.Web/Properties/launchSettings.json
+=======
+>>>>>>> 7c82c8e... 修改项目结构
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development" //Development//Production
+      },
+      "applicationUrl": "http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {},
+      "httpPort": 63380
+    }
+  }
+}

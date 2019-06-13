@@ -1,0 +1,24 @@
+﻿using Microsoft.EntityFrameworkCore;
+using YDQZ.Core.Entities;
+using YDQZ.Infrastructure.Database.EntityConfigurations;
+
+namespace {TemplateNamespace}
+{
+	public class MyContext : DbContext
+	{
+		public MyContext(DbContextOptions<MyContext> options)
+            : base(options)
+        {
+        }
+
+		{DbSetModelProperties}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+			{OnModelCreats}
+		}
+	}
+}
+{TemplateAddScopeds}
