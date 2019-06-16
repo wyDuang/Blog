@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WyBlog.Api.Controllers
 {
-    [Route("api/values")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET: api/<controller>
         /// <summary>
-        /// Get所有的方法
+        /// 获取全部 api/values
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -21,10 +20,10 @@ namespace WyBlog.Api.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
         /// <summary>
-        /// Get单条的方法
+        /// 获取单个 api/values/5
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
         public string Get(int id)
@@ -33,29 +32,19 @@ namespace WyBlog.Api.Controllers
         }
 
         // POST api/<controller>
-        /// <summary>
-        /// Post的方法
-        /// </summary>
-        /// <param name="value">参数</param>
         [HttpPost]
         public void Post([FromBody]string value)
         {
         }
 
         // PUT api/<controller>/5
-        /// <summary>
-        /// Put的方法
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="value"></param>
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/<controller>/5
         /// <summary>
-        /// Delete的方法
+        /// 删除 api/values/5
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("{id}")]

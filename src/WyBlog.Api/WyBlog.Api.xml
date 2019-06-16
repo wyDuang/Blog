@@ -4,36 +4,5 @@
         <name>WyBlog.Api</name>
     </assembly>
     <members>
-        <member name="M:WyBlog.Api.Controllers.ValuesController.Get">
-            <summary>
-            Get所有的方法
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:WyBlog.Api.Controllers.ValuesController.Get(System.Int32)">
-            <summary>
-            Get单条的方法
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:WyBlog.Api.Controllers.ValuesController.Post(System.String)">
-            <summary>
-            Post的方法
-            </summary>
-            <param name="value">参数</param>
-        </member>
-        <member name="M:WyBlog.Api.Controllers.ValuesController.Put(System.Int32,System.String)">
-            <summary>
-            Put的方法
-            </summary>
-            <param name="id"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:WyBlog.Api.Controllers.ValuesController.Delete(System.Int32)">
-            <summary>
-            Delete的方法
-            </summary>
-            <param name="id"></param>
-        </member>
     </members>
 </doc>
