@@ -4,5 +4,31 @@
         <name>WyBlog.Api</name>
     </assembly>
     <members>
+        <member name="M:WyBlog.Api.Controllers.AuthController.GetToken(WyBlog.Dtos.AccountEntity)">
+            <summary>
+            获取Token
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WyBlog.Api.Controllers.ValuesController.Get">
+            <summary>
+            获取全部 api/values
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WyBlog.Api.Controllers.ValuesController.Get(System.Int32)">
+            <summary>
+            获取单个 api/values/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WyBlog.Api.Controllers.ValuesController.Delete(System.Int32)">
+            <summary>
+            删除 api/values/5
+            </summary>
+            <param name="id"></param>
+        </member>
     </members>
 </doc>

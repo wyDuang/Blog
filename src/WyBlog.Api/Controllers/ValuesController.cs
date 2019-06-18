@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WyBlog.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/values")]
     [ApiController]
+    [Authorize]
     public class ValuesController : ControllerBase
     {
         /// <summary>
