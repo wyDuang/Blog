@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WyBlog.Dtos
+namespace WyBlog.Entities
 {
     public class AccountEntity
     {

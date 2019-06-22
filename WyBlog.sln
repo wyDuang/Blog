@@ -32,13 +32,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.SolutionItems", "7.SolutionItems", "{767D13EB-2F3F-4F0F-8FA9-8467A9BACABD}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
-		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Api", "src\WyBlog.Api\WyBlog.Api.csproj", "{5F5134BD-FEFF-4D22-BF06-D69747B19536}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WyBlog.Authentication", "src\WyBlog.Authentication\WyBlog.Authentication.csproj", "{6080551B-4970-4395-8AB2-2D81361736A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Authentication", "src\WyBlog.Authentication\WyBlog.Authentication.csproj", "{6080551B-4970-4395-8AB2-2D81361736A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Entities", "src\WyBlog.Entities\WyBlog.Entities.csproj", "{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WyBlog.AutoMapper", "src\WyBlog.AutoMapper\WyBlog.AutoMapper.csproj", "{5AF32CCC-EEA1-4D37-9843-A0213E122FFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +85,14 @@ Global
 		{6080551B-4970-4395-8AB2-2D81361736A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6080551B-4970-4395-8AB2-2D81361736A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6080551B-4970-4395-8AB2-2D81361736A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AF32CCC-EEA1-4D37-9843-A0213E122FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF32CCC-EEA1-4D37-9843-A0213E122FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF32CCC-EEA1-4D37-9843-A0213E122FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF32CCC-EEA1-4D37-9843-A0213E122FFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +107,8 @@ Global
 		{6C295EBF-2675-4601-A5F1-E342E24505CA} = {26FAA0B1-B775-40D4-BA90-8528945CD73B}
 		{5F5134BD-FEFF-4D22-BF06-D69747B19536} = {75247AD0-9463-4BF7-B07F-51184DF717F5}
 		{6080551B-4970-4395-8AB2-2D81361736A6} = {26FAA0B1-B775-40D4-BA90-8528945CD73B}
+		{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF} = {E6162EE3-83CF-41CC-AAA8-682CED3D666E}
+		{5AF32CCC-EEA1-4D37-9843-A0213E122FFF} = {26FAA0B1-B775-40D4-BA90-8528945CD73B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4AB89147-8B0F-4BC1-AC1D-2A6E0797B063}

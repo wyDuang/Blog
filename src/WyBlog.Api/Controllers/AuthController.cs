@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using WyBlog.Authentication;
 using WyBlog.Core.Models;
-using WyBlog.Dtos;
+using WyBlog.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,14 +20,14 @@ namespace WyBlog.Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        protected JwtSettings _jwtSettings;
-        protected AppSettings _appSettings;
+        private JwtSettings _jwtSettings;
+        private AppSettings _appSettings;
 
         public AuthController(
-            IOptionsSnapshot<JwtSettings> jwtOptions,
+            IOptions<JwtSettings> jwtSettings,
             IOptionsSnapshot<AppSettings> appSettings)
         {
-            _jwtSettings = jwtOptions.Value;
+            _jwtSettings = jwtSettings.Value;
             _appSettings = appSettings.Value;
         }
 
@@ -45,30 +45,39 @@ namespace WyBlog.Api.Controllers
 
             if (account.UserName == _appSettings.UserName && account.Password == _appSettings.Password)
             {
+                var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
+                var expiresAt = authTime.AddMinutes(_jwtSettings.ExpireMinutes);//Exp 过期时间，在此之后不可用
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
+
                 var claims = new Claim[]
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, account.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(DateTime.Now.AddMinutes(_jwtSettings.ExpireMinutes)).ToUnixTimeSeconds()}"),
-                    new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}")
+                    new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(authTime).ToUnixTimeSeconds()}"),
+                    new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(expiresAt).ToUnixTimeSeconds()}")
                 };
-
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var token = new JwtSecurityToken(
                     issuer: _jwtSettings.Issuer,
                     audience: _jwtSettings.Audience,
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(_jwtSettings.ExpireMinutes),
-                    signingCredentials: creds);
+                    expires: expiresAt,
+                    signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
+                );
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-                var response = new {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    token_type = "Bearer"
+                var result = new {
+                    access_token = tokenString,
+                    token_type = "Bearer",
+                    profile = new
+                    {
+                        name = account.UserName,
+                        auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
+                        expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
+                    }
                 };
-                return Ok(response);
+                return Ok(result);
             }
-            return Unauthorized();
+            return Unauthorized("The moonlight in front of the bed, two pairs of shoes on the ground. Transfer the dog to men and women, including you.");
         }
     }
 }

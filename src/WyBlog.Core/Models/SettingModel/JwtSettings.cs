@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace WyBlog.Authentication
+namespace WyBlog.Core.Models
 {
     public class JwtSettings
     {
         /// <summary>
-        /// 
+        /// Token颁发机构
         /// </summary>
         public string Issuer { get; set; }
         /// <summary>
-        /// 
+        /// 颁发给谁
         /// </summary>
         public string Audience { get; set; }
         /// <summary>
