@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "layui-src@2.5.4",
+      "destination": "wwwroot/libs/layui"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@5.9.0",
+      "destination": "wwwroot/libs/font-awesome"
+    }
+  ]
+}

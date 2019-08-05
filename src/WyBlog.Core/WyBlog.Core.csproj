@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
   </ItemGroup>
 
 </Project>
