@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WyBlog.Entities\WyBlog.Entities.csproj" />
     <ProjectReference Include="..\WyBlog.IRepository\WyBlog.IRepository.csproj" />
   </ItemGroup>
 

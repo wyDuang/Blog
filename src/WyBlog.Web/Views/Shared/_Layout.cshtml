@@ -1,0 +1,38 @@
+﻿@{
+    var title = "别来无恙博客 | wyduang.com";
+    if (ViewBag.Title != null)
+    {
+        title = ViewBag.Title + " | wyduang.com";
+    }
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@Html.Raw(title)</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    @if (!string.IsNullOrEmpty(ViewBag.Keyword))
+    {
+        <meta name="keywords" content="@Html.Raw(ViewBag.Keyword)" />
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Description))
+    {
+        <meta name="description" content="@Html.Raw(ViewBag.Description)" />
+    }
+    <link rel="stylesheet" href="~/libs/layui/src/css/layui.css">
+    <link rel="stylesheet" href="~/css/blog.css" />
+    @RenderSection("Style", required: false)
+</head>
+<body class="lay-blog">
+    <partial name="_Header" />
+    <div class="container-wrap">
+        @RenderBody()
+    </div>
+    <partial name="_Footer" />
+    <script src="~/libs/layui/src/layui.js"></script>
+    <script src="~/js/blog.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
