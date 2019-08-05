@@ -4,9 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WyBlog.Entities;
-using WyBlog.Repository.MySql.Database;
 
-namespace WyBlog.Repository.MySql.Configurations
+namespace WyBlog.Repository.MySql.Database.EntityConfigurations
 {
     public class ArticleTagConfiguration : IEntityTypeConfiguration<ArticleTag>
     {

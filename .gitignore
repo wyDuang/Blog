@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+layui
+/src/WyBlog.Web/wwwroot/libs/font-awesome
+/src/WyBlog.Repository.MySql/Migrations

@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WyBlog.Entities;
-using WyBlog.Repository.MySql.Database;
 
-namespace WyBlog.Repository.MySql.Configurations
+namespace WyBlog.Repository.MySql.Database.EntityConfigurations
 {
     public class ArticleConfiguration : IEntityTypeConfiguration<Article>
     {

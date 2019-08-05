@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WyBlog.Entities;
+using WyBlog.Repository.MySql.Database.EntityConfigurations;
 
 namespace WyBlog.Repository.MySql.Database
 {
     public class BlogDbContext : DbContext
     {
-        public BlogDbContext(DbContextOptions options)
+        public BlogDbContext(DbContextOptions<BlogDbContext> options)
             : base(options)
         {
 
@@ -14,9 +15,12 @@ namespace WyBlog.Repository.MySql.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
-            //modelBuilder.ApplyConfiguration(new ArticleConfiguration());
+            modelBuilder.ApplyConfiguration(new ArticleConfiguration());
+            modelBuilder.ApplyConfiguration(new ArticleTagConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TagConfiguration());
         }
 
         public DbSet<Article> Articles { get; set; }
