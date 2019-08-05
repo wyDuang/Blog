@@ -38,21 +38,9 @@ namespace WyBlog.Web
 
             var connectionStrings = Configuration.GetSection("ConnectionStrings");
             services.Configure<ConnectionStrings>(connectionStrings);
+
             var jwtSection = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtSection);
-
-            services.AddDbContext<BlogDbContext>(options =>
-            {
-                options.UseLazyLoadingProxies()
-                    .UseMySql(connectionStrings["MySqlConnection"],
-                        sqlOptions =>
-                        {
-                            sqlOptions.EnableRetryOnFailure(
-                                maxRetryCount: 3,
-                                maxRetryDelay: TimeSpan.FromSeconds(30),
-                                errorNumbersToAdd: null);
-                        });
-            });
 
             services.AddDbContext<BlogDbContext>(options =>
             {
