@@ -9,12 +9,12 @@ namespace WyBlog.Web
     {
         //public static async Task Main(string[] args)
         //{
-        //   await WebHost.CreateDefaultBuilder(args)
-        //        .UseStartup<Startup>()
-        //        .UseNLog()
-        //        .Build()
-        //        .RunAsync();
-        //} 
+        //    await WebHost.CreateDefaultBuilder(args)
+        //                 .UseStartup<Startup>()
+        //                 .UseNLog()
+        //                 .Build()
+        //                 .RunAsync();
+        //}
 
         public static void Main(string[] args)
         {

@@ -341,3 +341,6 @@ healthchecksdb
 layui
 /src/WyBlog.Web/wwwroot/libs/font-awesome
 /src/WyBlog.Repository.MySql/Migrations
+/src/WyBlog.Web/wwwroot/libs/wowjs
+/src/WyBlog.Web/wwwroot/libs/animate
+/src/WyBlog.Web/wwwroot/libs
