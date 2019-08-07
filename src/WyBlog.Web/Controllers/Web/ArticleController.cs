@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WyBlog.Web.Controllers.Web
 {
-    public class HomeController : Controller
+    public class ArticleController : Controller
     {
-        [Route("/")]
-        [Route("/index.html")]
+        [Route("/articles.html")]
         public IActionResult Index()
         {
             return View();
