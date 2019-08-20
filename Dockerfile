@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 
 WORKDIR /app
-COPY ./src.WyBlog.Api /app
+COPY ./src/WyBlog.Web /app
 
-EXPOSE 5000
-ENTRYPOINT ["dotnet", "WyBlog.Api.dll"]
+EXPOSE 80
+ENTRYPOINT ["dotnet", "WyBlog.Web.dll"]

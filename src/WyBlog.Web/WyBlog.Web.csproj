@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\Index.min.css" />
+    <Content Remove="wwwroot\css\master.css" />
     <Content Remove="wwwroot\libs.cs" />
   </ItemGroup>
 
@@ -25,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Admin\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\libs\" />
   </ItemGroup>

@@ -21,11 +21,13 @@ namespace WyBlog.Repository.MySql.Database
             modelBuilder.ApplyConfiguration(new ArticleTagConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
+            modelBuilder.ApplyConfiguration(new FriendLinkConfiguration());
         }
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ArticleTag> ArticleTags { get; set; }
+        public DbSet<FriendLink> FriendLinks { get; set; }
     }
 }

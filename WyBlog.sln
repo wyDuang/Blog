@@ -30,6 +30,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.SolutionItems", "7.SolutionItems", "{767D13EB-2F3F-4F0F-8FA9-8467A9BACABD}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
 		Dockerfile = Dockerfile
 		README.md = README.md
 	EndProjectSection
@@ -38,7 +40,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Authentication", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Entities", "src\WyBlog.Entities\WyBlog.Entities.csproj", "{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WyBlog.Web", "src\WyBlog.Web\WyBlog.Web.csproj", "{3CE0B21D-1575-48F9-ABCF-76793387ED47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Web", "src\WyBlog.Web\WyBlog.Web.csproj", "{3CE0B21D-1575-48F9-ABCF-76793387ED47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,7 +21,7 @@ namespace WyBlog.Repository.MySql.Database.EntityConfigurations
             builder.Property(x => x.CommentCount).HasDefaultValue(0).IsRequired();
 
             builder.Property(x => x.Remark).HasMaxLength(2000).IsRequired();
-            builder.Property(x => x.CreateDate).HasColumnType("datetime");
+            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
 
             builder.ToTable(BlogDbTableNames.Articles);
         }
