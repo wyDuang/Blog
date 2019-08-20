@@ -26,6 +26,16 @@
       "provider": "unpkg",
       "library": "nprogress@0.2.0",
       "destination": "wwwroot/libs/nprogress"
+    },
+    {
+      "provider": "unpkg",
+      "library": "editor.md@1.5.0",
+      "destination": "wwwroot/libs/editor.md"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "vue@2.6.10",
+      "destination": "wwwroot/libs/vue"
     }
   ]
 }

@@ -7,14 +7,14 @@
     master.start($);
 });
 var slider = 0;
-var pathname = window.location.pathname.replace('Read', 'Article');
+var pathname = window.location.pathname.replace('Read', 'articles');
 var master = {};
 master.start = function ($) {
     $('#nav li').hover(function () {
         $(this).addClass('current');
     }, function () {
         var href = $(this).find('a').attr("href");
-        if (pathname.indexOf(href) == -1) {
+            if (pathname.indexOf(href) == -1 || href == "/") {
             $(this).removeClass('current');
         }
     });
@@ -23,6 +23,7 @@ master.start = function ($) {
         var navobjs = $("#nav a");
         $.each(navobjs, function () {
             var href = $(this).attr("href");
+            if (href == "/") return;
             if (pathname.indexOf(href) != -1) {
                 $(this).parent().addClass('current');
             }

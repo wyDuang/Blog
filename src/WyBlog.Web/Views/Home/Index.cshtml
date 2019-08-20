@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>别来无恙博客 | wyduang.com</title>
-    <meta name="keywords" content="别来无恙，无恙，wyduang" />
-    <meta name="description" content="别来无恙博客：美好的生活，从现在开始" />
+    <title>无恙Duang的博客 | wyduang.com</title>
+    <meta name="keywords" content="别来无恙，无恙Duang，wyduang" />
+    <meta name="description" content="无恙Duang的博客：美好的生活，从现在开始！" />
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
 
     <environment include="Development">
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
     </environment>
     <environment exclude="Development">
-        @*<link rel="stylesheet" href="~/css/index.min.css" asp-append-version="true" />*@
+        <link rel="stylesheet" href="~/css/home.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -36,7 +36,7 @@
             <li><a href="article.html">博客</a></li>
             <li><a href="message.html">留言</a></li>
         </ul>
-        <div class="logo"><a>Mr.Wuyang</a></div>
+        <div class="logo"><a>wyDuang</a></div>
     </div>
     <!-- section1 Start -->
     <div class="section" id="section1">
@@ -227,7 +227,7 @@
             <div class="container">
                 <div class="layui-row">
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 text-center">
-                        <p>Copyright &copy; 2018-2019 别来无恙 All Rights Reserved V.1.0.0 蜀ICP备18008609号</p>
+                        <p>Copyright &copy; 2018-2019 别来无恙 All Rights Reserved V.1.0.0 蜀ICP备xxxxxx号</p>
                     </div>
                 </div>
             </div>
@@ -240,9 +240,7 @@
         <script src="~/js/index.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/index.min.js" asp-append-version="true"></script>
+        <script src="~/js/home.min.js" asp-append-version="true"></script>
     </environment>
-
-    @*@RenderSection("Scripts", required: false)*@
 </body>
 </html>

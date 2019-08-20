@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>新增文章</title>
+    <link href="~/libs/editor.md/css/editormd.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container-fixed" style="">
+        <div class="col-content" id="app">
+            <div>
+                <input type="text" id="title" placeholder="标题" autocomplete="off" value="" />
+                <input type="text" id="author" placeholder="作者" autocomplete="off" value="" />
+                <input type="text" id="url" placeholder="URL" autocomplete="off" value="" />
+                <input type="datetime" id="time" placeholder="时间" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" />
+            </div>
+
+        </div>
+    </div>
+    <div id="editor" style="width:100%; height: 100%;">
+        <textarea style="display:none;">
+                ### 关于 Editor.md
+                **Editor.md** 是一款开源的、可嵌入的 Markdown 在线编辑器（组件），基于 CodeMirror、jQuery 和 Marked 构建。
+                </textarea>
+    </div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="~/libs/editor.md/editormd.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var editor = editormd("editor", {
+            width: "98%",
+            height: "600",
+            path: "/libs/editor.md/lib/",
+            codeFold: true,
+            saveHTMLToTextarea: true,
+            atLink: false,
+            emailLink: false,
+            theme: localStorage.toolBarTheme || '',
+            editorTheme: localStorage.editorTheme || 'default',
+            previewTheme: localStorage.previewTheme || '',
+            //toolbarIcons: function () {
+            //    return ["bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "hr", "link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "watch", "preview", "fullscreen", "clear"]
+            //}
+        });
+
+    });
+</script>
+<script>
+            //var app = new Vue({
+            //    el: '#app',
+            //    data: {
+            //        message: 'Hello Vue!'
+            //    }
+            //});
+</script>

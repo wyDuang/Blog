@@ -13,5 +13,7 @@ namespace WyBlog.Repository.MySql.Database
         public const string Tags = "tags";
 
         public const string Article_Tags = "article_tags";
+
+        public const string FriendLinks = "friendlinks";
     }
 }

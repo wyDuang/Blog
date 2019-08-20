@@ -707,8 +707,8 @@ a, img {
 /*底部*/
 @font-face {
     font-family: 'BarbaraHand';
-    src: url('~/font/barbarahand-webfont.eot');
-    src: url('~/font/barbarahand-webfont.eot?#iefix') format('embedded-opentype'),url('~/font/barbarahand-webfont.woff2') format('woff2'),url('~/font/barbarahand-webfont.woff') format('woff'),url('~/font/barbarahand-webfont.ttf') format('truetype'),url('~/font/barbarahand-webfont.svg#BarbaraHand') format('svg');
+    src: url(../fonts/barbarahand-webfont.eot);
+    src: url(../fonts/barbarahand-webfont.eot?#iefix) format('embedded-opentype'), url(../fonts/barbarahand-webfont.woff2) format('woff2'), url(../fonts/barbarahand-webfont.woff) format('woff'), url(../fonts/barbarahand-webfont.ttf) format('truetype'), url(../fonts/barbarahand-webfont.svg#BarbaraHand) format('svg');
     font-weight: normal;
     font-style: normal;
 }

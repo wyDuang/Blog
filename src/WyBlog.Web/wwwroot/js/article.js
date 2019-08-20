@@ -5,7 +5,6 @@
 });
 var article = {};
 article.Init = function ($) {
-    //var $ = layui.jquery,
     var slider = 0;
     blogtype();
     //类别导航开关点击事件
@@ -68,4 +67,3 @@ article.Init = function ($) {
         });
     };
 };
-
