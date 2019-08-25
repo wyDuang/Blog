@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-16.04'
 
 variables:
   solution: '**/*.sln'
@@ -32,3 +32,7 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+-
+steps:
+- script: docker build -t $(dockerId)/$(imageName) .
+#- script: docker login -u $(dockerId) -p $(pswd) <docker-registry-url>
