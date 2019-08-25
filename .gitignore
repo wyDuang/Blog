@@ -344,3 +344,5 @@ layui
 /src/WyBlog.Web/wwwroot/libs/wowjs
 /src/WyBlog.Web/wwwroot/libs/animate
 /src/WyBlog.Web/wwwroot/libs
+/src/WyBlog.Web/appsettings.Production.json
+/src/WyBlog.Web/appsettings.Development.json
