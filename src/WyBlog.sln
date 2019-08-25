@@ -15,32 +15,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Infrastructure", "5.Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Test", "6.Test", "{F15BD7A5-4FEF-404D-977C-AE4A460A1BA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Dtos", "src\WyBlog.Dtos\WyBlog.Dtos.csproj", "{F98406B8-C20B-4C4A-B7AC-71A4B8A35F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Dtos", "WyBlog.Dtos\WyBlog.Dtos.csproj", "{F98406B8-C20B-4C4A-B7AC-71A4B8A35F61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.IServices", "src\WyBlog.IServices\WyBlog.IServices.csproj", "{8BB47FD8-038F-4B7B-BD86-C20D947B1318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.IServices", "WyBlog.IServices\WyBlog.IServices.csproj", "{8BB47FD8-038F-4B7B-BD86-C20D947B1318}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Services", "src\WyBlog.Services\WyBlog.Services.csproj", "{B0EAD339-50FA-4A94-B65F-BF3C8EFFA337}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Services", "WyBlog.Services\WyBlog.Services.csproj", "{B0EAD339-50FA-4A94-B65F-BF3C8EFFA337}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.IRepository", "src\WyBlog.IRepository\WyBlog.IRepository.csproj", "{B9B27AE6-1220-47CF-8D23-563CC5898E33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.IRepository", "WyBlog.IRepository\WyBlog.IRepository.csproj", "{B9B27AE6-1220-47CF-8D23-563CC5898E33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Repository.MySql", "src\WyBlog.Repository.MySql\WyBlog.Repository.MySql.csproj", "{6937CD43-1BBF-4426-B9CB-9B35C64A7625}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Repository.MySql", "WyBlog.Repository.MySql\WyBlog.Repository.MySql.csproj", "{6937CD43-1BBF-4426-B9CB-9B35C64A7625}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Core", "src\WyBlog.Core\WyBlog.Core.csproj", "{6C295EBF-2675-4601-A5F1-E342E24505CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Core", "WyBlog.Core\WyBlog.Core.csproj", "{6C295EBF-2675-4601-A5F1-E342E24505CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.SolutionItems", "7.SolutionItems", "{767D13EB-2F3F-4F0F-8FA9-8467A9BACABD}"
 	ProjectSection(SolutionItems) = preProject
-		.gitattributes = .gitattributes
-		.gitignore = .gitignore
-		azure-pipelines.yml = azure-pipelines.yml
-		Dockerfile = Dockerfile
-		README.md = README.md
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Authentication", "src\WyBlog.Authentication\WyBlog.Authentication.csproj", "{6080551B-4970-4395-8AB2-2D81361736A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Authentication", "WyBlog.Authentication\WyBlog.Authentication.csproj", "{6080551B-4970-4395-8AB2-2D81361736A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Entities", "src\WyBlog.Entities\WyBlog.Entities.csproj", "{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Entities", "WyBlog.Entities\WyBlog.Entities.csproj", "{44B8AFA4-D313-4A27-A53D-D8CEF4EC8CDF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Web", "src\WyBlog.Web\WyBlog.Web.csproj", "{3CE0B21D-1575-48F9-ABCF-76793387ED47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyBlog.Web", "WyBlog.Web\WyBlog.Web.csproj", "{3CE0B21D-1575-48F9-ABCF-76793387ED47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
