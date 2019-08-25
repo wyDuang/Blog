@@ -12,7 +12,6 @@
   {
     "outputFileName": "wwwroot/js/index.all.js",
     "inputFiles": [
-      "wwwroot/libs/wowjs/dist/wow.js",
       "wwwroot/js/index.js"
     ]
   },
