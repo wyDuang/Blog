@@ -1,7 +1,7 @@
 [
   //йврЁ
   {
-    "outputFileName": "wwwroot/css/home.min.css",
+    "outputFileName": "wwwroot/css/index.all.css",
     "inputFiles": [
       "wwwroot/libs/layui/dist/css/layui.css",
       "wwwroot/libs/font-awesome/css/font-awesome.css",
@@ -10,16 +10,15 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/home.min.js",
+    "outputFileName": "wwwroot/js/index.all.js",
     "inputFiles": [
-      "wwwroot/libs/layui/dist/layui.js",
       "wwwroot/libs/wowjs/dist/wow.js",
       "wwwroot/js/index.js"
     ]
   },
   //ндуб
   {
-    "outputFileName": "wwwroot/css/all.min.css",
+    "outputFileName": "wwwroot/css/blog.all.css",
     "inputFiles": [
       "wwwroot/libs/layui/dist/css/layui.css",
       "wwwroot/libs/font-awesome/css/font-awesome.css",
@@ -28,9 +27,8 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/all.min.js",
+    "outputFileName": "wwwroot/js/article.all.js",
     "inputFiles": [
-      "wwwroot/libs/layui/dist/layui.js",
       "wwwroot/libs/nprogress/nprogress.js",
       "wwwroot/js/gloable.js",
       "wwwroot/js/article.js"
