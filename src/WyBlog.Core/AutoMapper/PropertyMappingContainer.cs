@@ -18,7 +18,7 @@ namespace WyBlog.Core.AutoMapper
             }
         }
 
-        public IPropertyMapping Resolve<TSource, TDestination>() where TDestination : IEntity
+        public IPropertyMapping Resolve<TSource, TDestination>() where TDestination : IBaseEntity
         {
             var matchingMapping = PropertyMappings.OfType<PropertyMapping<TSource, TDestination>>().ToList();
             if (matchingMapping.Count == 1)
@@ -29,7 +29,7 @@ namespace WyBlog.Core.AutoMapper
             throw new Exception($"Cannot find property mapping instance for <{typeof(TSource)},{typeof(TDestination)}");
         }
 
-        public bool ValidateMappingExistsFor<TSource, TDestination>(string fields) where TDestination : IEntity
+        public bool ValidateMappingExistsFor<TSource, TDestination>(string fields) where TDestination : IBaseEntity
         {
             var propertyMapping = Resolve<TSource, TDestination>();
 

@@ -13,8 +13,8 @@ namespace WyBlog.Core.AutoMapper
         /// <typeparam name="T"></typeparam>
         void Register<T>() where T : IPropertyMapping, new();
 
-        IPropertyMapping Resolve<TSource, TDestination>() where TDestination : IEntity;
+        IPropertyMapping Resolve<TSource, TDestination>() where TDestination : IBaseEntity;
 
-        bool ValidateMappingExistsFor<TSource, TDestination>(string fields) where TDestination : IEntity;
+        bool ValidateMappingExistsFor<TSource, TDestination>(string fields) where TDestination : IBaseEntity;
     }
 }

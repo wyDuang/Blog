@@ -4,8 +4,10 @@ using System.Text;
 
 namespace WyBlog.Core.Models
 {
-    public interface IEntity
+    public enum PaginationUriType
     {
-        int Id { get; set; }
+        CurrentPage,
+        PreviousPage,
+        NextPage
     }
 }
