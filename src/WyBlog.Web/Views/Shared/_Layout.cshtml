@@ -1,5 +1,5 @@
 ﻿@{
-    var title = "无恙Duang的博客 | wyduang.com";
+    var title = "🤣无恙duang | wyduang.com";
     if (ViewBag.Title != null)
     {
         title = ViewBag.Title + " | wyduang.com";
@@ -12,6 +12,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@Html.Raw(title)</title>
+
+    <meta name="keywords" content="wyduang，别来无恙，无恙duang" />
+    <meta name="description" content="无恙duang的博客：美好的生活，从现在开始！" />
     @if (!string.IsNullOrEmpty(ViewBag.Keyword))
     {
         <meta name="keywords" content="@Html.Raw(ViewBag.Keyword)" />
@@ -20,6 +23,7 @@
     {
         <meta name="description" content="@Html.Raw(ViewBag.Description)" />
     }
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
     <environment include="Development">
         <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="~/libs/layui/dist/css/layui.css">
