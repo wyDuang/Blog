@@ -1,8 +1,8 @@
 ﻿@{
-    var title = "🤣无恙duang | wyduang.com";
+    var title = "🤓无恙Duang | wyduang.com";
     if (ViewBag.Title != null)
     {
-        title = ViewBag.Title + " | wyduang.com";
+        title = "🤓" + ViewBag.Title + " | wyduang.com";
     }
 }
 <!DOCTYPE html>
@@ -29,12 +29,14 @@
         <link rel="stylesheet" href="~/libs/layui/dist/css/layui.css">
         <link rel="stylesheet" href="~/css/gloable.css" asp-append-version="true" />
     </environment>
-    @RenderSection("style", required: false)
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <partial name="_Header" />
     <div class="doc-container" id="doc-container">
-        @RenderBody()
+        <div class="container-fixed">
+            @RenderBody()
+        </div>
     </div>
     <partial name="_Footer" />
     <environment include="Development">

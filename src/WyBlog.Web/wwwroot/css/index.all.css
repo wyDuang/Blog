@@ -6258,7 +6258,17 @@ a, img {
     margin: 20px 0
 }
 
-.page1 .nav .btn {
+.page1 .nav img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.page1 .nav a {
+    margin-top: 20px
+}
+
+/*.page1 .nav .btn {
     padding: 10px 40px;
     background: 0 0;
     border-radius: 4px;
@@ -6268,7 +6278,7 @@ a, img {
     margin-top: 20px;
     font-family: 'Microsoft YaHei';
     display: inline-block
-}
+}*/
 
 .page1 .next {
     display: block;

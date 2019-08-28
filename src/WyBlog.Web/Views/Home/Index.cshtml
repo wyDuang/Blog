@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>🤣无恙duang | wyduang.com</title>
+    <title>🤓无恙Duang | wyduang.com</title>
     <meta name="keywords" content="wyduang，别来无恙，无恙duang" />
     <meta name="description" content="无恙duang的博客：美好的生活，从现在开始！" />
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
@@ -32,8 +32,8 @@
     </div>
     <div id="navgation" class="navgation navgation_close">
         <ul class="point">
-            <li><a href="/">首页</a></li>
-            <li><a href="article.html">博客</a></li>
+            <li><a href="@Url.Action("Index","Home")">首页</a></li>
+            <li><a href="@Url.Action("Index","Article")">文章</a></li>
             <li><a href="message.html">留言</a></li>
         </ul>
         <div class="logo"><a>wyDuang</a></div>
@@ -43,16 +43,16 @@
         <div class="fp-tablecell">
             <div class="page1">
                 <div class="nav wow zoomIn" data-wow-duration="2s">
-                    <img style="width: 150px;height: 150px;border-radius: 50%;" src="~/images/avatar.jpg">
+                    <img src="~/images/avatar.jpg">
                     <p>剑气纵横三万里，一剑光寒十九洲。</p>
-                    <a class="layui-btn layui-btn-normal" style="margin-top: 20px" href="/articles.html">Enter Blog</a>
+                    <a class="btn layui-btn layui-btn-normal" href="@Url.Action("Index","Article")">Enter Blog</a>
                 </div>
                 <a class="next wow fadeInUp" data-wow-duration="2s" id="next"></a>
             </div>
         </div>
     </div>
     <!-- section1 End -->
-    <!-- 热门文章 section2 Start -->
+    <!-- section2 Start -->
     <div class="section" id="section2">
         <div class="fp-tablecell">
             <div class="page2">
@@ -61,8 +61,8 @@
                         <div class="inner wow fadeInDown" data-wow-delay=".2s">
                             <h1>热门文章</h1>
                             <p>
-                                很想给你写封信,告诉你这里的天气.
-                                <br>昨夜的那场电影,还有我的心情.
+                                很想给你写封信，告诉你这里的天气。
+                                <br>昨夜的那场电影，还有我的心情。
                             </p>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
             </div>
         </div>
     </div>
-    <!-- 热门文章 section2 End -->
+    <!-- section2 End -->
     <!-- section3 Start -->
     <div class="section" id="section3">
         <div class="fp-tablecell">

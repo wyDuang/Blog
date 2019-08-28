@@ -9,7 +9,6 @@ namespace WyBlog.Web.Controllers.Web
     public class HomeController : Controller
     {
         [Route("/")]
-        [Route("/index.html")]
         public IActionResult Index()
         {
             return View();
