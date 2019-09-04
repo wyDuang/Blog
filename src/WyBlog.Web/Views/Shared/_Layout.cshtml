@@ -1,8 +1,8 @@
 ﻿@{
-    var title = "🤓无恙Duang | wyduang.com";
+    var title = "😎无恙Duang | wyduang.com";
     if (ViewBag.Title != null)
     {
-        title = "🤓" + ViewBag.Title + " | wyduang.com";
+        title = "😎" + ViewBag.Title + " | wyduang.com";
     }
 }
 <!DOCTYPE html>
@@ -34,9 +34,7 @@
 <body>
     <partial name="_Header" />
     <div class="doc-container" id="doc-container">
-        <div class="container-fixed">
-            @RenderBody()
-        </div>
+        @RenderBody()
     </div>
     <partial name="_Footer" />
     <environment include="Development">

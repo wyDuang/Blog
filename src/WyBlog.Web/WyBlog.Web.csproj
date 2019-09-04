@@ -36,12 +36,16 @@
   <ItemGroup>
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\libs\" />
+    <Folder Include="Validation\" />
+    <Folder Include="PropertyMapping\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WyBlog.Core\WyBlog.Core.csproj" />
     <ProjectReference Include="..\WyBlog.Dtos\WyBlog.Dtos.csproj" />
     <ProjectReference Include="..\WyBlog.Entities\WyBlog.Entities.csproj" />
+    <ProjectReference Include="..\WyBlog.IRepository\WyBlog.IRepository.csproj" />
+    <ProjectReference Include="..\WyBlog.IServices\WyBlog.IServices.csproj" />
     <ProjectReference Include="..\WyBlog.Repository.MySql\WyBlog.Repository.MySql.csproj" />
   </ItemGroup>
 

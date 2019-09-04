@@ -14,8 +14,10 @@ namespace WyBlog.Repository.MySql.Database.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Title).HasMaxLength(200).IsRequired();
-            builder.Property(x => x.LinkUrl).HasMaxLength(200).IsRequired();
+            builder.Property(x => x.Title).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.LinkUrl).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.Avatar).HasMaxLength(150).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(200).IsRequired();
             builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
 
             builder.ToTable(BlogDbTableNames.FriendLinks);

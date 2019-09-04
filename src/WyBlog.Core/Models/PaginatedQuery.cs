@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WyBlog.Core.Models
 {
-    public abstract class QueryParameters : INotifyPropertyChanged
+    public abstract class PaginatedQuery : INotifyPropertyChanged
     {
         private const int DefaultPageSize = 10;
         private const int DefaultMaxPageSize = 100;

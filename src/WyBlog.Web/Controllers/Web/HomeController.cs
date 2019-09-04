@@ -13,5 +13,11 @@ namespace WyBlog.Web.Controllers.Web
         {
             return View();
         }
+
+        [Route("/about.html")]
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }

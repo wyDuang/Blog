@@ -1,0 +1,70 @@
+﻿/**
+*┌──────────────────────────────────────────────────────────────┐
+*│　描    述：{Comment}接口实现                                                    
+*│　作    者：{Author}                                            
+*│　版    本：1.0    模板代码自动生成                                                
+*│　创建时间：{GeneratorTime}                             
+*└──────────────────────────────────────────────────────────────┘
+*┌──────────────────────────────────────────────────────────────┐
+*│　命名空间： {RepositoryNamespace}                                  
+*│　类    名： {ModelName}Repository                                      
+*└──────────────────────────────────────────────────────────────┘
+*/
+using Censtry.Core.DbHelper;
+using Censtry.Core.Options;
+using Censtry.Core.Repository;
+using Censtry.IRepository;
+using Censtry.Models;
+using Dapper;
+using Microsoft.Extensions.Options;
+using System;
+using System.Threading.Tasks;
+
+namespace {RepositoryNamespace}
+{
+	/// <summary>
+	/// {Comment}（仓储层实现）
+	/// </summary>
+    public class {ModelName}Repository : BaseRepository<{ModelName},{KeyTypeName}>, I{ModelName}Repository
+    {
+        public {ModelName}Repository(IOptionsSnapshot<DbOption> options)
+        {
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
+            _dbOption = options.Get("CenstryDB");
+            if (_dbOption == null)
+            {
+                throw new ArgumentNullException(nameof(DbOption));
+            }
+            _dbConnection = ConnectionFactory.CreateConnection(_dbOption.DbType, _dbOption.ConnectionString);
+        }
+
+		/// <summary>
+        /// 逻辑删除返回影响的行数
+        /// </summary>
+        /// <param name="ids">需要删除的主键数组</param>
+        /// <returns>影响的行数</returns>
+		public int DeleteLogical(int[] ids)
+        {
+            string sql = "update {ModelName} set IsDelete=1 where Id in @Ids";
+            return _dbConnection.Execute(sql, new
+            {
+                Ids = ids
+            });
+        }
+
+		/// <summary>
+        /// 逻辑删除返回影响的行数（异步操作）
+        /// </summary>
+        /// <param name="ids">需要删除的主键数组</param>
+        /// <returns>影响的行数</returns>
+        public async Task<int> DeleteLogicalAsync(int[] ids)
+        {
+            string sql = "update {ModelName} set IsDelete=1 where Id in @Ids";
+            return await _dbConnection.ExecuteAsync(sql, new
+            {
+                Ids = ids
+            });
+        }
+
+    }
+}
