@@ -7,7 +7,7 @@ namespace WyBlog.Core.Models.SettingModel
     /// <summary>
     /// 代码生成选项
     /// </summary>
-    public class CodeGenerateSetting
+    public class CodeGenerateSettings
     {
         /// <summary>
         /// 作者
