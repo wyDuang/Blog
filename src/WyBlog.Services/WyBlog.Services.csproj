@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WyBlog.Dtos\WyBlog.Dtos.csproj" />
     <ProjectReference Include="..\WyBlog.IRepository\WyBlog.IRepository.csproj" />
     <ProjectReference Include="..\WyBlog.IServices\WyBlog.IServices.csproj" />
   </ItemGroup>

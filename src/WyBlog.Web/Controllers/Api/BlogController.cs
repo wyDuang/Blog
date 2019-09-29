@@ -13,21 +13,25 @@ using Microsoft.IdentityModel.Tokens;
 using WyBlog.Core.Models;
 using WyBlog.Dtos;
 using WyBlog.Entities;
+using WyBlog.IServices;
 
 namespace WyBlog.Web.Controllers.Api
 {
     [ApiController]
     public class BlogController : ControllerBase
     {
+        private readonly IArticleService _articleService;
         private JwtSettings _jwtSettings;
         private AppSettings _appSettings;
 
         public BlogController(
+            IArticleService articleService,
             IOptions<JwtSettings> jwtSettings,
             IOptionsSnapshot<AppSettings> appSettings)
         {
             _jwtSettings = jwtSettings.Value;
             _appSettings = appSettings.Value;
+            _articleService = articleService;
         }
 
         /// <summary>
@@ -39,6 +43,7 @@ namespace WyBlog.Web.Controllers.Api
         [Route("post")]
         public async Task<IActionResult> AddArticle([FromBody] ArticleAddDto dto)
         {
+            await _articleService.InsertAsync(dto);
             //var response = new Response<string>();
 
             //var result = await _blogService.InsertPost(dto);
