@@ -18,10 +18,8 @@ namespace WyBlog.Web.Controllers.Api
     [ApiController]
     public class AccountController : ControllerBase
     {
-
         private JwtSettings _jwtSettings;
         private AppSettings _appSettings;
-
         public AccountController(
             IOptions<JwtSettings> jwtSettings,
             IOptionsSnapshot<AppSettings> appSettings)
