@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\Api\SignatureController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="wwwroot\css\Index.min.css" />
     <Content Remove="wwwroot\css\master.css" />
     <Content Remove="wwwroot\libs.cs" />
