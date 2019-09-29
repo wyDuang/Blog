@@ -6,6 +6,6 @@ namespace WyBlog.IServices
 {
     public interface IArticleService
     {
-
+        void MyProperty();
     }
 }
