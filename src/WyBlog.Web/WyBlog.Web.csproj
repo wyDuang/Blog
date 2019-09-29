@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Dockerfile" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -47,6 +43,7 @@
     <ProjectReference Include="..\WyBlog.IRepository\WyBlog.IRepository.csproj" />
     <ProjectReference Include="..\WyBlog.IServices\WyBlog.IServices.csproj" />
     <ProjectReference Include="..\WyBlog.Repository.MySql\WyBlog.Repository.MySql.csproj" />
+    <ProjectReference Include="..\WyBlog.Services\WyBlog.Services.csproj" />
   </ItemGroup>
 
 </Project>

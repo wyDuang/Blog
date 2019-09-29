@@ -19,6 +19,8 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using WyBlog.IServices;
+using WyBlog.Services;
 
 namespace WyBlog.Web
 {
@@ -104,6 +106,8 @@ namespace WyBlog.Web
 
             //小写路由url
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddScoped<IArticleService, ArticleService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
