@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Exceptions\SessionExtensions.cs" />
     <Compile Remove="Helper\ImageHelper.cs" />
   </ItemGroup>
 
