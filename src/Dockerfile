@@ -4,23 +4,18 @@ EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
-COPY ["WyBlog.Web/WyBlog.Web.csproj", "WyBlog.Web/"]
-COPY ["WyBlog.Dtos/WyBlog.Dtos.csproj", "WyBlog.Dtos/"]
-COPY ["WyBlog.Core/WyBlog.Core.csproj", "WyBlog.Core/"]
-COPY ["WyBlog.Repository.MySql/WyBlog.Repository.MySql.csproj", "WyBlog.Repository.MySql/"]
-COPY ["WyBlog.Entities/WyBlog.Entities.csproj", "WyBlog.Entities/"]
-COPY ["WyBlog.IRepository/WyBlog.IRepository.csproj", "WyBlog.IRepository/"]
-COPY ["WyBlog.IServices/WyBlog.IServices.csproj", "WyBlog.IServices/"]
-COPY ["WyBlog.Services/WyBlog.Services.csproj", "WyBlog.Services/"]
-RUN dotnet restore "WyBlog.Web/WyBlog.Web.csproj"
+COPY ["Blog.Site/Blog.Site.csproj", "Blog.Site/"]
+COPY ["Blog.Infrastructure/Blog.Infrastructure.csproj", "Blog.Infrastructure/"]
+COPY ["Blog.Core/Blog.Core.csproj", "Blog.Core/"]
+RUN dotnet restore "Blog.Site/Blog.Site.csproj"
 COPY . .
-WORKDIR "/src/WyBlog.Web"
-RUN dotnet build "WyBlog.Web.csproj" -c Release -o /app/build
+WORKDIR "/src/Blog.Site"
+RUN dotnet build "Blog.Site.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WyBlog.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish "Blog.Site.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WyBlog.Web.dll"]
+ENTRYPOINT ["dotnet", "Blog.Site.dll"]

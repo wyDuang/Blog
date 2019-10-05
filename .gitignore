@@ -339,10 +339,8 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 layui
-/src/WyBlog.Web/wwwroot/libs/font-awesome
-/src/WyBlog.Repository.MySql/Migrations
-/src/WyBlog.Web/wwwroot/libs/wowjs
-/src/WyBlog.Web/wwwroot/libs/animate
-/src/WyBlog.Web/wwwroot/libs
-/src/WyBlog.Web/appsettings.Production.json
-/src/WyBlog.Web/appsettings.Development.json
+/src/Blog.Site/Logs
+/src/Blog.Site/appsettings.Development.json
+/src/Blog.Site/appsettings.Production.json
+/src/Blog.Site/Properties
+/src/Blog.Site/wwwroot/libs

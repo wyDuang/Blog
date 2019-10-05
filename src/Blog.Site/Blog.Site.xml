@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blog.Site</name>
+    </assembly>
+    <members>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.Index">
+            <summary>
+            后台管理首页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.Articles">
+            <summary>
+            文章列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.AddArticle">
+            <summary>
+            文章添加
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.EditArticle">
+            <summary>
+            文章编辑
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.Categories">
+            <summary>
+            分类管理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.Tags">
+            <summary>
+            标签管理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Admin.ManageController.SelectTags">
+            <summary>
+            标签列表（添加和编辑文章中需要）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Api.AccountController.GetToken(Blog.Core.Entities.AccountEntity)">
+            <summary>
+            获取Token
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Site.Controllers.Api.ArticleController.Get(Blog.Core.QueryParameters.ArticleParameter,System.String)">
+            <summary>
+            分页获取文章
+            </summary>
+        </member>
+        <member name="M:Blog.Site.Controllers.Api.ArticleController.Get(System.Int32,System.String)">
+            <summary> 
+            根据ID获取一篇文章
+            </summary>
+        </member>
+        <member name="M:Blog.Site.Controllers.Api.ArticleController.Post(Blog.Infrastructure.Resources.ArticleAddResource)">
+            <summary>
+            创建文章
+            </summary>
+        </member>
+        <member name="M:Blog.Site.Controllers.Api.ArticleController.BlockCreating(System.Int32)">
+            <summary>
+            判断是存在
+            </summary>
+        </member>
+    </members>
+</doc>
