@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Site.Controllers.Web
 {
+    [AllowAnonymous]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         [Route("/")]
@@ -21,6 +25,9 @@ namespace Blog.Site.Controllers.Web
 >>>>>>> 1ff30bd... 增加blog首页和文章页
 =======
 >>>>>>> 9197bf0... 集成layui+editor.md编辑器
+=======
+        [Route("/index.html")]
+>>>>>>> 2ab0d7d... 修改路由
         public IActionResult Index()
         {
             return View();

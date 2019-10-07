@@ -7,13 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Site.Controllers.Admin
 {
+    [Authorize]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ManageController : Controller
     {
         /// <summary>
         /// 后台管理首页
         /// </summary>
         /// <returns></returns>
-        [Route("/admin")]
+        //[Route("/admin")]
         public IActionResult Index()
         {
             return View();

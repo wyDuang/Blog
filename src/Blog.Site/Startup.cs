@@ -2,13 +2,10 @@ using System;
 using System.IO;
 using System.Text;
 using AutoMapper;
-using Blog.Core.Interfaces;
 using Blog.Core.SettingModels;
 using Blog.Infrastructure.CodeGenerator.CodeSettings;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
-using Blog.Infrastructure.Middlewares;
-using Blog.Infrastructure.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -23,21 +20,21 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
 
 namespace Blog.Site
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _loggerFactory = loggerFactory;
         }
 
+        public IConfiguration Configuration { get; }
         private readonly string _defaultCorsPolicyName = "BlogApiCors";
-        public static IConfiguration Configuration { get; set; }
-        private readonly ILoggerFactory _loggerFactory;
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CodeGenerateSettings>(Configuration.GetSection("CodeGenerateSettings"));
@@ -56,36 +53,39 @@ namespace Blog.Site
                 options.AddPolicy(_defaultCorsPolicyName, builder =>
                     builder.AllowAnyOrigin()//允许任何来源的主机访问
                            .AllowAnyMethod()
-                           .AllowAnyHeader()
-                           //.AllowCredentials()//指定处理cookie;
-                           );
+                           .AllowAnyHeader());//.AllowCredentials()//指定处理cookie;
             });
 
-            services.AddAuthentication(options => {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtStrings["IssuerSigningKey"])),//拿到SecurityKey
-                    ValidateIssuer = true,//是否验证Issuer
-                    ValidIssuer = jwtStrings["Issuer"],//Issuer，这两项和前面签发jwt的设置一致
-                    ValidateAudience = true,//是否验证Audience
-                    ValidAudience = jwtStrings["Audience"],//Audience
-                    ValidateLifetime = true,//是否验证失效时间
-                    ClockSkew = TimeSpan.FromMinutes(1) //默认5，是缓冲期，例如Token设置有效期为30，到了30分钟的时候是不会过期，会有5缓冲时间，也就是35分钟才会过期
-                };
-            });
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //{
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,//是否验证SecurityKey
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtStrings["IssuerSigningKey"])),//拿到SecurityKey
+            //        ValidateIssuer = true,//是否验证Issuer
+            //        ValidIssuer = jwtStrings["Issuer"],//Issuer，这两项和前面签发jwt的设置一致
+            //        ValidateAudience = true,//是否验证Audience
+            //        ValidAudience = jwtStrings["Audience"],//Audience
+            //        ValidateLifetime = true,//是否验证失效时间
+            //        ClockSkew = TimeSpan.FromMinutes(1) //默认5，是缓冲期，例如Token设置有效期为30，到了30分钟的时候是不会过期，会有5缓冲时间，也就是35分钟才会过期
+            //    };
+            //});
 
             services.AddControllersWithViews(options =>
             {
                 options.ReturnHttpNotAcceptable = true;//设为true,如果客户端请求不支持的数据格式,就会返回406
-            }).AddJsonOptions(options =>
-            {
-                //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            }).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MyContext>());
+            })
+                //.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)//默认CamelCase风格，首字母小写，在此将改成PascalCase风格，首字母大写
+                .AddNewtonsoftJson(options => {
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver(){
+                        NamingStrategy = new DefaultNamingStrategy() 
+                    };
+                })
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MyContext>());
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -105,10 +105,10 @@ namespace Blog.Site
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
+                    Version = "v1",
                     Title = "我的博客 API",
-                    Version = "v1.0",
                     Description = "我的博客 API说明文档。",
                     Contact = new OpenApiContact
                     {
@@ -118,47 +118,69 @@ namespace Blog.Site
                     }
                 });
 
-                var basePath = Directory.GetCurrentDirectory();
-                c.IncludeXmlComments(Path.Combine(basePath, "Blog.Site.xml"));
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Assembly.GetName().Name}.xml"), true);
+
+                //var basePath = Directory.GetCurrentDirectory();
+                //c.IncludeXmlComments(Path.Combine(basePath, "Blog.Site.xml"));
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
+                    Description = "请在字段中输入单词“bearer”，后跟空格和jwt值",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    { new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference()
+                        {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme
+                        }
+                    }, Array.Empty<string>() }
+                });
             });
 
             services.AddMyServices();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            _loggerFactory.AddNLog();
-            app.UseMyExceptionHandler(_loggerFactory);
-
             if (env.IsDevelopment())
             {
-                NLog.LogManager.LoadConfiguration("nlog.Development.config").GetCurrentClassLogger();
-                app.UseDeveloperExceptionPage();
+                //NLog.LogManager.LoadConfiguration("nlog.Development.config").GetCurrentClassLogger();
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
-                NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
-                NLog.LogManager.Configuration.Variables["connectionString"] = Configuration["DbOption:ConnectionString"].ToString();
+                app.UseExceptionHandler("/Home/Error");
+                //NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
+                //NLog.LogManager.Configuration.Variables["connectionString"] = Configuration["DbOption:ConnectionString"].ToString();
             }
-            app.UseCors(_defaultCorsPolicyName);
+            
             app.UseStaticFiles();
-            app.UseAuthorization();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "我的博客 API v1.0");
-                //c.RoutePrefix = string.Empty;//在http://localhost:5000/处提供 Swagger UI
-            });
+            app.UseSwagger()
+                .UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "我的博客API v1");
+
+                    //c.RoutePrefix = string.Empty;//在http://localhost:5000/处提供 Swagger UI
+                    c.DocumentTitle = "我的博客 API";
+                });
 
             app.UseRouting();
+            app.UseCors(_defaultCorsPolicyName);
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers(); // 属性路由
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapControllers();
+                     name: "default",
+                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Site.Controllers.Api
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class ApiBaseController : ControllerBase
     {

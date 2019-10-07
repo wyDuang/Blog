@@ -1,0 +1,36 @@
+[
+  //йврЁ
+  {
+    "outputFileName": "wwwroot/css/index.all.css",
+    "inputFiles": [
+      "wwwroot/libs/layui/dist/css/layui.css",
+      "wwwroot/libs/font-awesome/css/font-awesome.css",
+      "wwwroot/libs/animate/animate.css",
+      "wwwroot/css/index.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/index.all.js",
+    "inputFiles": [
+      "wwwroot/js/index.js"
+    ]
+  },
+  //ндуб
+  {
+    "outputFileName": "wwwroot/css/blog.all.css",
+    "inputFiles": [
+      "wwwroot/libs/layui/dist/css/layui.css",
+      "wwwroot/libs/font-awesome/css/font-awesome.css",
+      "wwwroot/css/gloable.css",
+      "wwwroot/css/blog.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/article.all.js",
+    "inputFiles": [
+      "wwwroot/libs/nprogress/nprogress.js",
+      "wwwroot/js/gloable.js",
+      "wwwroot/js/article.js"
+    ]
+  }
+]
