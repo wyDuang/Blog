@@ -8,7 +8,7 @@ namespace Blog.Site.Controllers.Web
 {
     public class HomeController : Controller
     {
-        [Route("/")]
+        [Route("/index.html")]
         public IActionResult Index()
         {
             return View();

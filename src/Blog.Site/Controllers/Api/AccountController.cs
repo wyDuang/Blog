@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Site.Controllers.Api
 {
-    [AllowAnonymous]
+    [AllowAnonymous]    
     public class AccountController : ApiBaseController
     {
         private readonly IHttpClientFactory _client;

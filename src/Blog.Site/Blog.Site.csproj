@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>G:\VsProjects\Blog\Blog.Site\Blog.Site.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Api\AccountController.cs" />
+    <Compile Remove="Controllers\Api\ApiBaseController.cs" />
+    <Compile Remove="Controllers\Api\ArticleController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\Web\" />
-    <Folder Include="Controllers\Api\" />
     <Folder Include="Controllers\Admin\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -20,6 +25,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="nlog.Development.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace Blog.Site.Controllers.Admin
         /// 后台管理首页
         /// </summary>
         /// <returns></returns>
-        [Route("/admin")]
+        //[Route("/admin")]
         public IActionResult Index()
         {
             return View();

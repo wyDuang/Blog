@@ -42,9 +42,8 @@ namespace Blog.Site.Controllers.Api
         /// <summary>
         /// 分页获取文章
         /// </summary>
-        [AllowAnonymous]
         [HttpGet(Name = "GetArticles")]
-        public async Task<IActionResult> Get(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
+        public async Task<IActionResult> Gets(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
         {
             if (!_propertyMappingContainer.ValidateMappingExistsFor<ArticleResource, Article>(parameter.OrderBy))
                 return BadRequest("找不到要排序的字段。");

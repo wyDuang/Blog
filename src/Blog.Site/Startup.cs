@@ -23,21 +23,21 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
 
 namespace Blog.Site
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _loggerFactory = loggerFactory;
         }
 
+        public IConfiguration Configuration { get; }
         private readonly string _defaultCorsPolicyName = "BlogApiCors";
-        public static IConfiguration Configuration { get; set; }
-        private readonly ILoggerFactory _loggerFactory;
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CodeGenerateSettings>(Configuration.GetSection("CodeGenerateSettings"));
@@ -61,7 +61,8 @@ namespace Blog.Site
                            );
             });
 
-            services.AddAuthentication(options => {
+            services.AddAuthentication(options =>
+            {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
@@ -82,10 +83,10 @@ namespace Blog.Site
             services.AddControllersWithViews(options =>
             {
                 options.ReturnHttpNotAcceptable = true;//设为true,如果客户端请求不支持的数据格式,就会返回406
-            }).AddJsonOptions(options =>
-            {
-                //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            }).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MyContext>());
+            })
+                //.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)//默认CamelCase风格，首字母小写，在此将改成PascalCase风格，首字母大写
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver() { NamingStrategy = new DefaultNamingStrategy() })
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MyContext>());
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -118,47 +119,49 @@ namespace Blog.Site
                     }
                 });
 
-                var basePath = Directory.GetCurrentDirectory();
-                c.IncludeXmlComments(Path.Combine(basePath, "Blog.Site.xml"));
+                //var basePath = Directory.GetCurrentDirectory();
+                //c.IncludeXmlComments(Path.Combine(basePath, "Blog.Site.xml"));
             });
 
             services.AddMyServices();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            _loggerFactory.AddNLog();
-            app.UseMyExceptionHandler(_loggerFactory);
+            loggerFactory.AddNLog();
+            NLog.Web.NLogBuilder.ConfigureNLog("NLog.config");
+            //app.UseMyExceptionHandler(loggerFactory);
 
             if (env.IsDevelopment())
             {
-                NLog.LogManager.LoadConfiguration("nlog.Development.config").GetCurrentClassLogger();
+                //NLog.LogManager.LoadConfiguration("nlog.Development.config").GetCurrentClassLogger();
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
-                NLog.LogManager.Configuration.Variables["connectionString"] = Configuration["DbOption:ConnectionString"].ToString();
+                app.UseExceptionHandler("/Home/Error");
+                //NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
+                //NLog.LogManager.Configuration.Variables["connectionString"] = Configuration["DbOption:ConnectionString"].ToString();
             }
             app.UseCors(_defaultCorsPolicyName);
             app.UseStaticFiles();
-            app.UseAuthorization();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "我的博客 API v1.0");
-                //c.RoutePrefix = string.Empty;//在http://localhost:5000/处提供 Swagger UI
-            });
-
             app.UseRouting();
+            app.UseAuthorization();            
+
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "我的博客 API v1.0");
+            //    //c.RoutePrefix = string.Empty;//在http://localhost:5000/处提供 Swagger UI
+            //});
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapControllers();
+                     name: "default",
+                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
