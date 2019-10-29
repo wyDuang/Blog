@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Site.Controllers.Api
 {
+    [Authorize]
     [Route("api/articles")]
     public class ArticleController : ApiBaseController
     {

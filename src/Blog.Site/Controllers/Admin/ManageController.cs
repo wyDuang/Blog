@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Site.Controllers.Admin
 {
+    [Authorize]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ManageController : Controller
     {
         /// <summary>
