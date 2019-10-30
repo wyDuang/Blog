@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using AutoMapper;
@@ -20,6 +21,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
 
@@ -41,6 +44,8 @@ namespace Blog.Site
 
             var jwtStrings = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtStrings);
+
+            services.Configure<DomainSettings>(Configuration.GetSection("SubDomains"));
 
             services.AddDbContext<MyContext>(options =>
             {
