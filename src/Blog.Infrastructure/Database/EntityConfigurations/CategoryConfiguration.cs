@@ -16,7 +16,7 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
 
             builder.Property(x => x.CategoryName).HasMaxLength(50).IsRequired();
             builder.Property(x => x.DisplayName).HasMaxLength(50).IsRequired();
-            builder.Property(x => x.IconUrl).HasMaxLength(100).HasDefaultValue("").IsRequired();
+            builder.Property(x => x.CategoryKey).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Sort).HasDefaultValue(0).IsRequired();
 
             builder.ToTable(BlogDbTableNames.Categories);

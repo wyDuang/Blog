@@ -7,6 +7,10 @@ namespace Blog.Core.Entities
     public class Article : Entity
     {
         /// <summary>
+        /// 博客key
+        /// </summary>
+        public string ArticleKey { get; set; }
+        /// <summary>
         /// 博客标题
         /// </summary>
         public string Title { get; set; }

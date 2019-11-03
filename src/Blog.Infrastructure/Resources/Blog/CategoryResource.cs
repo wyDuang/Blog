@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.Core.Entities
+namespace Blog.Infrastructure.Resources
 {
-    /// <summary>
-    /// 分类表
-    /// </summary>
-    public class Category: Entity
+    public class CategoryResource
     {
         /// <summary>
         /// 分类名称
@@ -17,10 +14,6 @@ namespace Blog.Core.Entities
         /// 分类展示名称
         /// </summary>
         public string DisplayName { get; set; }
-        /// <summary>
-        /// url的key值
-        /// </summary>
-        public string CategoryKey { get; set; }
         /// <summary>
         /// 排序
         /// </summary>

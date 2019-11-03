@@ -2,16 +2,12 @@
 using Blog.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Blog.Site.Controllers.Api
+namespace Blog.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class ApiBaseController : ControllerBase
+    [Route("[controller]")]
+    public class BaseController : ControllerBase
     {
         protected readonly IUnitOfWork _unitOfWork;
         protected readonly ILogger<ControllerBase> _logger;
@@ -19,7 +15,7 @@ namespace Blog.Site.Controllers.Api
         protected readonly IUrlHelper _urlHelper;
         protected readonly ITypeHelperService _typeHelperService;
         protected readonly IPropertyMappingContainer _propertyMappingContainer;
-        public ApiBaseController(
+        public BaseController(
             IUnitOfWork unitOfWork = null,
             ILogger<ControllerBase> logger = null,
             IMapper mapper = null,

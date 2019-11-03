@@ -4,56 +4,54 @@ using Blog.Core.Entities;
 using Blog.Core.Interfaces;
 using Blog.Core.QueryParameters;
 using Blog.Infrastructure.Extensions;
-using Blog.Infrastructure.Filter;
 using Blog.Infrastructure.Resources;
 using Blog.Infrastructure.Resources.Hateoas;
 using Blog.Infrastructure.ResultModel;
+using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Blog.Site.Controllers.Api
+namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("api/articles")]
-    public class ArticleController : ApiBaseController
+    [Route("categories")]
+    public class CategoryController : BaseController
     {
-        private readonly IArticleRepository _articleRepository;
-        public ArticleController(
-            IArticleRepository articleRepository,
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(
+            ICategoryRepository categoryRepository,
             IUnitOfWork unitOfWork,
-            ILogger<ArticleController> logger,
+            ILogger<CategoryController> logger,
             IMapper mapper,
             IUrlHelper urlHelper,
             ITypeHelperService typeHelperService,
             IPropertyMappingContainer propertyMappingContainer)
             : base(unitOfWork, logger, mapper, urlHelper, typeHelperService, propertyMappingContainer)
         {
-            _articleRepository = articleRepository;
+            _categoryRepository = categoryRepository;
         }
 
         /// <summary>
         /// 分页获取文章
         /// </summary>
-        [HttpGet(Name = "GetArticles")]
-        public async Task<IActionResult> Gets(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
+        [HttpGet(Name = "GetCategories")]
+        public async Task<IActionResult> Gets(CategoryParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
         {
-            if (!_propertyMappingContainer.ValidateMappingExistsFor<ArticleResource, Article>(parameter.OrderBy))
+            if (!_propertyMappingContainer.ValidateMappingExistsFor<CategoryResource, Category>(parameter.OrderBy))
                 return BadRequest("找不到要排序的字段。");
 
             if (!_typeHelperService.TypeHasProperties<ArticleResource>(parameter.Fields))
                 return BadRequest("字段不存在。");
 
-            var pagedList = await _articleRepository.GetPageListAsync(parameter, _propertyMappingContainer.Resolve<ArticleResource, Article>());
-            var articleResources = _mapper.Map<IEnumerable<Article>, IEnumerable<ArticleResource>>(pagedList);
+            var pagedList = await _categoryRepository.GetPageListAsync(parameter, _propertyMappingContainer.Resolve<CategoryResource, Category>());
+            var categoryResources = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryResource>>(pagedList);
 
             if (mediaType == "application/vnd.wyduang.hateoas+json")
             {
@@ -65,18 +63,15 @@ namespace Blog.Site.Controllers.Api
                     pagedList.PageCount
                 };
 
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(meta, new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                }));
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
 
-                var links = CreateLinksForArticles(parameter, pagedList.HasPrevious, pagedList.HasNext);
+                var links = CreateLinks(parameter, pagedList.HasPrevious, pagedList.HasNext);
 
-                var shapedResources = articleResources.ToDynamicIEnumerable(parameter.Fields);
+                var shapedResources = categoryResources.ToDynamicIEnumerable(parameter.Fields);
                 var shapedWithLinks = shapedResources.Select(x =>
                 {
                     var dict = x as IDictionary<string, object>;
-                    var links = CreateLinksForArticle((int)dict["Id"], parameter.Fields);
+                    var links = CreateLink((int)dict["Id"], parameter.Fields);
                     dict.Add("links", links);
                     return dict;
                 });
@@ -90,8 +85,8 @@ namespace Blog.Site.Controllers.Api
             }
             else
             {
-                var previousPageLink = pagedList.HasPrevious ? CreateArticleUri(parameter, PaginationUriType.PreviousPage) : null;
-                var nextPageLink = pagedList.HasNext ? CreateArticleUri(parameter, PaginationUriType.NextPage) : null;
+                var previousPageLink = pagedList.HasPrevious ? CreateUri(parameter, PaginationUriType.PreviousPage) : null;
+                var nextPageLink = pagedList.HasNext ? CreateUri(parameter, PaginationUriType.NextPage) : null;
 
                 var meta = new
                 {
@@ -103,47 +98,44 @@ namespace Blog.Site.Controllers.Api
                     nextPageLink
                 };
 
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(meta, new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                }));
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
 
-                return Ok(articleResources.ToDynamicIEnumerable(parameter.Fields));
+                return Ok(categoryResources.ToDynamicIEnumerable(parameter.Fields));
             }
         }
 
         /// <summary> 
-        /// 根据ID获取一篇文章
+        /// 根据ID获取一个分类
         /// </summary>
         //[DisableCors]
-        [HttpGet("{id}", Name = "GetArticle")]
+        [HttpGet("{id}", Name = "GetCategory")]
         public async Task<IActionResult> Get(int id, string fields = null)
         {
-            if (!_typeHelperService.TypeHasProperties<ArticleResource>(fields))
+            if (!_typeHelperService.TypeHasProperties<CategoryResource>(fields))
                 return BadRequest("字段不存在。");
 
-            var article = await _articleRepository.GetAsync(id);
-            if (article == null) 
+            var category = await _categoryRepository.GetAsync(id);
+            if (category == null) 
                 return NotFound();
 
-            var articleResource = _mapper.Map<Article, ArticleResource>(article);
+            var categoryResource = _mapper.Map<Category, CategoryResource>(category);
 
-            var links = CreateLinksForArticle(id, fields);
-            var result = articleResource.ToDynamic(fields) as IDictionary<string, object>;
+            var links = CreateLink(id, fields);
+            var result = categoryResource.ToDynamic(fields) as IDictionary<string, object>;
             result.Add("links", links);
 
             return Ok(result);
         }
 
         /// <summary>
-        /// 创建文章
+        /// 创建分类
         /// </summary>
-        [HttpPost(Name = "CreateArticle")]
+        [HttpPost(Name = "CreateCategory")]
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.create+json" })]
         //[RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
-        public async Task<IActionResult> Post([FromBody] ArticleAddResource articleAddResource)
+        public async Task<IActionResult> Post([FromBody] CategoryAddResource categoryAddResource)
         {
-            if (articleAddResource == null)
+            if (categoryAddResource == null)
                 return BadRequest();
 
             if (!ModelState.IsValid)
@@ -151,43 +143,42 @@ namespace Blog.Site.Controllers.Api
                 return new MyUnprocessableEntityObjectResult(ModelState);
             }
 
-            var newArticle = _mapper.Map<ArticleAddResource, Article>(articleAddResource);
+            var newCategory = _mapper.Map<CategoryAddResource, Category>(categoryAddResource);
+            newCategory.CategoryKey = newCategory.CategoryName.GetKeyName();
 
-            newArticle.Author = "wyDuang";
-            newArticle.CreateDate = DateTime.Now;
-            _articleRepository.Add(newArticle);
+            _categoryRepository.Add(newCategory);
 
             if (!await _unitOfWork.SaveAsync())
                 throw new Exception("保存失败！");
 
-            var resultResource = _mapper.Map<Article, ArticleResource>(newArticle);
+            var resultResource = _mapper.Map<Category, CategoryResource>(newCategory);
 
-            var links = CreateLinksForArticle(newArticle.Id); 
+            var links = CreateLink(newCategory.Id);
             var linkedArticleResource = resultResource.ToDynamic() as IDictionary<string, object>;
             linkedArticleResource.Add("links", links);
 
-            return CreatedAtRoute("GetArticle", new { id = linkedArticleResource["Id"] }, linkedArticleResource);
+            return CreatedAtRoute("GetCategory", new { id = linkedArticleResource["Id"] }, linkedArticleResource);
         }
 
         /// <summary>
-        /// 判断是存在
+        /// 判断是存在此分类
         /// </summary>
-        [HttpPost("{id}", Name = "BlockCreatingArticle")]
-        public async Task<IActionResult> BlockCreating(int id)
+        [HttpPost("{id}", Name = "IsExistCategory")]
+        public async Task<IActionResult> IsExist(string key)
         {
-            var article = await _articleRepository.GetAsync(id);
-            if (article == null) return NotFound();
-            
+            var categories = await _categoryRepository.GetListAsync(x=>x.CategoryKey == key);
+            if (categories == null) return NoContent();
+
             return StatusCode(StatusCodes.Status409Conflict);
         }
 
-        [HttpDelete("{id}", Name = "DeleteArticle")]
+        [HttpDelete("{id}", Name = "DeleteCategory")]
         public async Task<IActionResult> Delete(int id)
         {
-            var article = await _articleRepository.GetAsync(id);
-            if (article == null) return NotFound();
+            var category = await _categoryRepository.GetAsync(id);
+            if (category == null) return NotFound();
 
-            _articleRepository.Delete(article);
+            _categoryRepository.Delete(category);
 
             if (!await _unitOfWork.SaveAsync())
             {
@@ -196,7 +187,7 @@ namespace Blog.Site.Controllers.Api
             return NoContent();
         }
 
-        [HttpPut("{id}", Name = "UpdateArticle")]
+        [HttpPut("{id}", Name = "UpdateCategory")]
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
         public async Task<IActionResult> Update(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
         {
@@ -204,19 +195,19 @@ namespace Blog.Site.Controllers.Api
             if (!ModelState.IsValid)
                 return new UnprocessableEntityObjectResult(ModelState);
 
-            var article = await _articleRepository.GetAsync(id);
+            var article = await _categoryRepository.GetAsync(id);
             if (article == null) return NotFound();
 
             _mapper.Map(articleUpdateResource, article);
 
             if (!await _unitOfWork.SaveAsync())
             {
-                throw new Exception($"Updating product {id} failed when saving.");
+                throw new Exception($"更新类别 {id} 时保存失败。");
             }
             return NoContent();
         }
 
-        private string CreateArticleUri(ArticleParameter parameters, PaginationUriType uriType)
+        private string CreateUri(CategoryParameter parameters, PaginationUriType uriType)
         {
             switch (uriType)
             {
@@ -227,9 +218,9 @@ namespace Blog.Site.Controllers.Api
                         pageSize = parameters.PageSize,
                         orderBy = parameters.OrderBy,
                         fields = parameters.Fields,
-                        title = parameters.Title
+                        name = parameters.Name
                     };
-                    return _urlHelper.Link("GetArticles", previousParameters);
+                    return _urlHelper.Link("GetCategories", previousParameters);
                 case PaginationUriType.NextPage:
                     var nextParameters = new
                     {
@@ -237,9 +228,9 @@ namespace Blog.Site.Controllers.Api
                         pageSize = parameters.PageSize,
                         orderBy = parameters.OrderBy,
                         fields = parameters.Fields,
-                        title = parameters.Title
+                        name = parameters.Name
                     };
-                    return _urlHelper.Link("GetArticles", nextParameters);
+                    return _urlHelper.Link("GetCategories", nextParameters);
                 default:
                     var currentParameters = new
                     {
@@ -247,39 +238,39 @@ namespace Blog.Site.Controllers.Api
                         pageSize = parameters.PageSize,
                         orderBy = parameters.OrderBy,
                         fields = parameters.Fields,
-                        title = parameters.Title
+                        name = parameters.Name
                     };
-                    return _urlHelper.Link("GetArticles", currentParameters);
+                    return _urlHelper.Link("GetCategories", currentParameters);
             }
         }
 
-        private IEnumerable<LinkResource> CreateLinksForArticle(int id, string fields = null)
+        private IEnumerable<LinkResource> CreateLink(int id, string fields = null)
         {
             var links = new List<LinkResource>();
 
             if (string.IsNullOrWhiteSpace(fields))
-                links.Add(new LinkResource(_urlHelper.Link("GetArticle", new { id }), "self", "GET"));
+                links.Add(new LinkResource(_urlHelper.Link("GetCategory", new { id }), "self", "GET"));
             else
-                links.Add(new LinkResource(_urlHelper.Link("GetArticle", new { id, fields }), "self", "GET"));
-            links.Add(new LinkResource(_urlHelper.Link("DeleteArticle", new { id }), "delete_post", "DELETE"));
+                links.Add(new LinkResource(_urlHelper.Link("GetCategory", new { id, fields }), "self", "GET"));
+            links.Add(new LinkResource(_urlHelper.Link("DeleteCategory", new { id }), "delete_category", "DELETE"));
 
             return links;
         }
 
-        private IEnumerable<LinkResource> CreateLinksForArticles(ArticleParameter parameter, bool hasPrevious, bool hasNext)
+        private IEnumerable<LinkResource> CreateLinks(CategoryParameter parameter, bool hasPrevious, bool hasNext)
         {
             var links = new List<LinkResource>
             {
-                new LinkResource( CreateArticleUri(parameter, PaginationUriType.CurrentPage), "self", "GET")
+                new LinkResource( CreateUri(parameter, PaginationUriType.CurrentPage), "self", "GET")
             };
 
             if (hasPrevious)
             {
-                links.Add(new LinkResource(CreateArticleUri(parameter, PaginationUriType.PreviousPage), "previous_page", "GET"));
+                links.Add(new LinkResource(CreateUri(parameter, PaginationUriType.PreviousPage), "previous_page", "GET"));
             }
             if (hasNext)
             {
-                links.Add(new LinkResource(CreateArticleUri(parameter, PaginationUriType.NextPage), "next_page", "GET"));
+                links.Add(new LinkResource(CreateUri(parameter, PaginationUriType.NextPage), "next_page", "GET"));
             }
 
             return links;

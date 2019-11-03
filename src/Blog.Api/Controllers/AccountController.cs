@@ -14,11 +14,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Site.Controllers.Api
+namespace Blog.Api.Controllers
 {
     [AllowAnonymous]
+    [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = false)]
-    public class AccountController : ApiBaseController
+    public class AccountController : BaseController
     {
         private readonly IHttpClientFactory _client;
         private readonly JwtSettings _jwtSettings;

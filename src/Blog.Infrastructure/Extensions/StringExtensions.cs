@@ -1000,5 +1000,24 @@ namespace Blog.Infrastructure.Extensions
 
             return text;
         }
+
+        /// <summary>
+        /// 返回格式化关键名-KeyName
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string GetKeyName(this string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                return name.Trim().Replace("~", "-").Replace("`", "-").Replace("!", "-").Replace("@", "-")
+                    .Replace("#", "-").Replace("$", "-").Replace("%", "-").Replace("^", "-").Replace("&", "-").Replace("*", "-")
+                    .Replace(" ", "-").Replace("(", "-").Replace(")", "-").Replace("+", "-").Replace("®", "-").Replace("™", "-")
+                    .Replace("=", "-").Replace(",", "-").Replace(".", "-").Replace("<", "-").Replace(">", "-").Replace("’", "-").Replace("，", "-").Replace("±", "-").Replace("[", "-").Replace("]", "-")
+                    .Replace("?", "-").Replace("/", "-").Replace("\\", "-").Replace(";", "-").Replace(":", "-").Replace("–", "-").Replace("ω", "-").Replace("{", "-").Replace("}", "-")
+                    .Replace("'", "-").Replace("\"", "-").Replace("“", "-").Replace("”", "-").Replace("|", "-").Replace("_", "-").Replace("---", "-").Replace("--", "-").ToLower().Trim();
+            }
+            return "";
+        }
     }
 }
