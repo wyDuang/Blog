@@ -16,7 +16,7 @@ namespace Blog.Infrastructure.Repositories
         {
         }
 
-        public async Task<PaginatedList<Article>> GetPageListAsync(ArticleParameter parameter, IPropertyMapping propertyMapping)
+        public async Task<PaginatedList<Article>> GetPageListAsync(ArticleParameter parameter, IPropertyMapping propertyMapping = null)
         {
             var query = Context.Articles.AsQueryable();
 
@@ -26,8 +26,11 @@ namespace Blog.Infrastructure.Repositories
                 query = query.Where(x => x.Title.ToLowerInvariant() == title);
             }
 
-            query = query.ApplySort(parameter.OrderBy, propertyMapping);
-
+            if(propertyMapping != null)
+            {
+                query = query.ApplySort(parameter.OrderBy, propertyMapping);
+            }
+            
             var count = await query.CountAsync();
             var data = await query
                 .Skip(parameter.PageIndex * parameter.PageSize)

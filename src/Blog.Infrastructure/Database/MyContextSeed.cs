@@ -17,7 +17,7 @@ namespace Blog.Infrastructure.Database
             int retryForAvailability = retry;
             try
             {
-                // TODO: Only run this if using a real database
+                // 只有在使用真正的数据库时才运行这个
                 // myContext.Database.Migrate();
 
                 if (!myContext.Articles.Any())

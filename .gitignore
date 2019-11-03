@@ -370,4 +370,13 @@ layui
 /src/Blog.Site/appsettings.Production.json
 /src/Blog.Site/Properties
 /src/Blog.Site/wwwroot/libs
+<<<<<<< HEAD
 >>>>>>> 12b277e... asp.net core 3.0
+=======
+/src/Blog.Api/appsettings.Development.json
+/src/Blog.Api/appsettings.Production.json
+<<<<<<< HEAD
+>>>>>>> 44c5959... 添加api
+=======
+/src/Blog.Api/Properties
+>>>>>>> d0b3130... api静态文件目录

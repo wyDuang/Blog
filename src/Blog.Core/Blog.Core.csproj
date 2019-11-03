@@ -4,8 +4,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\Blog.Api\Blog.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Remove="Interfaces\blog\IBaseRepository.cs" />
+    <Compile Remove="Interfaces\Blog\IBaseRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

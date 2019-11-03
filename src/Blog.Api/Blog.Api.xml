@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blog.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Blog.Api.Controllers.AuthController.PostToken(Blog.Core.Entities.AccountEntity)">
+            <summary>
+            Post 获取Token
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.AuthController.GetGithubLoginUrlAsync">
+            <summary>
+            获取Github 登录地址 最终得到code
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.AuthController.GetAccessTokenAsync(System.String)">
+            <summary>
+            获取Github access_token
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.AuthController.GenerateTokenAsync(System.String)">
+            <summary>
+            通过 github的 access_token 生成 Token
+            </summary>
+            <param name="access_token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.ArticleController.GetArticles(Blog.Core.QueryParameters.ArticleParameter,System.String)">
+            <summary>
+            分页获取文章
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.ArticleController.GetArticle(System.Int32,System.String)">
+            <summary> 
+            根据ID获取一篇文章
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.ArticleController.CreateArticle(Blog.Infrastructure.Resources.ArticleAddResource)">
+            <summary>
+            创建文章
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.ArticleController.IsExistArticle(System.String)">
+            <summary>
+            根据key判断是否存在
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.ArticleController.DeleteArticle(System.Int32)">
+            <summary>
+            根据Id删除
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.CategoryController.Gets(Blog.Core.QueryParameters.CategoryParameter,System.String)">
+            <summary>
+            分页获取文章
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.CategoryController.Get(System.Int32,System.String)">
+            <summary> 
+            根据ID获取一个分类
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.CategoryController.Post(Blog.Infrastructure.Resources.CategoryAddResource)">
+            <summary>
+            创建分类
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.CategoryController.IsExist(System.String)">
+            <summary>
+            判断是存在此分类
+            </summary>
+            <param name="key">分类key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.CategoryController.Delete(System.Int32)">
+            <summary>
+            根据Id删除分类
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Api.Controllers.Blog.TagController.Gets(Blog.Core.QueryParameters.TagParameter,System.String)">
+            <summary>
+            分页获取标签
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.Blog.TagController.Get(System.Int32,System.String)">
+            <summary> 
+            根据ID获取一个标签
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.Blog.TagController.Post(Blog.Infrastructure.Resources.TagResource)">
+            <summary>
+            创建标签
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.Blog.TagController.IsExist(System.String)">
+            <summary>
+            判断是存在
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.SignatureController.Get(Blog.Core.Entities.SignatureEntity)">
+            <summary>
+            艺术签名
+            </summary>
+            <param name="signatureEntity">参数对象</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
