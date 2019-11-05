@@ -117,6 +117,7 @@ namespace Blog.Api
             app.UseCors(_defaultCorsPolicyName);
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseStaticFiles();
             app.UseSwagger().UseSwaggerUI();
             app.UseEndpoints(endpoints =>
             {
