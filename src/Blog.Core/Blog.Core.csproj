@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\blog\IBaseRepository.cs" />
+    <Compile Remove="Interfaces\Blog\IBaseRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

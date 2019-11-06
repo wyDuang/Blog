@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.Core.Entities
+namespace Blog.Infrastructure.Resources
 {
-    public class Tag : Entity
+    public class TagResource
     {
+        public int Id { get; set; }
         /// <summary>
         /// 标签Key
         /// </summary>

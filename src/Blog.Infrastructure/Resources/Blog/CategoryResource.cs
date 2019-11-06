@@ -6,6 +6,7 @@ namespace Blog.Infrastructure.Resources
 {
     public class CategoryResource
     {
+        public int Id { get; set; }
         /// <summary>
         /// 分类名称
         /// </summary>

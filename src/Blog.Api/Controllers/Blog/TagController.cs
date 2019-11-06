@@ -18,41 +18,41 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Blog.Api.Controllers
+namespace Blog.Api.Controllers.Blog
 {
     [Authorize]
-    [Route("articles")]
+    [Route("tags")]
     [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v1)]
-    public class ArticleController : BaseController
+    public class TagController : BaseController
     {
-        private readonly IArticleRepository _articleRepository;
-        public ArticleController(
-            IArticleRepository articleRepository,
+        private readonly ITagRepository _tagRepository;
+        public TagController(
+            ITagRepository tagRepository,
             IUnitOfWork unitOfWork,
-            ILogger<ArticleController> logger,
+            ILogger<TagController> logger,
             IMapper mapper,
             IUrlHelper urlHelper,
             ITypeHelperService typeHelperService,
             IPropertyMappingContainer propertyMappingContainer)
             : base(unitOfWork, logger, mapper, urlHelper, typeHelperService, propertyMappingContainer)
         {
-            _articleRepository = articleRepository;
+            _tagRepository = tagRepository;
         }
 
         /// <summary>
-        /// 分页获取文章
+        /// 分页获取标签
         /// </summary>
-        [HttpGet(Name = "GetArticles")]
-        public async Task<IActionResult> Gets(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
+        [HttpGet(Name = "GetTags")]
+        public async Task<IActionResult> Gets(TagParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
         {
-            if (!_propertyMappingContainer.ValidateMappingExistsFor<ArticleResource, Article>(parameter.OrderBy))
+            if (!_propertyMappingContainer.ValidateMappingExistsFor<TagResource, Tag>(parameter.OrderBy))
                 return BadRequest("找不到要排序的字段。");
 
-            if (!_typeHelperService.TypeHasProperties<ArticleResource>(parameter.Fields))
+            if (!_typeHelperService.TypeHasProperties<TagResource>(parameter.Fields))
                 return BadRequest("字段不存在。");
 
-            var pagedList = await _articleRepository.GetPageListAsync(parameter, _propertyMappingContainer.Resolve<ArticleResource, Article>());
-            var articleResources = _mapper.Map<IEnumerable<Article>, IEnumerable<ArticleResource>>(pagedList);
+            var pagedList = await _tagRepository.GetPageListAsync(parameter, _propertyMappingContainer.Resolve<TagResource, Tag>());
+            var tagResources = _mapper.Map<IEnumerable<Tag>, IEnumerable<TagResource>>(pagedList);
 
             if (mediaType == "application/vnd.wyduang.hateoas+json")
             {
@@ -66,13 +66,13 @@ namespace Blog.Api.Controllers
 
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
 
-                var links = CreateLinksForArticles(parameter, pagedList.HasPrevious, pagedList.HasNext);
+                var links = CreateLinks(parameter, pagedList.HasPrevious, pagedList.HasNext);
 
-                var shapedResources = articleResources.ToDynamicIEnumerable(parameter.Fields);
+                var shapedResources = tagResources.ToDynamicIEnumerable(parameter.Fields);
                 var shapedWithLinks = shapedResources.Select(x =>
                 {
                     var dict = x as IDictionary<string, object>;
-                    var links = CreateLinksForArticle((int)dict["Id"], parameter.Fields);
+                    var links = CreateLink((int)dict["Id"], parameter.Fields);
                     dict.Add("links", links);
                     return dict;
                 });
@@ -86,8 +86,8 @@ namespace Blog.Api.Controllers
             }
             else
             {
-                var previousPageLink = pagedList.HasPrevious ? CreateArticleUri(parameter, PaginationUriType.PreviousPage) : null;
-                var nextPageLink = pagedList.HasNext ? CreateArticleUri(parameter, PaginationUriType.NextPage) : null;
+                var previousPageLink = pagedList.HasPrevious ? CreateUri(parameter, PaginationUriType.PreviousPage) : null;
+                var nextPageLink = pagedList.HasNext ? CreateUri(parameter, PaginationUriType.NextPage) : null;
 
                 var meta = new
                 {
@@ -101,42 +101,42 @@ namespace Blog.Api.Controllers
 
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
 
-                return Ok(articleResources.ToDynamicIEnumerable(parameter.Fields));
+                return Ok(tagResources.ToDynamicIEnumerable(parameter.Fields));
             }
         }
 
         /// <summary> 
-        /// 根据ID获取一篇文章
+        /// 根据ID获取一个标签
         /// </summary>
         //[DisableCors]
-        [HttpGet("{id}", Name = "GetArticle")]
+        [HttpGet("{id}", Name = "GetTag")]
         public async Task<IActionResult> Get(int id, string fields = null)
         {
-            if (!_typeHelperService.TypeHasProperties<ArticleResource>(fields))
+            if (!_typeHelperService.TypeHasProperties<TagResource>(fields))
                 return BadRequest("字段不存在。");
 
-            var article = await _articleRepository.GetAsync(id);
-            if (article == null) 
+            var tag = await _tagRepository.GetAsync(id);
+            if (tag == null)
                 return NotFound();
 
-            var articleResource = _mapper.Map<Article, ArticleResource>(article);
+            var tagResource = _mapper.Map<Tag, TagResource>(tag);
 
-            var links = CreateLinksForArticle(id, fields);
-            var result = articleResource.ToDynamic(fields) as IDictionary<string, object>;
+            var links = CreateLink(id, fields);
+            var result = tagResource.ToDynamic(fields) as IDictionary<string, object>;
             result.Add("links", links);
 
             return Ok(result);
         }
 
         /// <summary>
-        /// 创建文章
+        /// 创建标签
         /// </summary>
-        [HttpPost(Name = "CreateArticle")]
+        [HttpPost(Name = "CreateTag")]
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.create+json" })]
         //[RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
-        public async Task<IActionResult> Post([FromBody] ArticleAddResource articleAddResource)
+        public async Task<IActionResult> Post([FromBody] TagResource AddResource)
         {
-            if (articleAddResource == null)
+            if (AddResource == null)
                 return BadRequest();
 
             if (!ModelState.IsValid)
@@ -144,10 +144,8 @@ namespace Blog.Api.Controllers
                 return new MyUnprocessableEntityObjectResult(ModelState);
             }
 
-            var newArticle = _mapper.Map<ArticleAddResource, Article>(articleAddResource);
+            var newArticle = _mapper.Map<TagResource, Tag>(AddResource);
 
-            newArticle.Author = "wyDuang";
-            newArticle.CreateDate = DateTime.Now;
             _articleRepository.Add(newArticle);
 
             if (!await _unitOfWork.SaveAsync())
@@ -155,7 +153,7 @@ namespace Blog.Api.Controllers
 
             var resultResource = _mapper.Map<Article, ArticleResource>(newArticle);
 
-            var links = CreateLinksForArticle(newArticle.Id); 
+            var links = CreateLinksForArticle(newArticle.Id);
             var linkedArticleResource = resultResource.ToDynamic() as IDictionary<string, object>;
             linkedArticleResource.Add("links", links);
 
@@ -168,9 +166,9 @@ namespace Blog.Api.Controllers
         [HttpPost("{id}", Name = "IsExistArticle")]
         public async Task<IActionResult> IsExist(string key)
         {
-            var article = await _articleRepository.GetListAsync(x => x.ArticleKey == key);
+            var article = await _tagRepository.GetListAsync(x => x.ArticleKey == key);
             if (article == null) return NoContent();
-            
+
             return StatusCode(StatusCodes.Status409Conflict);
         }
 
@@ -189,7 +187,7 @@ namespace Blog.Api.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}", Name = "UpdateArticle")]
+        [HttpPut("{id}", Name = "UpdateTag")]
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
         public async Task<IActionResult> Update(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
         {
@@ -197,19 +195,19 @@ namespace Blog.Api.Controllers
             if (!ModelState.IsValid)
                 return new UnprocessableEntityObjectResult(ModelState);
 
-            var article = await _articleRepository.GetAsync(id);
+            var article = await _tagRepository.GetAsync(id);
             if (article == null) return NotFound();
 
             _mapper.Map(articleUpdateResource, article);
 
             if (!await _unitOfWork.SaveAsync())
             {
-                throw new Exception($"更新文章 {id} 时保存失败。");
+                throw new Exception($"更新标签 {id} 时保存失败。");
             }
             return NoContent();
         }
 
-        private string CreateArticleUri(ArticleParameter parameters, PaginationUriType uriType)
+        private string CreateUri(TagParameter parameters, PaginationUriType uriType)
         {
             switch (uriType)
             {
@@ -220,9 +218,9 @@ namespace Blog.Api.Controllers
                         pageSize = parameters.PageSize,
                         orderBy = parameters.OrderBy,
                         fields = parameters.Fields,
-                        title = parameters.Title
+                        title = parameters.DisplayName
                     };
-                    return _urlHelper.Link("GetArticles", previousParameters);
+                    return _urlHelper.Link("GetTags", previousParameters);
                 case PaginationUriType.NextPage:
                     var nextParameters = new
                     {
@@ -230,9 +228,9 @@ namespace Blog.Api.Controllers
                         pageSize = parameters.PageSize,
                         orderBy = parameters.OrderBy,
                         fields = parameters.Fields,
-                        title = parameters.Title
+                        title = parameters.DisplayName
                     };
-                    return _urlHelper.Link("GetArticles", nextParameters);
+                    return _urlHelper.Link("GetTags", nextParameters);
                 default:
                     var currentParameters = new
                     {
@@ -240,39 +238,39 @@ namespace Blog.Api.Controllers
                         pageSize = parameters.PageSize,
                         orderBy = parameters.OrderBy,
                         fields = parameters.Fields,
-                        title = parameters.Title
+                        title = parameters.DisplayName
                     };
-                    return _urlHelper.Link("GetArticles", currentParameters);
+                    return _urlHelper.Link("GetTags", currentParameters);
             }
         }
 
-        private IEnumerable<LinkResource> CreateLinksForArticle(int id, string fields = null)
+        private IEnumerable<LinkResource> CreateLink(int id, string fields = null)
         {
             var links = new List<LinkResource>();
 
             if (string.IsNullOrWhiteSpace(fields))
-                links.Add(new LinkResource(_urlHelper.Link("GetArticle", new { id }), "self", "GET"));
+                links.Add(new LinkResource(_urlHelper.Link("GetTag", new { id }), "self", "GET"));
             else
-                links.Add(new LinkResource(_urlHelper.Link("GetArticle", new { id, fields }), "self", "GET"));
-            links.Add(new LinkResource(_urlHelper.Link("DeleteArticle", new { id }), "delete_post", "DELETE"));
+                links.Add(new LinkResource(_urlHelper.Link("GetTag", new { id, fields }), "self", "GET"));
+            links.Add(new LinkResource(_urlHelper.Link("DeleteTag", new { id }), "delete_tag", "DELETE"));
 
             return links;
         }
 
-        private IEnumerable<LinkResource> CreateLinksForArticles(ArticleParameter parameter, bool hasPrevious, bool hasNext)
+        private IEnumerable<LinkResource> CreateLinks(TagParameter parameter, bool hasPrevious, bool hasNext)
         {
             var links = new List<LinkResource>
             {
-                new LinkResource( CreateArticleUri(parameter, PaginationUriType.CurrentPage), "self", "GET")
+                new LinkResource(CreateUri(parameter, PaginationUriType.CurrentPage), "self", "GET")
             };
 
             if (hasPrevious)
             {
-                links.Add(new LinkResource(CreateArticleUri(parameter, PaginationUriType.PreviousPage), "previous_page", "GET"));
+                links.Add(new LinkResource(CreateUri(parameter, PaginationUriType.PreviousPage), "previous_page", "GET"));
             }
             if (hasNext)
             {
-                links.Add(new LinkResource(CreateArticleUri(parameter, PaginationUriType.NextPage), "next_page", "GET"));
+                links.Add(new LinkResource(CreateUri(parameter, PaginationUriType.NextPage), "next_page", "GET"));
             }
 
             return links;
