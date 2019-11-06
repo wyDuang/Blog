@@ -116,7 +116,7 @@ namespace Blog.Api.Controllers
             return result;
         }
 
-        private async Task AddWatermarkSaveItAsync(string signaturePath)
+        private void AddWatermarkSaveItAsync(string signaturePath)
         {
             if (string.IsNullOrWhiteSpace(_webHostEnvironment.WebRootPath))
             {

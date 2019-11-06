@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("categories")]
+    [Route("api/categories")]
     public class CategoryController : BaseController
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -163,18 +163,29 @@ namespace Blog.Api.Controllers
         /// <summary>
         /// 判断是存在此分类
         /// </summary>
+        /// <param name="key">分类key</param>
+        /// <returns></returns>
         [HttpPost("{id}", Name = "IsExistCategory")]
         public async Task<IActionResult> IsExist(string key)
         {
+            if (key.IsNullOrWhiteSpace()) return BadRequest();
+
             var categories = await _categoryRepository.GetListAsync(x=>x.CategoryKey == key);
             if (categories == null) return NoContent();
 
-            return StatusCode(StatusCodes.Status409Conflict);
+            return Forbid("此Key已存在！");
         }
 
+        /// <summary>
+        /// 根据Id删除分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}", Name = "DeleteCategory")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (id <= 0) return BadRequest();
+
             var category = await _categoryRepository.GetAsync(id);
             if (category == null) return NotFound();
 
@@ -191,7 +202,7 @@ namespace Blog.Api.Controllers
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
         public async Task<IActionResult> Update(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
         {
-            if (articleUpdateResource == null) return BadRequest();
+            if (articleUpdateResource == null || id <= 0) return BadRequest();
             if (!ModelState.IsValid)
                 return new UnprocessableEntityObjectResult(ModelState);
 

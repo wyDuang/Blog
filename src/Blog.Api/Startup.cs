@@ -84,6 +84,19 @@ namespace Blog.Api
                            .AllowAnyMethod()
                            .AllowAnyHeader());//.AllowCredentials()//指定处理cookie;
             });
+
+            services.AddHttpClient("github", config =>
+            {
+                config.BaseAddress = new Uri("https://github.com/");
+                config.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
+            });
+            services.AddHttpClient("translate", config =>
+            {
+                config.BaseAddress = new Uri("https://translate.google.cn");
+                config.DefaultRequestHeaders.Add("Accept", "*/*");
+                config.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
+                config.DefaultRequestHeaders.Referrer = new Uri("https://translate.google.cn");
+            });
             services.AddHttpClient();
 
             services.AddAutoMapper(typeof(Startup));

@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers.Blog
 {
     [Authorize]
-    [Route("tags")]
+    [Route("api/tags")]
     [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v1)]
     public class TagController : BaseController
     {
@@ -136,49 +136,50 @@ namespace Blog.Api.Controllers.Blog
         //[RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
         public async Task<IActionResult> Post([FromBody] TagResource AddResource)
         {
-            if (AddResource == null)
-                return BadRequest();
+            if (AddResource == null) return BadRequest();
 
             if (!ModelState.IsValid)
-            {
                 return new MyUnprocessableEntityObjectResult(ModelState);
-            }
 
-            var newArticle = _mapper.Map<TagResource, Tag>(AddResource);
-
-            _articleRepository.Add(newArticle);
+            var newTag = _mapper.Map<TagResource, Tag>(AddResource);
+            _tagRepository.Add(newTag);
 
             if (!await _unitOfWork.SaveAsync())
                 throw new Exception("保存失败！");
 
-            var resultResource = _mapper.Map<Article, ArticleResource>(newArticle);
+            var resultResource = _mapper.Map<Tag, TagResource>(newTag);
 
-            var links = CreateLinksForArticle(newArticle.Id);
-            var linkedArticleResource = resultResource.ToDynamic() as IDictionary<string, object>;
-            linkedArticleResource.Add("links", links);
+            var links = CreateLink(newTag.Id);
+            var linkedResource = resultResource.ToDynamic() as IDictionary<string, object>;
+            linkedResource.Add("links", links);
 
-            return CreatedAtRoute("GetArticle", new { id = linkedArticleResource["Id"] }, linkedArticleResource);
+            return CreatedAtRoute("GetTag", new { id = linkedResource["Id"] }, linkedResource);
         }
 
         /// <summary>
         /// 判断是存在
         /// </summary>
-        [HttpPost("{id}", Name = "IsExistArticle")]
+        [HttpPost("{id}", Name = "IsExistTag")]
         public async Task<IActionResult> IsExist(string key)
         {
-            var article = await _tagRepository.GetListAsync(x => x.ArticleKey == key);
-            if (article == null) return NoContent();
+            if (key.IsNullOrWhiteSpace()) return BadRequest();
 
-            return StatusCode(StatusCodes.Status409Conflict);
+            var article = await _tagRepository.GetListAsync(x => x.TagKey == key);
+            if (article == null)
+                return NoContent();
+
+            return Forbid("此Key已存在！");
         }
 
-        [HttpDelete("{id}", Name = "DeleteArticle")]
+        [HttpDelete("{id}", Name = "DeleteTag")]
         public async Task<IActionResult> Delete(int id)
         {
-            var article = await _articleRepository.GetAsync(id);
-            if (article == null) return NotFound();
+            if (id <= 0) return BadRequest();
 
-            _articleRepository.Delete(article);
+            var tag = await _tagRepository.GetAsync(id);
+            if (null == tag) return NotFound();
+
+            _tagRepository.Delete(tag);
 
             if (!await _unitOfWork.SaveAsync())
             {
@@ -191,7 +192,7 @@ namespace Blog.Api.Controllers.Blog
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
         public async Task<IActionResult> Update(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
         {
-            if (articleUpdateResource == null) return BadRequest();
+            if (null == articleUpdateResource || id <= 0 ) return BadRequest();
             if (!ModelState.IsValid)
                 return new UnprocessableEntityObjectResult(ModelState);
 

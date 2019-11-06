@@ -6,7 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace Blog.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     public class BaseController : ControllerBase
     {
         protected readonly IUnitOfWork _unitOfWork;

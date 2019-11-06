@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("articles")]
+    [Route("api/articles")]
     [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v1)]
     public class ArticleController : BaseController
     {
@@ -115,8 +115,10 @@ namespace Blog.Api.Controllers
             if (!_typeHelperService.TypeHasProperties<ArticleResource>(fields))
                 return BadRequest("字段不存在。");
 
+            if (id <= 0) return BadRequest();
+
             var article = await _articleRepository.GetAsync(id);
-            if (article == null) 
+            if (null == article)
                 return NotFound();
 
             var articleResource = _mapper.Map<Article, ArticleResource>(article);
@@ -136,13 +138,11 @@ namespace Blog.Api.Controllers
         //[RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
         public async Task<IActionResult> Post([FromBody] ArticleAddResource articleAddResource)
         {
-            if (articleAddResource == null)
+            if (null == articleAddResource)
                 return BadRequest();
 
             if (!ModelState.IsValid)
-            {
                 return new MyUnprocessableEntityObjectResult(ModelState);
-            }
 
             var newArticle = _mapper.Map<ArticleAddResource, Article>(articleAddResource);
 
@@ -168,15 +168,19 @@ namespace Blog.Api.Controllers
         [HttpPost("{id}", Name = "IsExistArticle")]
         public async Task<IActionResult> IsExist(string key)
         {
+            if (key.IsNullOrWhiteSpace()) return BadRequest();
+
             var article = await _articleRepository.GetListAsync(x => x.ArticleKey == key);
             if (article == null) return NoContent();
-            
-            return StatusCode(StatusCodes.Status409Conflict);
+
+            return Forbid("此Key已存在！");
         }
 
         [HttpDelete("{id}", Name = "DeleteArticle")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (id <= 0) return BadRequest();
+
             var article = await _articleRepository.GetAsync(id);
             if (article == null) return NotFound();
 
@@ -193,7 +197,7 @@ namespace Blog.Api.Controllers
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
         public async Task<IActionResult> Update(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
         {
-            if (articleUpdateResource == null) return BadRequest();
+            if (articleUpdateResource == null || id <= 0) return BadRequest();
             if (!ModelState.IsValid)
                 return new UnprocessableEntityObjectResult(ModelState);
 
