@@ -346,3 +346,4 @@ layui
 /src/Blog.Site/wwwroot/libs
 /src/Blog.Api/appsettings.Development.json
 /src/Blog.Api/appsettings.Production.json
+/src/Blog.Api/Properties

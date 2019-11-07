@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace Blog.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [Produces("application/json")]
     public class BaseController : ControllerBase
     {
