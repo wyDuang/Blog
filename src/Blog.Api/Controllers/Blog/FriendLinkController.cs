@@ -21,8 +21,8 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("api/friendLinks")]
-    [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v1)]
+    [Route("friendLinks")]
+    [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v1)]
     public class FriendLinkController: BaseController
     {
         public FriendLinkController()

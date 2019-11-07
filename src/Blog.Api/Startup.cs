@@ -54,26 +54,26 @@ namespace Blog.Api
             });
 
             services.AddSwagger();
-            services.AddAuthentication(
-                options =>
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                        ValidateIssuer = true,//是否验证Issuer
-                        ValidateAudience = true,//是否验证Audience
-                        ValidateLifetime = true,//是否验证失效时间 
-                        ValidIssuer = jwtStrings["Issuer"],//Issuer，这两项和前面签发jwt的设置一致
-                        ValidAudience = jwtStrings["Audience"],//Audience
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtStrings["IssuerSigningKey"])),//拿到SecurityKey
-                        ClockSkew = TimeSpan.FromMinutes(1) //默认5分钟缓冲期，例如Token设置有效期为30，到了30分钟的时候是不会过期，会有5缓冲时间。
-                    };
-                });
+                    ValidateIssuerSigningKey = true,//是否验证SecurityKey
+                    ValidateIssuer = true,//是否验证Issuer
+                    ValidateAudience = true,//是否验证Audience
+                    ValidateLifetime = true,//是否验证失效时间 
+                    ValidIssuer = jwtStrings["Issuer"],//Issuer，这两项和前面签发jwt的设置一致
+                    ValidAudience = jwtStrings["Audience"],//Audience
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtStrings["IssuerSigningKey"])),//拿到SecurityKey
+                    ClockSkew = TimeSpan.FromMinutes(1), //默认5分钟缓冲期，例如Token设置有效期为30，到了30分钟的时候是不会过期，会有5缓冲时间。
+                    RequireExpirationTime = true,
+                };
+            });
             services.AddAuthorization();
             //services.AddResponseCaching();
             services.AddMemoryCache();

@@ -4,6 +4,7 @@ using Blog.Core.Entities;
 using Blog.Core.Interfaces;
 using Blog.Core.QueryParameters;
 using Blog.Infrastructure.Extensions;
+using Blog.Infrastructure.Attribute;
 using Blog.Infrastructure.Resources;
 using Blog.Infrastructure.Resources.Hateoas;
 using Blog.Infrastructure.ResultModel;
@@ -21,8 +22,8 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("api/articles")]
-    [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v1)]
+    [Route("articles")]
+    [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v1)]
     public class ArticleController : BaseController
     {
         private readonly IArticleRepository _articleRepository;
@@ -42,8 +43,9 @@ namespace Blog.Api.Controllers
         /// <summary>
         /// 分页获取文章
         /// </summary>
-        [HttpGet(Name = "GetTags")]
-        public async Task<IActionResult> Gets(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
+        [AllowAnonymous]
+        [HttpGet(Name = "GetArticles")]
+        public async Task<IActionResult> GetArticles(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
         {
             if (!_propertyMappingContainer.ValidateMappingExistsFor<ArticleResource, Article>(parameter.OrderBy))
                 return BadRequest("找不到要排序的字段。");
@@ -77,12 +79,12 @@ namespace Blog.Api.Controllers
                     return dict;
                 });
 
-                var result = new
+                var linkedResult = new
                 {
                     value = shapedWithLinks,
                     links
                 };
-                return Ok(result);
+                return Ok(linkedResult);
             }
             else
             {
@@ -110,7 +112,7 @@ namespace Blog.Api.Controllers
         /// </summary>
         //[DisableCors]
         [HttpGet("{id}", Name = "GetArticle")]
-        public async Task<IActionResult> Get(int id, string fields = null)
+        public async Task<IActionResult> GetArticle(int id, string fields = null)
         {
             if (!_typeHelperService.TypeHasProperties<ArticleResource>(fields))
                 return BadRequest("字段不存在。");
@@ -134,12 +136,11 @@ namespace Blog.Api.Controllers
         /// 创建文章
         /// </summary>
         [HttpPost(Name = "CreateArticle")]
-        //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.create+json" })]
-        //[RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
-        public async Task<IActionResult> Post([FromBody] ArticleAddResource articleAddResource)
+        [RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.create+json" })]
+        [RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
+        public async Task<IActionResult> CreateArticle([FromBody] ArticleAddResource articleAddResource)
         {
-            if (null == articleAddResource)
-                return BadRequest();
+            if (null == articleAddResource) return BadRequest();
 
             if (!ModelState.IsValid)
                 return new MyUnprocessableEntityObjectResult(ModelState);
@@ -163,26 +164,31 @@ namespace Blog.Api.Controllers
         }
 
         /// <summary>
-        /// 判断是存在
+        /// 根据key判断是否存在
         /// </summary>
         [HttpPost("{id}", Name = "IsExistArticle")]
-        public async Task<IActionResult> IsExist(string key)
+        public async Task<IActionResult> IsExistArticle(string key)
         {
             if (key.IsNullOrWhiteSpace()) return BadRequest();
 
             var article = await _articleRepository.GetListAsync(x => x.ArticleKey == key);
-            if (article == null) return NoContent();
+            if (article == null) return NotFound();//404资源不存在
 
-            return Forbid("此Key已存在！");
+            return StatusCode(StatusCodes.Status409Conflict);//此Key已存在！
         }
 
+        /// <summary>
+        /// 根据Id删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}", Name = "DeleteArticle")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteArticle(int id)
         {
             if (id <= 0) return BadRequest();
 
             var article = await _articleRepository.GetAsync(id);
-            if (article == null) return NotFound();
+            if (null == article) return NotFound();
 
             _articleRepository.Delete(article);
 
@@ -195,14 +201,15 @@ namespace Blog.Api.Controllers
 
         [HttpPut("{id}", Name = "UpdateArticle")]
         //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
-        public async Task<IActionResult> Update(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
+        public async Task<IActionResult> UpdateArticle(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
         {
-            if (articleUpdateResource == null || id <= 0) return BadRequest();
+            if (null == articleUpdateResource || id <= 0) return BadRequest();
+
             if (!ModelState.IsValid)
                 return new UnprocessableEntityObjectResult(ModelState);
 
             var article = await _articleRepository.GetAsync(id);
-            if (article == null) return NotFound();
+            if (null == article) return NotFound();
 
             _mapper.Map(articleUpdateResource, article);
 

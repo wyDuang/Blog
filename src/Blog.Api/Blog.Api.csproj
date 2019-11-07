@@ -2,14 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\Blog.Api\Blog.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Blog.Api.xml" />
+    <None Remove="Blog.Core.xml" />
     <None Remove="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Blog.Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -29,6 +39,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Blog.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

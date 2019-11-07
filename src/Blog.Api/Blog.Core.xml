@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blog.Core</name>
+    </assembly>
+    <members>
+        <member name="P:Blog.Core.Entities.AccountEntity.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.AccountEntity.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.ArticleKey">
+            <summary>
+            博客key
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.Title">
+            <summary>
+            博客标题
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.CategoryId">
+            <summary>
+            博客类别
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.Html">
+            <summary>
+            博客内容 HTML
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.Markdown">
+            <summary>
+            博客内容 Markdown
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.Source">
+            <summary>
+            来源
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.ClickCount">
+            <summary>
+            点击数量
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.CommentCount">
+            <summary>
+            评论数量
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Article.CreateDate">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.ArticleTag.ArticleId">
+            <summary>
+            文章Id
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.ArticleTag.TagId">
+            <summary>
+            标签Id
+            </summary>
+        </member>
+        <member name="T:Blog.Core.Entities.Category">
+            <summary>
+            分类表
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Category.CategoryName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Category.DisplayName">
+            <summary>
+            分类展示名称
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Category.CategoryKey">
+            <summary>
+            url的key值
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Category.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.FriendLink.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.FriendLink.LinkUrl">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.FriendLink.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.FriendLink.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.FriendLink.CreateDate">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:Blog.Core.Entities.SysUser">
+            <summary>
+            用户信息表
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.RealName">
+            <summary>
+            真实姓名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.MobilePhone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.LastLoginTime">
+            <summary>
+            最后登录时间 
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SysUser.LastLoginIp">
+            <summary>
+            最后登录时间 
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Tag.TagKey">
+            <summary>
+            标签Key
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.Tag.TagName">
+            <summary>
+            标签名称
+            </summary>
+        </member>
+        <member name="T:Blog.Core.Entities.SignatureEntity">
+            <summary>
+            签名实体
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SignatureEntity.Name">
+            <summary>
+            签名姓名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SignatureEntity.Type">
+            <summary>
+            签名类型
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Entities.SignatureEntity.Url">
+            <summary>
+            返回签名地址
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.AppSettings.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.AppSettings.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.AppSettings.WatermarkPath">
+            <summary>
+            水印图片地址
+            </summary>
+        </member>
+        <member name="T:Blog.Core.SettingModels.SubDomain">
+            <summary>
+            域名信息实体类
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.SubDomain.Domain">
+            域名
+            <summary>
+            域名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.SubDomain.AreaName">
+            区域名
+            <summary>
+            区域名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.SubDomain.Controller">
+            控制器名
+            <summary>
+            控制器名
+            </summary>
+        </member>
+        <member name="T:Blog.Core.SettingModels.GitHubSettings">
+            <summary>
+            GitHub配置文件
+            接入地址：https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.API_Authorize">
+            <summary>
+            GET请求，跳转GitHub登录界面，获取用户授权，得到code
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.API_AccessToken">
+            <summary>
+            POST请求，根据code得到access_token
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.API_User">
+            <summary>
+            GET请求，根据access_token得到用户信息
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.ApplicationName">
+            <summary>
+            Application name
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.Client_Id">
+            <summary>
+            Client ID
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.Client_Secret">
+            <summary>
+            Client Secret
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.GitHubSettings.Redirect_Uri">
+            <summary>
+            Authorization callback URL
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.JwtSettings.Issuer">
+            <summary>
+            Token发布者
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.JwtSettings.Audience">
+            <summary>
+            Token接受者
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.JwtSettings.IssuerSigningKey">
+            <summary>
+            签名秘钥
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.JwtSettings.TokenExpiresMinutes">
+            <summary>
+            访问令牌过期分钟数
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.JwtSettings.RefreshTokenAudience">
+            <summary>
+            刷新令牌接受者
+            </summary>
+        </member>
+        <member name="P:Blog.Core.SettingModels.JwtSettings.RefreshTokenExpiresMinutes">
+            <summary>
+            刷新令牌过期分钟数
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -21,7 +21,8 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("api/categories")]
+    [Route("categories")]
+    [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v1)]
     public class CategoryController : BaseController
     {
         private readonly ICategoryRepository _categoryRepository;

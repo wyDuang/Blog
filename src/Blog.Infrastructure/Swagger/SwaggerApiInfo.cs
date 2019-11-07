@@ -7,7 +7,7 @@ namespace Blog.Infrastructure.Swagger
 {
     public class SwaggerApiInfo
     {
-        public string UrlPrefix { get; set; }
+        public string Version { get; set; }
 
         public string Name { get; set; }
 

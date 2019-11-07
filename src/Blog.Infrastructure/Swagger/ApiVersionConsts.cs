@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Blog.Infrastructure.Swagger
 {
-    public static  class GlobalConsts
+    public static class ApiVersionConsts
     {
         /// <summary>
         /// 博客数据接口组

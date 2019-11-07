@@ -21,8 +21,8 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers.Blog
 {
     [Authorize]
-    [Route("api/tags")]
-    [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v1)]
+    [Route("tags")]
+    [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v1)]
     public class TagController : BaseController
     {
         private readonly ITagRepository _tagRepository;

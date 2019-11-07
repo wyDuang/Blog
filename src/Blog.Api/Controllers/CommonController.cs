@@ -1,5 +1,8 @@
-﻿using Blog.Infrastructure.Swagger;
+﻿using AutoMapper;
+using Blog.Core.Interfaces;
+using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +12,19 @@ using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers
 {
-    [ApiExplorerSettings(GroupName = GlobalConsts.GroupName_v2)]
+    [Route("common")]
+    [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v2)]
     public class CommonController: BaseController
     {
         private readonly IHttpClientFactory _httpClient;
-        public CommonController(IHttpClientFactory httpClient)
+        public CommonController(IHttpClientFactory httpClient,
+            IUnitOfWork unitOfWork,
+            ILogger<CommonController> logger,
+            IMapper mapper,
+            IUrlHelper urlHelper,
+            ITypeHelperService typeHelperService,
+            IPropertyMappingContainer propertyMappingContainer)
+            : base(unitOfWork, logger, mapper, urlHelper, typeHelperService, propertyMappingContainer)
         {
             _httpClient = httpClient;
         }

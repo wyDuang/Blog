@@ -2,6 +2,7 @@
 using Blog.Core.SettingModels;
 using Blog.Infrastructure.Helpers;
 using Blog.Infrastructure.ResultModel;
+using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,10 @@ using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers
 {
-    [Route("api/signature")]
-    [ApiController]
     [Authorize]
-    public class SignatureController : ControllerBase
+    [Route("signature")]
+    [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v2)]
+    public class SignatureController : BaseController
     {
         private AppSettings _appSettings;
         private readonly IHttpClientFactory _clientFactory;
@@ -52,8 +53,7 @@ namespace Blog.Api.Controllers
             //return new string[] { "value1", "value2" };
         }
 
-        [NonAction]
-        public async Task<DataResult> GetSignature(string name, SignatureEnum signature)
+        private async Task<DataResult> GetSignature(string name, SignatureEnum signature)
         {
             DataResult result = new DataResult();
             const string urlPath = "http://www.jiqie.com/a/re22.php";

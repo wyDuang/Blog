@@ -79,7 +79,7 @@ namespace Blog.Site.Controllers.Web
         }
 
         [Route("/login")]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
