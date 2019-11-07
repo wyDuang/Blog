@@ -43,7 +43,7 @@ namespace Blog.Api.Controllers
         /// <summary>
         /// 分页获取文章
         /// </summary>
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet(Name = "GetArticles")]
         public async Task<IActionResult> GetArticles(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
         {
