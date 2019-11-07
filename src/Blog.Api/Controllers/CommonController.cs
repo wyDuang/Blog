@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Core.Interfaces;
 using Blog.Infrastructure.Swagger;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers
 {
+    [AllowAnonymous]
     [Route("common")]
     [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v2)]
     public class CommonController: BaseController

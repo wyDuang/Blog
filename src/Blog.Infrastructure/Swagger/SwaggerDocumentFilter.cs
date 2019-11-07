@@ -26,11 +26,11 @@ namespace Blog.Infrastructure.Swagger
                     Description = "通用数据接口",
                     ExternalDocs = new OpenApiExternalDocs { Description = "Common 未开发..." }
                 },
-                new OpenApiTag {
-                    Name = "MTA",
-                    Description = "腾讯移动分析",
-                    ExternalDocs = new OpenApiExternalDocs { Description = "MTA 未开发..." }
-                },
+                //new OpenApiTag {
+                //    Name = "MTA",
+                //    Description = "腾讯移动分析",
+                //    ExternalDocs = new OpenApiExternalDocs { Description = "MTA 未开发..." }
+                //},
                 //new OpenApiTag {
                 //    Name = "Signature",
                 //    Description = "个性艺术签名设计",

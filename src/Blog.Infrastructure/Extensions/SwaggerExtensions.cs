@@ -1,12 +1,16 @@
 ﻿using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Blog.Infrastructure.Extensions
@@ -53,6 +57,22 @@ namespace Blog.Infrastructure.Extensions
                     options.OrderActionsBy(o => o.RelativePath);
                 });
 
+                //设置要展示的接口
+                options.DocInclusionPredicate((docName, apiDes) =>
+                {
+                    if (!apiDes.TryGetMethodInfo(out MethodInfo method)) return false;
+
+                    var version = method.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
+
+                    if (!version.Any()) return true;
+
+                    var actionVersion = method.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
+                    if (actionVersion.Any())
+                        return actionVersion.Any(v => v == docName);
+
+                    return version.Any(v => v == docName);
+                });
+
                 var security = new OpenApiSecurityScheme
                 {
                     Description = "JWT模式授权，请输入 Bearer[空格]{Token} 进行身份验证",
@@ -65,6 +85,12 @@ namespace Blog.Infrastructure.Extensions
                     { security, Array.Empty<string>() }
                 });
 
+                options.DocumentFilter<SwaggerDocumentFilter>();
+
+                options.OperationFilter<AddResponseHeadersFilter>();
+                options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+
                 try
                 {
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Blog.Api.xml"));
@@ -74,12 +100,6 @@ namespace Blog.Infrastructure.Extensions
                 {
                     throw new Exception(ex.Message, ex);
                 }
-
-                options.DocumentFilter<SwaggerDocumentFilter>();
-
-                options.OperationFilter<AddResponseHeadersFilter>();
-                options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
-                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
         }
 
