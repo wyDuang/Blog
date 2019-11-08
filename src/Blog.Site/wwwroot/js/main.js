@@ -1,20 +1,18 @@
 ﻿$('.ui.menu .ui.dropdown').dropdown({ on: 'hover' });
-$('.ui.menu a.item').on('click', function () {
-    $(this).addClass('active').siblings().removeClass('active');
-});
-
+//$('.ui.menu a.item').on('click', function () {
+//    $(this).addClass('active').siblings().removeClass('active');
+//});
 $(document).ready(function () {
-   
-
     $('.main.menu').visibility({ type: 'fixed' });
-    $('.image').visibility({
-        type: 'image',
-        transition: 'vertical flip in',
-        duration: 500
-    });
+
     $('.main.menu  .ui.dropdown').dropdown({ on: 'hover' });
 
-    $('header .jumbotron').slideDown();
+    //$('.image').visibility({
+    //    type: 'image',
+    //    transition: 'vertical flip in',
+    //    duration: 500
+    //});
+    
 });
 
 (function back_to_top() {

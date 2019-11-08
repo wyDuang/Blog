@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Blog.Site.Controllers.Web
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
     public class AdminController : Controller
     {
         private readonly ITagRepository _tagRepository;
