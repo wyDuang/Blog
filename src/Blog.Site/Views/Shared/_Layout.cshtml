@@ -12,22 +12,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@Html.Raw(title)</title>
-
-    <meta name="keywords" content="wyduang，别来无恙，无恙duang" />
-    <meta name="description" content="无恙duang的博客：美好的生活，从现在开始！" />
     @if (!string.IsNullOrEmpty(ViewBag.Keyword))
     {
         <meta name="keywords" content="@Html.Raw(ViewBag.Keyword)" />
+    }
+    else
+    {
+        <meta name="keywords" content="wyduang，wyDuang，别来无恙，无恙Duang" />
     }
     @if (!string.IsNullOrEmpty(ViewBag.Description))
     {
         <meta name="description" content="@Html.Raw(ViewBag.Description)" />
     }
+    else
+    {
+        <meta name="description" content="无恙duang的博客：别来无恙啊！" />
+    }
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
     <environment include="Development">
         <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css">
-        <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
+        @*<link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />*@
         @*<link rel="stylesheet" href="~/libs/animate/animate.css" />*@
+        <link rel="stylesheet" href="~/css/gloable.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     </environment>
     <environment exclude="Development">

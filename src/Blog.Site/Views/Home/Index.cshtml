@@ -1,16 +1,42 @@
-﻿<div class="ui mini test modal" id="post_del_modal">
+﻿@model Blog.Core.BaseModels.PaginatedList<Article>
+@{ 
+
+
+}
+<div class="ui mini test modal" id="post_del_modal">
     <div class="header">
         <a href="">添加文章</a>
     </div>
 </div>
-<div id="main-body" class="content ui column centered grid container">
+<div class="content ui column centered grid container">
     <div class="row">
-        <div id="body-left" class="eleven wide column">
+        <div id="body-home-left" class="eleven wide column">
             <div class="ui segment">
                 <div class="ui divided items">
-                    <div class="item" style="margin-top:0px;margin-bottom:2px;cursor:default;">
+                    @if (Model.TotalItemsCount > 0 && Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="item">
+                                <div class="ui content">
+                                    <a class="ui header" href="/a/@item.ArticleKey"><h3>@item.Title</h3></a>
+                                    <div class="ui meta">
+                                        <i class="tags icon"></i>
+                                        <button class="ui mini button" href="/tags/Linux">Linux</button>
+                                    </div>
+                                    <div class="ui description">
+                                        @Html.Raw(item.Html)
+                                    </div>
+                                    <div class="ui extra">
+                                        <div class="right floated">22天前</div>
+                                        <div><i class="user icon"></i>阅读(59)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="item">
                         <div class="ui content">
-
                             <a class="ui header" href="/post/5d9edf50707b537882203bf4"><h2>VritualBox centos NAT、Host-Only网络配置</h2></a>
                             <div class="ui meta">
                                 <i class="tags icon"></i>
@@ -33,24 +59,20 @@
 
                     <div class="divider">&nbsp;</div>
                     <div class="ui buttons center aligned container">
-                        <button class="alink ui labeled icon button disabled" page="0">
-                            <i class="left chevron icon"></i>
-                            上一页
-                        </button>
-                        <button class="alink ui right labeled icon button " page="2">
-                            下一页
-                            <i class="right chevron icon"></i>
-                        </button>
+                        <a class="alink ui labeled icon button disabled" href="">
+                            <i class="left chevron icon"></i>上一页
+                        </a>
+                        <a class="alink ui right labeled icon button" page="2">下一页<i class="right chevron icon"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="body-right" class="five wide right column">
+        <div id="body-home-right" class="five wide right column">
             <div class="profile ui raised segment">
                 <div class="ui divided items">
                     <div class="item">
                         <div class="ui tiny image">
-                            <img src="https://ningto.com/public/img/logo_full.png" class="ui tiny image">
+                            <img src="~/images/avatar.png" class="ui tiny image">
                         </div>
                         <div class="signature middle aligned content">
                             wyDuang

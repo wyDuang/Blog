@@ -1,28 +1,37 @@
-﻿<header>
-    <div class="jumbotron">
-        <div class="ui main text container ">
-            <h1 class="ui header">别来无恙啊！</h1>
-            <p>长风破浪会有时，直挂云帆济沧海。</p>
+﻿@{
+
+
+}
+<header>
+    @if (Context.Request.Path == @Url.Action("Index","Home"))
+    {
+        <div class="jumbotron">
+            <div class="ui main text container ">
+                <h2 class="ui header">别来无恙啊！</h2>
+                <p>长风破浪会有时，直挂云帆济沧海。</p>
+            </div>
         </div>
-    </div>
+    }
     <div class="ui borderless main menu">
         <div class="ui text container">
-            <div class="header item">wyDuang</div>
-            <a class="item" href="/">首页</a>
-            <a class="item" href="/gather">IT聚合</a>
-            <a class="item" href="/program">小程序</a>
-            <a class="item" href="/post/59edecd82be91645212c9981">书签</a>
-            <a class="item" href="/textjoke">笑话</a>
-            <a class="item" href="http://down.ningto.com/files">资源</a>
+            <div class="header item">
+                <a href="javascript:void(0)" id="logo" class="logo">wyDuang</a>
+            </div>
+            <a class="item" href="@Url.Action("Index","Home")">首页</a>
+            <a class="item" href="javascript:void(0)">IT聚合</a>
+            <a class="item" href="javascript:void(0)">小程序</a>
+            <a class="item" href="javascript:void(0)">书签</a>
+            <a class="item" href="javascript:void(0)">笑话</a>
+            <a class="item" href="javascript:void(0)">资源</a>
             <div class="ui floated dropdown item" tabindex="0">
                 工具
                 <i class="dropdown icon"></i>
                 <div class="menu" tabindex="-1">
-                    <div class="item alink _blank" href="http://next.ningto.com">老版本</div>
-                    <div class="item alink  _blank" href="http://next.ningto.com/mdviewer">markdown预览</div>
-                    <div class="item alink  _blank" href="http://next.ningto.com/html2markdown">html转markdown</div>
-                    <div class="item alink  _blank" href="http://next.ningto.com/uploadimage">图片上传</div>
-                    <div class="item alink  _blank" href="http://next.ningto.com/react-wchathot">微信文章精选</div>
+                    <div class="item alink _blank" href="javascript:void(0)">老版本</div>
+                    <div class="item alink _blank" href="javascript:void(0)">markdown预览</div>
+                    <div class="item alink _blank" href="javascript:void(0)">html转markdown</div>
+                    <div class="item alink _blank" href="javascript:void(0)">图片上传</div>
+                    <div class="item alink _blank" href="javascript:void(0)">微信文章精选</div>
                 </div>
             </div>
             <a class="item" href="/about">关于</a>
