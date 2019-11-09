@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using AutoMapper;
@@ -7,21 +8,27 @@ using Blog.Infrastructure.CodeGenerator.CodeSettings;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Blog.Site
 {
@@ -42,6 +49,8 @@ namespace Blog.Site
             var jwtStrings = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtStrings);
 
+            //services.Configure<DomainSettings>(Configuration.GetSection("SubDomains"));
+
             services.AddDbContext<MyContext>(options =>
             {
                 var connectionString = Configuration.GetConnectionString("MySqlConnection");
@@ -55,6 +64,22 @@ namespace Blog.Site
                            .AllowAnyMethod()
                            .AllowAnyHeader());//.AllowCredentials()//指定处理cookie;
             });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/login";
+                });
+
+            services.AddSession();
+            services.AddHttpClient();
+            services.AddMemoryCache();
 
             //services.AddAuthentication(options =>
             //{
@@ -79,15 +104,19 @@ namespace Blog.Site
             {
                 options.ReturnHttpNotAcceptable = true;//设为true,如果客户端请求不支持的数据格式,就会返回406
             })
-                //.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)//默认CamelCase风格，首字母小写，在此将改成PascalCase风格，首字母大写
-                .AddNewtonsoftJson(options => {
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver(){
-                        NamingStrategy = new DefaultNamingStrategy() 
-                    };
-                })
+                .AddRazorRuntimeCompilation()
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)//默认CamelCase风格，首字母小写，在此将改成PascalCase风格，首字母大写
+                //.AddNewtonsoftJson(options => {
+                //    options.SerializerSettings.ContractResolver = new DefaultContractResolver(){
+                //        NamingStrategy = new DefaultNamingStrategy() 
+                //    };
+                //})
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MyContext>());
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory =>
@@ -96,7 +125,7 @@ namespace Blog.Site
                 return new UrlHelper(actionContext);
             });
 
-            services.AddResponseCaching();
+            //services.AddResponseCaching();
             services.AddRouting(options =>
             {
                 options.LowercaseUrls = true;// 采用小写的 URL 路由模式
@@ -144,18 +173,17 @@ namespace Blog.Site
             services.AddMyServices();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                //NLog.LogManager.LoadConfiguration("nlog.Development.config").GetCurrentClassLogger();
-                //app.UseDeveloperExceptionPage();
+                NLogBuilder.ConfigureNLog("nlog.Development.config").GetCurrentClassLogger();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
+                NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
                 app.UseExceptionHandler("/Home/Error");
-                //NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
-                //NLog.LogManager.Configuration.Variables["connectionString"] = Configuration["DbOption:ConnectionString"].ToString();
             }
             
             app.UseStaticFiles();
@@ -172,12 +200,12 @@ namespace Blog.Site
             app.UseRouting();
             app.UseCors(_defaultCorsPolicyName);
 
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // 属性路由
                 endpoints.MapControllerRoute(
                      name: "default",
                      pattern: "{controller=Home}/{action=Index}/{id?}");

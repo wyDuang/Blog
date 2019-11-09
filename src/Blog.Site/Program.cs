@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Blog.Site
 {
@@ -22,8 +23,8 @@ namespace Blog.Site
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:5000")
-                    .ConfigureLogging(log => log.AddNLog());
-                });
+                    .UseUrls("http://*:5000");
+                })
+                .UseNLog();
     }
 }

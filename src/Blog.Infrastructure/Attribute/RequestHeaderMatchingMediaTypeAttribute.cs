@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.Infrastructure.Filter
+namespace Blog.Infrastructure.Attribute
 {
     [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
-    public class RequestHeaderMatchingMediaTypeAttribute : Attribute, IActionConstraint
+    public class RequestHeaderMatchingMediaTypeAttribute : System.Attribute, IActionConstraint
     {
         private readonly string _requestHeaderToMatch;
         private readonly string[] _mediaTypes;

@@ -1,248 +1,169 @@
-﻿@{
-    Layout = null;
+﻿@model Blog.Core.BaseModels.PaginatedList<Article>
+@{ 
+
+
 }
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>😎无恙Duang | wyduang.com</title>
-    <meta name="keywords" content="wyduang，别来无恙，无恙duang" />
-    <meta name="description" content="无恙duang的博客：美好的生活，从现在开始！" />
-    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
-
-    <environment include="Development">
-        <link rel="stylesheet" href="~/libs/layui/dist/css/layui.css">
-        <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/libs/animate/animate.css" />
-        <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/css/index.all.css" asp-append-version="true" />
-    </environment>
-</head>
-<body>
-    <div id="menu" class="hover_animation menu_open" data-mark="false">
-        <span></span>
-        <span></span>
-        <span></span>
+<div class="ui mini test modal" id="post_del_modal">
+    <div class="header">
+        <a href="">添加文章</a>
     </div>
-    <div id="navgation" class="navgation navgation_close">
-        <ul class="point">
-            <li><a href="@Url.Action("Index","Home")">首页</a></li>
-            <li><a href="@Url.Action("Index","Article")">文章</a></li>
-            <li><a href="message.html">留言</a></li>
-        </ul>
-        <div class="logo"><a href="@Url.Action("Index","Home")">wyDuang</a></div>
-    </div>
-    <!-- section1 Start -->
-    <div class="section" id="section1">
-        <div class="fp-tablecell">
-            <div class="page1">
-                <div class="nav wow zoomIn" data-wow-duration="2s">
-                    <img src="~/images/avatar.jpg">
-                    <p>长风破浪会有时，直挂云帆济沧海。</p>
-                    <a class="btn layui-btn layui-btn-normal" href="@Url.Action("Index","Article")">Enter Blog</a>
-                </div>
-                <a class="next wow fadeInUp" data-wow-duration="2s" id="next"></a>
-            </div>
-        </div>
-    </div>
-    <!-- section1 End -->
-    <!-- section2 Start -->
-    <div class="section" id="section2">
-        <div class="fp-tablecell">
-            <div class="page2">
-                <div class="warp-box">
-                    <div class="new-article">
-                        <div class="inner wow fadeInDown" data-wow-delay=".2s">
-                            <h1>热门文章</h1>
-                            <p>
-                                很想给你写封信，告诉你这里的天气。
-                                <br>昨夜的那场电影，还有我的心情。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="layui-row">
-                        <div class="layui-col-xs12 layui-col-sm4 layui-col-md4  wow fadeInUp" style="padding: 0 10px">
-                            <div class="single-news">
-                                <div class="news-head">
-                                    <img src="~/images/article.jpg">
-                                    <a href="#" class="link"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="news-content">
-                                    <h4>
-                                        <a href="#">
-                                            标题标题
-                                        </a>
-                                    </h4>
-                                    <div class="date">
-                                        2019年8月7日
+</div>
+<div class="content ui column centered grid container">
+    <div class="row">
+        <div id="body-home-left" class="eleven wide column">
+            <div class="ui segment">
+                <div class="ui divided items">
+                    @if (Model.TotalItemsCount > 0 && Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="item">
+                                <div class="ui content">
+                                    <a class="ui header" href="/a/@item.ArticleKey"><h3>@item.Title</h3></a>
+                                    <div class="ui meta">
+                                        <i class="tags icon"></i>
+                                        <button class="ui mini button" href="/tags/Linux">Linux</button>
                                     </div>
-                                    <p>
-                                        很想给你写封信，告诉你这里的天气、昨夜的那场电影、还有我的心情。
-                                    </p>
-                                    <a href="#" class="btn">
-                                        阅读更多
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-col-xs12 layui-col-sm4 layui-col-md4  wow fadeInUp" data-wow-delay=".2s" style="padding: 0 10px">
-                            <div class="single-news">
-                                <div class="news-head">
-                                    <img src="~/images/article.jpg">
-                                    <a href="#" class="link"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="news-content">
-                                    <h4>
-                                        <a href="#">
-                                            标题
-                                        </a>
-                                    </h4>
-                                    <div class="date">
-                                        2019年8月7日
+                                    <div class="ui description">
+                                        @Html.Raw(item.Html)
                                     </div>
-                                    <p>
-                                        很想给你写封信，告诉你这里的天气、昨夜的那场电影、还有我的心情。
-                                    </p>
-                                    <a href="#" class="btn">
-                                        阅读更多
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-col-xs12 layui-col-sm4 layui-col-md4  wow fadeInUp" data-wow-delay=".4s" style="padding: 0 10px">
-                            <div class="single-news">
-                                <div class="news-head">
-                                    <img src="~/images/article.jpg">
-                                    <a href="#" class="link"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="news-content">
-                                    <h4>
-                                        <a href="#">
-                                            标题
-                                        </a>
-                                    </h4>
-                                    <div class="date">
-                                        2019年8月7日
+                                    <div class="ui extra">
+                                        <div class="right floated">22天前</div>
+                                        <div><i class="user icon"></i>阅读(59)</div>
                                     </div>
-                                    <p>
-                                        很想给你写封信，告诉你这里的天气、昨夜的那场电影、还有我的心情。
-                                    </p>
-                                    <a href="#" class="btn">
-                                        阅读更多
-                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- section2 End -->
-    <!-- section3 Start -->
-    <div class="section" id="section3">
-        <div class="fp-tablecell">
-            <div class="page3">
-                <div class="warp-box">
-                    <div class="warp">
-                        <div class="inner">
-                            <div class="links">
-                                <ul>
-                                    <li class="wow fadeInLeft"><a href="#">关于</a></li>
-                                    <li class="wow fadeInRight"><a href="#">+友情链接</a></li>
-                                </ul>
+                        }
+                    }
+                    <div class="item">
+                        <div class="ui content">
+                            <a class="ui header" href="/post/5d9edf50707b537882203bf4"><h2>VritualBox centos NAT、Host-Only网络配置</h2></a>
+                            <div class="ui meta">
+                                <i class="tags icon"></i>
+                                <button class="ui mini button" href="/tags/Linux">Linux</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- section3 End -->
-    <!-- section4 Start -->
-    <div class="section" id="section4">
-        <div class="fp-tablecell">
-            <div class="page4">
-                <div class="warp-box">
-                    <div class="about">
-                        <div class="inner">
-                            <h1 class="wow fadeInLeft">犯二青年</h1>
-                            <p class="wow fadeInRight">
-                                爱好编程，喜欢交流，外冷内热型，半个肥宅 => 整个肥宅 进阶中😅。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- section4 End -->
-    <footer class="footer wow fadeInUp" id="contact">
-        <div class="footer-top">
-            <div class="container">
-                <div class="layui-row">
-                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
-                        <div class="single-widget about">
-                            <div class="footer-logo">
-                                <h2>wyDuang</h2>
-                            </div>
-                            <p>长风破浪会有时，直挂云帆济沧海。</p>
-                            <div class="button">
-                                <a href="#" class="btn layui-btn layui-btn-normal">About Me</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
-                        <div class="single-widget">
-                            <h2>相关链接</h2>
-                            <ul class="social-icon">
-                                <li class="active"><a href="#"><i class="fa fa-book"></i>博文</a></li>
-                                <li class="active"><a href="#"><i class="fa fa-comments"></i>留言</a></li>
-                                <li class="active"><a href="#"><i class="fa fa-share"></i>资源</a></li>
-                                <li class="active"><a href="#"><i class="fa fa-snowflake-o"></i>日记</a></li>
-                                <li class="active"><a href="#"><i class="fa fa-files-o"></i>归档</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
-                        <div class="single-widget contact">
-                            <h2>联系我</h2>
-                            <ul class="list">
-                                <li><i class="fa fa-map"></i>地址: 深圳市福田区深南中路3018号</li>
-                                <li><i class="fa fa-qq"></i>QQ: 1014558384 </li>
-                                <li><i class="fa fa-envelope"></i>邮箱: 110@wyduang.com</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <div class="container">
-                <div class="layui-row">
-                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 text-center">
-                        <p>Copyright &copy; 2019 wyduang | Powered by .NET Core on Linux</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+                            <div class="ui description">
+                                下面配置NAT和Host-Only这两种网卡可以实现外网访问，虚拟机之间互通
 
-    <environment include="Development">
-        <script src="~/libs/layui/dist/layui.js"></script>
-        <script src="~/libs/wowjs/dist/wow.js"></script>
-        <script src="~/js/index.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/libs/layui/dist/layui.js"></script>
-        <script src="~/libs/wowjs/dist/wow.min.js"></script>
-        <script src="~/js/index.all.js" asp-append-version="true"></script>
-    </environment>
-</body>
-</html>
+                                虚拟机安装
+                                ![Snipaste_2019-10-10_13-35-06_1.png](https://www.ningto.com/upload/Snipaste_2019-10-10_13-35-06_1.png)
+
+                                ![Snipaste_2019-10-10_13-36-04_2.png](https://www.ningto.com/up...
+                            </div>
+                            <div class="ui extra">
+                                <div class="right floated">22天前</div>
+                                <div><i class="user icon"></i>阅读(59)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divider">&nbsp;</div>
+                    <div class="ui buttons center aligned container">
+                        <a class="alink ui labeled icon button disabled" href="">
+                            <i class="left chevron icon"></i>上一页
+                        </a>
+                        <a class="alink ui right labeled icon button" page="2">下一页<i class="right chevron icon"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="body-home-right" class="five wide right column">
+            <div class="profile ui raised segment">
+                <div class="ui divided items">
+                    <div class="item">
+                        <div class="ui tiny image">
+                            <img src="~/images/avatar.png" class="ui tiny image">
+                        </div>
+                        <div class="signature middle aligned content">
+                            wyDuang
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="middle aligned content">
+                            <div class="name">文章数</div>
+                            <div class="num">300</div>
+                        </div>
+                        <div class="middle aligned content">
+                            <div class="name">总访问量</div>
+                            <div class="num">468105</div>
+                        </div>
+                        <div class="middle aligned content">
+                            <div class="name">今日访问</div>
+                            <div class="num">2044</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui raised segment article_category">
+                <a class="ui blue ribbon label">文章分类</a>
+                <p></p>
+                <div class="ui mini tag labels">
+                    <a class="ui mini label" href="/tags/C/C++">
+                        C/C++ 134
+                    </a>
+                    <a class="ui mini label" href="/tags/Windows">
+                        Windows 65
+                    </a>
+                    <a class="ui mini label" href="/tags/Linux">
+                        Linux 39
+                    </a>
+                    <a class="ui mini label" href="/tags/Qt">
+                        Qt 35
+                    </a>
+                    <a class="ui mini label" href="/tags/Web">
+                        Web 31
+                    </a>
+                    <a class="ui mini label" href="/tags/Node.js">
+                        Node.js 17
+                    </a>
+                    <a class="ui mini label" href="/tags/Go">
+                        Go 15
+                    </a>
+                    <a class="ui mini label" href="/tags/Javascript">
+                        Javascript 14
+                    </a>
+                    <a class="ui mini label" href="/tags/Mobile">
+                        Mobile 12
+                    </a>
+                    <a class="ui mini label" href="/tags/Database">
+                        Database 9
+                    </a>
+                    <a class="ui mini label" href="/tags/Tools">
+                        Tools 8
+                    </a>
+                    <a class="ui mini label" href="/tags/MongoDB">
+                        MongoDB 7
+                    </a>
+                    <a class="ui mini label" href="/tags/Life">
+                        Life 6
+                    </a>
+                    <a class="ui mini label" href="/tags/Tips">
+                        Tips 5
+                    </a>
+                    <a class="ui mini label" href="/tags/React">
+                        React 5
+                    </a>
+                    <a class="ui mini label" href="/tags/Shell">
+                        Shell 5
+                    </a>
+                    <a class="ui mini label" href="/tags/Design">
+                        Design 4
+                    </a>
+                    <a class="ui mini label" href="/tags/MQ">
+                        MQ 3
+                    </a>
+                    <a class="ui mini label" href="/tags/Boost">
+                        Boost 3
+                    </a>
+                    <a class="ui mini label" href="/tags/Product">
+                        Product 3
+                    </a>
+                    <a class="ui mini label" href="/tags/Java">
+                        Java 1
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,7 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
+            builder.Property(x => x.ArticleKey).HasMaxLength(200).IsRequired();
             builder.Property(x => x.Title).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Html).HasColumnType("text");
             builder.Property(x => x.Markdown).HasColumnType("text");

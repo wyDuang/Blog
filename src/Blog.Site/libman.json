@@ -3,11 +3,6 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "provider": "unpkg",
-      "library": "layui-src@2.5.4",
-      "destination": "wwwroot/libs/layui"
-    },
-    {
       "provider": "cdnjs",
       "library": "font-awesome@4.7.0",
       "destination": "wwwroot/libs/font-awesome"
@@ -34,8 +29,18 @@
     },
     {
       "provider": "cdnjs",
+      "library": "jquery.form@4.2.2",
+      "destination": "wwwroot/libs/jquery-form"
+    },
+    {
+      "provider": "cdnjs",
       "library": "vue@2.6.10",
       "destination": "wwwroot/libs/vue"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "semantic-ui@2.4.1",
+      "destination": "wwwroot/libs/semantic-ui"
     }
   ]
 }

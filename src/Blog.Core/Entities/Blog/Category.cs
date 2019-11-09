@@ -18,12 +18,12 @@ namespace Blog.Core.Entities
         /// </summary>
         public string DisplayName { get; set; }
         /// <summary>
+        /// url的key值
+        /// </summary>
+        public string CategoryKey { get; set; }
+        /// <summary>
         /// 排序
         /// </summary>
         public int Sort { get; set; }
-        /// <summary>
-        /// 分类图标
-        /// </summary>
-        public string IconUrl { get; set; }
     }
 }
