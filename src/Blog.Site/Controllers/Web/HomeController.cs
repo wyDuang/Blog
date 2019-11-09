@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 namespace Blog.Site.Controllers.Web
 {
     [AllowAnonymous]
-    [ApiExplorerSettings(IgnoreApi = true)]//应忽略控制器或动作
     public class HomeController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
