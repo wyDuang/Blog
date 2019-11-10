@@ -1,12 +1,12 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 5001
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
 COPY ["Blog.Site/Blog.Site.csproj", "Blog.Site/"]
-COPY ["Blog.Infrastructure/Blog.Infrastructure.csproj", "Blog.Infrastructure/"]
 COPY ["Blog.Core/Blog.Core.csproj", "Blog.Core/"]
+COPY ["Blog.Infrastructure/Blog.Infrastructure.csproj", "Blog.Infrastructure/"]
 RUN dotnet restore "Blog.Site/Blog.Site.csproj"
 COPY . .
 WORKDIR "/src/Blog.Site"
