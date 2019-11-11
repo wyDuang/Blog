@@ -1,5 +1,6 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 WORKDIR /app
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -13,21 +14,24 @@ EXPOSE 80
 =======
 EXPOSE 5000
 >>>>>>> 21d7527... 修改Dockerfile
+=======
+EXPOSE 5001
+>>>>>>> 10766ea... 整理版本，重新开始学习使用Azure Pipelines
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["Blog.Site/Blog.Site.csproj", "Blog.Site/"]
-COPY ["Blog.Infrastructure/Blog.Infrastructure.csproj", "Blog.Infrastructure/"]
+COPY ["Blog.Api/Blog.Api.csproj", "Blog.Api/"]
 COPY ["Blog.Core/Blog.Core.csproj", "Blog.Core/"]
-RUN dotnet restore "Blog.Site/Blog.Site.csproj"
+COPY ["Blog.Infrastructure/Blog.Infrastructure.csproj", "Blog.Infrastructure/"]
+RUN dotnet restore "Blog.Api/Blog.Api.csproj"
 COPY . .
-WORKDIR "/src/Blog.Site"
-RUN dotnet build "Blog.Site.csproj" -c Release -o /app/build
+WORKDIR "/src/Blog.Api"
+RUN dotnet build "Blog.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Blog.Site.csproj" -c Release -o /app/publish
+RUN dotnet publish "Blog.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Blog.Site.dll"]
+ENTRYPOINT ["dotnet", "Blog.Api.dll"]
