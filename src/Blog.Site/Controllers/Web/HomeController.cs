@@ -14,26 +14,6 @@ namespace Blog.Site.Controllers.Web
     [AllowAnonymous]
     public class HomeController : Controller
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        [Route("/")]
-<<<<<<< HEAD
-        [Route("/index.html")]
-=======
->>>>>>> e7f3251... 继续
-=======
-        [Route("/")]
-        [Route("/index.html")]
->>>>>>> 1ff30bd... 增加blog首页和文章页
-=======
->>>>>>> 9197bf0... 集成layui+editor.md编辑器
-=======
-        [Route("/index.html")]
->>>>>>> 2ab0d7d... 修改路由
-        public IActionResult Index()
-=======
         private readonly ICategoryRepository _categoryRepository;
         private readonly IArticleRepository _articleRepository;
         private readonly ITagRepository _tagRepository;
@@ -53,6 +33,7 @@ namespace Blog.Site.Controllers.Web
             _articleRepository = articleRepository;
             _logger = logger;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         [Route("/")]
@@ -64,7 +45,6 @@ namespace Blog.Site.Controllers.Web
 
         [Route("/a/{articleKey}.html")]
         public IActionResult Details(string articleKey)
->>>>>>> 44c5959... 添加api
         {
             return View();
         }

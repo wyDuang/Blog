@@ -50,9 +50,9 @@ namespace Blog.Core.Entities
         /// 创建时间
         /// </summary>
         public DateTime CreateDate { get; set; } = DateTime.Now;
-        /// <summary>
-        /// 博客标签
-        /// </summary>
+        ///// <summary>
+        ///// 博客标签
+        ///// </summary>
         //public virtual ICollection<Tag> ArticleTags { get; set; } = new List<Tag>();
     }
 }

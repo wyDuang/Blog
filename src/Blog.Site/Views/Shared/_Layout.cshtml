@@ -1,25 +1,5 @@
 ﻿@{
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    var title = "无恙Duang的博客 | wyduang.com";
-=======
-    var title = "别来无恙博客 | wyduang.com";
->>>>>>> e7f3251... 继续
-=======
-    var title = "无恙Duang的博客 | wyduang.com";
->>>>>>> fb48ab8... 完善前端资源压缩
-=======
-    var title = "🤣无恙duang | wyduang.com";
->>>>>>> 23713d8... 修改layout
-=======
-    var title = "🤓无恙Duang | wyduang.com";
->>>>>>> 9197bf0... 集成layui+editor.md编辑器
-=======
     var title = "😎无恙Duang | wyduang.com";
->>>>>>> 8723cb5... 添加 CodeGenerator
     if (ViewBag.Title != null)
     {
         title = "😎" + ViewBag.Title + " | wyduang.com";
@@ -32,22 +12,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@Html.Raw(title)</title>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
->>>>>>> e7f3251... 继续
-=======
->>>>>>> 1ff30bd... 增加blog首页和文章页
-=======
-
-    <meta name="keywords" content="wyduang，别来无恙，无恙duang" />
-    <meta name="description" content="无恙duang的博客：美好的生活，从现在开始！" />
->>>>>>> 23713d8... 修改layout
-=======
->>>>>>> 9575464... 前台
     @if (!string.IsNullOrEmpty(ViewBag.Keyword))
     {
         <meta name="keywords" content="@Html.Raw(ViewBag.Keyword)" />
@@ -60,43 +24,11 @@
     {
         <meta name="description" content="@Html.Raw(ViewBag.Description)" />
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <environment include="Development">
-        <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/libs/layui/dist/css/layui.css">
-        <link rel="stylesheet" href="~/css/gloable.css" asp-append-version="true" />
-    </environment>
-    @RenderSection("style", required: false)
-</head>
-<body>
-    <partial name="_Header" />
-    <div class="doc-container" id="doc-container">
-        @RenderBody()
-    </div>
-    <partial name="_Footer" />
-    <environment include="Development">
-        <script src="~/libs/layui/dist/layui.js"></script>
-        <script src="~/js/gloable.js" asp-append-version="true"></script>
-        <script src="~/libs/nprogress/nprogress.js"></script>
-    </environment>
-    @RenderSection("scripts", required: false)
-=======
-    <link rel="stylesheet" href="~/libs/layui/src/css/layui.css">
-    <link rel="stylesheet" href="~/css/blog.css" />
-    @RenderSection("Style", required: false)
-=======
-=======
-=======
     else
     {
         <meta name="description" content="无恙duang的博客：别来无恙啊！" />
     }
->>>>>>> 9575464... 前台
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
->>>>>>> 23713d8... 修改layout
     <environment include="Development">
         <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css">
         @*<link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />*@
@@ -107,23 +39,12 @@
     <environment exclude="Development">
         @*<link rel="stylesheet" href="~/css/index.all.css" asp-append-version="true" />*@
     </environment>
-<<<<<<< HEAD
-    @RenderSection("style", required: false)
->>>>>>> 1ff30bd... 增加blog首页和文章页
-=======
     @RenderSection("styles", required: false)
->>>>>>> 9197bf0... 集成layui+editor.md编辑器
 </head>
 <body>
     <partial name="_Header" />
     @RenderBody()
     <partial name="_Footer" />
-<<<<<<< HEAD
-    <script src="~/libs/layui/src/layui.js"></script>
-    <script src="~/js/blog.js"></script>
-    @RenderSection("Scripts", required: false)
->>>>>>> e7f3251... 继续
-=======
     <environment include="Development">
         <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -135,9 +56,6 @@
             <script src="~/js/index.all.js" asp-append-version="true"></script>*@
     </environment>
     @RenderSection("scripts", required: false)
-<<<<<<< HEAD
->>>>>>> 1ff30bd... 增加blog首页和文章页
-=======
     <script>
         var _mtac = {};
         (function () {
@@ -149,6 +67,5 @@
             s.parentNode.insertBefore(mta, s);
         })();
     </script>
->>>>>>> 44c5959... 添加api
 </body>
 </html>

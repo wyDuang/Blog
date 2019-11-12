@@ -1,77 +1,15 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1ff30bd... 增加blog首页和文章页
-﻿<div class="header">
-</div>
-<header class="gird-header">
-    <div class="header-fixed">
-        <div class="header-inner">
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <a href="javascript:void(0)" class="header-logo" id="logo">wyDuang</a>
-=======
-            <a href="javascript:void(0)" class="header-logo" id="logo">Mr.Wuyang</a>
->>>>>>> 1ff30bd... 增加blog首页和文章页
-=======
-            <a href="javascript:void(0)" class="header-logo" id="logo">wyDuang</a>
->>>>>>> fb48ab8... 完善前端资源压缩
-            <nav class="nav" id="nav">
-                <ul>
-                    <li><a href="@Url.Action("Index","Home")"><i class="fa fa-home fa-fw"></i>首页</a></li>
-                    <li><a href="@Url.Action("Index","Article")">文章</a></li>
-                    <li><a href="/messages.html">留言</a></li>
-                    <li><a href="/friendlinks.html">友链</a></li>
-                </ul>
-            </nav>
-            <a href="#" class="blog-user">
-                <i class="fa fa-qq"></i>
-<<<<<<< HEAD
-            </a>
-            <a class="phone-menu">
-                <i></i>
-                <i></i>
-                <i></i>
-            </a>
-        </div>
-    </div>
-=======
-﻿<header>
-    <div class="header-wrap">
-        <h1 class="logo pull-left">
-            <a href="index.html">
-                <img src="../res/static/images/logo.png" alt="" class="logo-img">
-                <img src="../res/static/images/logo-text.png" alt="" class="logo-text">
-=======
->>>>>>> 1ff30bd... 增加blog首页和文章页
-            </a>
-            <a class="phone-menu">
-                <i></i>
-                <i></i>
-                <i></i>
-            </a>
-=======
-﻿<header>
-    <div class="jumbotron">
-        <div class="ui main text container ">
-            <h1 class="ui header">别来无恙啊！</h1>
-            <p>长风破浪会有时，直挂云帆济沧海。</p>
-=======
-﻿@{
+@{
 
 
 }
 <header>
-    @if (Context.Request.Path == @Url.Action("Index","Home"))
+    @if (Context.Request.Path == @Url.Action("Index", "Home"))
     {
         <div class="jumbotron">
             <div class="ui main text container ">
                 <h2 class="ui header">别来无恙啊！</h2>
                 <p>长风破浪会有时，直挂云帆济沧海。</p>
             </div>
->>>>>>> 9575464... 前台
         </div>
     }
     <div class="ui borderless main menu">
@@ -81,21 +19,21 @@
             </div>
             <a class="item" href="@Url.Action("Index","Home")">首页</a>
             @*<a class="item" href="javascript:void(0)">IT聚合</a>
-            <a class="item" href="javascript:void(0)">小程序</a>*@
+                <a class="item" href="javascript:void(0)">小程序</a>*@
             <a class="item" href="javascript:void(0)">书签</a>
             @*<a class="item" href="javascript:void(0)">笑话</a>
-            <a class="item" href="javascript:void(0)">资源</a>*@
+                <a class="item" href="javascript:void(0)">资源</a>*@
             @*<div class="ui floated dropdown item" tabindex="0">
-                工具
-                <i class="dropdown icon"></i>
-                <div class="menu" tabindex="-1">
-                    <div class="item alink _blank" href="javascript:void(0)">老版本</div>
-                    <div class="item alink _blank" href="javascript:void(0)">markdown预览</div>
-                    <div class="item alink _blank" href="javascript:void(0)">html转markdown</div>
-                    <div class="item alink _blank" href="javascript:void(0)">图片上传</div>
-                    <div class="item alink _blank" href="javascript:void(0)">微信文章精选</div>
-                </div>
-            </div>*@
+                    工具
+                    <i class="dropdown icon"></i>
+                    <div class="menu" tabindex="-1">
+                        <div class="item alink _blank" href="javascript:void(0)">老版本</div>
+                        <div class="item alink _blank" href="javascript:void(0)">markdown预览</div>
+                        <div class="item alink _blank" href="javascript:void(0)">html转markdown</div>
+                        <div class="item alink _blank" href="javascript:void(0)">图片上传</div>
+                        <div class="item alink _blank" href="javascript:void(0)">微信文章精选</div>
+                    </div>
+                </div>*@
             <a class="item" href="@Url.Action("About","Home")">关于</a>
             <div class="right menu">
                 <div class="item">
@@ -106,16 +44,6 @@
                 </div>
                 <a class="item" href="/login">登录</a>
             </div>
->>>>>>> 44c5959... 添加api
         </div>
     </div>
-<<<<<<< HEAD
-    <ul class="pop-nav" id="pop-nav">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="message.html">留言</a></li>
-        <li><a href="about.html">关于</a></li>
-    </ul>
->>>>>>> e7f3251... 继续
-=======
->>>>>>> 1ff30bd... 增加blog首页和文章页
 </header>
