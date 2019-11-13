@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("signature")]
+    [Route("api/signature")]
     [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v2)]
     public class SignatureController : BaseController
     {

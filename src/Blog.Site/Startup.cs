@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using AutoMapper;
+using Blog.Core.Interfaces;
 using Blog.Core.SettingModels;
 using Blog.Infrastructure.CodeGenerator.CodeSettings;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
+using Blog.Infrastructure.Repositories;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -40,29 +42,15 @@ namespace Blog.Site
         }
 
         public IConfiguration Configuration { get; }
-        private readonly string _defaultCorsPolicyName = "BlogApiCors";
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CodeGenerateSettings>(Configuration.GetSection("CodeGenerateSettings"));
 
-            var jwtStrings = Configuration.GetSection("JwtSettings");
-            services.Configure<JwtSettings>(jwtStrings);
-
-            //services.Configure<DomainSettings>(Configuration.GetSection("SubDomains"));
-
             services.AddDbContext<MyContext>(options =>
             {
                 var connectionString = Configuration.GetConnectionString("MySqlConnection");
                 options.UseLazyLoadingProxies().UseMySql(connectionString);
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy(_defaultCorsPolicyName, builder =>
-                    builder.AllowAnyOrigin()//允许任何来源的主机访问
-                           .AllowAnyMethod()
-                           .AllowAnyHeader());//.AllowCredentials()//指定处理cookie;
             });
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -114,10 +102,14 @@ namespace Blog.Site
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MyContext>());
 
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IArticleTagRepository, ArticleTagRepository>();
+            services.AddScoped<IFriendLinkRepository, FriendLinkRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
-
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory =>
             {
@@ -129,45 +121,7 @@ namespace Blog.Site
             services.AddRouting(options =>
             {
                 options.LowercaseUrls = true;// 采用小写的 URL 路由模式
-                //options.AppendTrailingSlash = true; //最后面默认加斜杠
-            });
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "我的博客 API",
-                    Description = "我的博客 API说明文档。",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "wyDuang",
-                        Email = "110@wyduang.com",
-                        Url = new Uri("https://wyduang.com"),
-                    }
-                });
-
-                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Assembly.GetName().Name}.xml"), true);
-
-                //var basePath = Directory.GetCurrentDirectory();
-                //c.IncludeXmlComments(Path.Combine(basePath, "Blog.Site.xml"));
-
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
-                    Description = "请在字段中输入单词“bearer”，后跟空格和jwt值",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference()
-                        {
-                            Id = "Bearer",
-                            Type = ReferenceType.SecurityScheme
-                        }
-                    }, Array.Empty<string>() }
-                });
+                options.AppendTrailingSlash = false; //默认true 后面加斜杠
             });
 
             services.AddMyServices();
@@ -186,20 +140,8 @@ namespace Blog.Site
                 app.UseExceptionHandler("/Home/Error");
             }
             
-            app.UseStaticFiles();
-
-            app.UseSwagger()
-                .UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "我的博客API v1");
-
-                    //c.RoutePrefix = string.Empty;//在http://localhost:5000/处提供 Swagger UI
-                    c.DocumentTitle = "我的博客 API";
-                });
-
             app.UseRouting();
-            app.UseCors(_defaultCorsPolicyName);
-
+            app.UseStaticFiles();
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();

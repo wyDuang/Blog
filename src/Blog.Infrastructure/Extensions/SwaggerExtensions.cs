@@ -40,7 +40,7 @@ namespace Blog.Infrastructure.Extensions
                     Version = "v1.0",
                     Title = "其他数据接口 - 接口文档",
                     Description = $"wyDuang - .Net Core 3.0 - RESTful API ",
-                    Contact = new OpenApiContact { Url = new Uri("https://wyduang.com"), Name = "110@wyduang.com", Email = "110@wyduang.com" }
+                    Contact = new OpenApiContact { Name = "wyDuang", Email = "110@wyduang.com", Url = new Uri("https://wyduang.com") }
                 }
             },
         };
@@ -113,7 +113,7 @@ namespace Blog.Infrastructure.Extensions
                 });
                 options.DefaultModelsExpandDepth(-1);
                 options.DocExpansion(DocExpansion.List);
-                options.RoutePrefix = string.Empty;
+                options.RoutePrefix = "api";
                 options.DocumentTitle = "😎 wyDuang 接口文档 | api.wyduang.com";
             });
         }

@@ -23,23 +23,33 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [AllowAnonymous]
-    [ApiExplorerSettings(IgnoreApi = false)]
-    public class AuthController : BaseController
+    [ApiController]
+    public class AuthController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClient;
         private readonly JwtSettings _jwtSettings;
         private readonly GitHubSettings _gitHubSettings;
+        //public AuthController(
+        //    IHttpClientFactory httpClient,
+        //    IOptions<JwtSettings> jwtSettings,
+        //    IOptions<GitHubSettings> gitHubSettings,
+        //    IUnitOfWork unitOfWork,
+        //    ILogger<AuthController> logger,
+        //    IMapper mapper,
+        //    IUrlHelper urlHelper,
+        //    ITypeHelperService typeHelperService,
+        //    IPropertyMappingContainer propertyMappingContainer)
+        //    : base(unitOfWork, logger, mapper, urlHelper, typeHelperService, propertyMappingContainer)
+        //{
+        //    _httpClient = httpClient;
+        //    _jwtSettings = jwtSettings.Value;
+        //    _gitHubSettings = gitHubSettings.Value;
+        //}
+
         public AuthController(
-            IHttpClientFactory httpClient,
-            IOptions<JwtSettings> jwtSettings,
-            IOptions<GitHubSettings> gitHubSettings,
-            IUnitOfWork unitOfWork,
-            ILogger<AuthController> logger,
-            IMapper mapper,
-            IUrlHelper urlHelper,
-            ITypeHelperService typeHelperService,
-            IPropertyMappingContainer propertyMappingContainer)
-            : base(unitOfWork, logger, mapper, urlHelper, typeHelperService, propertyMappingContainer)
+        IHttpClientFactory httpClient,
+        IOptions<JwtSettings> jwtSettings,
+        IOptions<GitHubSettings> gitHubSettings)
         {
             _httpClient = httpClient;
             _jwtSettings = jwtSettings.Value;
@@ -52,7 +62,7 @@ namespace Blog.Api.Controllers
         /// <param name="account"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("token")]
+        [Route("api/token")]
         public IActionResult PostToken(AccountEntity account)
         {
             if (account == null) return Unauthorized();
@@ -102,7 +112,7 @@ namespace Blog.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("authorize")]
+        [Route("api/authorize")]
         public IActionResult GetGithubLoginUrlAsync()
         {
             //https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/
@@ -123,7 +133,7 @@ namespace Blog.Api.Controllers
         /// <param name="code"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("access_token")]
+        [Route("api/access_token")]
         public async Task<IActionResult> GetAccessTokenAsync(string code)
         {
             if (code.IsNullOrWhiteSpace()) return BadRequest();//发送的请求是错误的
@@ -148,7 +158,7 @@ namespace Blog.Api.Controllers
         /// <param name="access_token"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("token")]
+        [Route("api/token")]
         public async Task<IActionResult> GenerateTokenAsync(string access_token)
         {
             if (access_token.IsNullOrWhiteSpace()) return BadRequest();

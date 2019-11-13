@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [AllowAnonymous]
-    [Route("common")]
+    [Route("api/[action]")]
     [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v2)]
     public class CommonController: BaseController
     {
@@ -32,7 +32,7 @@ namespace Blog.Api.Controllers
         }
 
         [HttpGet]
-        [Route("bing")]
+        [Route("api/bing")]
         public async Task<IActionResult> Get_Bing()
         {
             var api = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&pid=hp&FORM=BEHPTB";

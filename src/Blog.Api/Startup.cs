@@ -1,9 +1,13 @@
 using System;
 using System.Text;
 using AutoMapper;
+using Blog.Core.Interfaces;
 using Blog.Core.SettingModels;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
+using Blog.Infrastructure.Repositories;
+using Blog.Infrastructure.Resources.PropertyMappings;
+using Blog.Infrastructure.Services;
 using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -100,13 +104,26 @@ namespace Blog.Api
             services.AddHttpClient();
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IArticleTagRepository, ArticleTagRepository>();
+            services.AddScoped<IFriendLinkRepository, FriendLinkRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddHttpContextAccessor();            
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory =>
             {
                 var actionContext = factory.GetService<IActionContextAccessor>().ActionContext;
                 return new UrlHelper(actionContext);
             });
+
+            var propertyMappingContainer = new PropertyMappingContainer();
+            propertyMappingContainer.Register<ArticlePropertyMapping>();
+            services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
+
+            services.AddTransient<ITypeHelperService, TypeHelperService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
