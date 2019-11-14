@@ -15,6 +15,9 @@ RUN dotnet build "Blog.Api.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "Blog.Api.csproj" -c Release -o /app/publish
 
+RUN apt-get update -y && apt-get install -y libgdiplus && apt-get clean && ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll
+
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

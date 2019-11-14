@@ -13,7 +13,6 @@
   <ItemGroup>
     <None Remove="Blog.Api.xml" />
     <None Remove="Blog.Core.xml" />
-    <None Remove="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +50,10 @@
     <Content Update="nlog.Development.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>
