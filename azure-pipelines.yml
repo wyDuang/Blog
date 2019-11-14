@@ -10,15 +10,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
   tagName: '$(Build.BuildNumber)'
   repoName: '$(dockerId)/webapi'
   imageName: '$(dockerId)/webapi:$(tagName)'
 
 steps:
-
-- script:  dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet build -c Release
   displayName: 'dotnet build'
@@ -28,9 +24,6 @@ steps:
 
 - script: docker tag $(imageName) $(repoName):latest
   displayName: 'Docker tag'
-
-- script:  dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
 
 - script: |
     docker login -u $(dockerId) -p $(dockerPwd)
