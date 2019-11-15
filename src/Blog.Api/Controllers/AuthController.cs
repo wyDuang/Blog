@@ -62,7 +62,7 @@ namespace Blog.Api.Controllers
         /// <param name="account"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/token")]
+        [Route("login")]
         public IActionResult PostToken(AccountEntity account)
         {
             if (account == null) return Unauthorized();
@@ -112,7 +112,7 @@ namespace Blog.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/authorize")]
+        [Route("login")]
         public IActionResult GetGithubLoginUrlAsync()
         {
             //https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/
@@ -133,7 +133,7 @@ namespace Blog.Api.Controllers
         /// <param name="code"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/access_token")]
+        [Route("access_token")]
         public async Task<IActionResult> GetAccessTokenAsync(string code)
         {
             if (code.IsNullOrWhiteSpace()) return BadRequest();//发送的请求是错误的
@@ -153,12 +153,12 @@ namespace Blog.Api.Controllers
         }
 
         /// <summary>
-        /// 通过 github的 access_token 生成 Token
+        /// 通过 github的 access_token 生成 Jwt Token
         /// </summary>
         /// <param name="access_token"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/token")]
+        [Route("token")]
         public async Task<IActionResult> GenerateTokenAsync(string access_token)
         {
             if (access_token.IsNullOrWhiteSpace()) return BadRequest();

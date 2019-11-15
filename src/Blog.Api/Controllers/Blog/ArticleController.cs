@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 namespace Blog.Api.Controllers
 {
     [Authorize]
-    [Route("api/articles")]
+    [Route("articles")]
     [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v1)]
     public class ArticleController : BaseController
     {

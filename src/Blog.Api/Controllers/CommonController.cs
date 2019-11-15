@@ -32,7 +32,7 @@ namespace Blog.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/bing")]
+        [Route("bing")]
         public async Task<IActionResult> Get_Bing()
         {
             var api = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&pid=hp&FORM=BEHPTB";

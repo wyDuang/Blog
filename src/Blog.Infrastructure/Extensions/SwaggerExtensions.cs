@@ -113,7 +113,7 @@ namespace Blog.Infrastructure.Extensions
                 });
                 options.DefaultModelsExpandDepth(-1);
                 options.DocExpansion(DocExpansion.List);
-                options.RoutePrefix = "api";
+                options.RoutePrefix = string.Empty;
                 options.DocumentTitle = "😎 wyDuang 接口文档 | api.wyduang.com";
             });
         }
