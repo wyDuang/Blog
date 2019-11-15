@@ -9,7 +9,7 @@ body {
     display: block;
     padding-bottom: 3em;
     background-color: rgba(0, 0, 0, 0.87);
-    background: url(/images/to_pageback.gif) repeat fixed;
+    background: url(https://static.wyduang.com/images/to_pageback.gif) repeat fixed;
 }
 
 .jumbotron .ui.header,
@@ -22,7 +22,7 @@ body {
 }
 
 .main.menu {
-    background-image: url(/images/shadow_light.png), url(/images/circuit.png);
+    background-image: url(https://static.wyduang.com/images/shadow_light.png), url(https://static.wyduang.com/images/circuit.png);
     background-repeat: repeat-x, repeat-x;
     margin-top: 0em;
     border-radius: 0;
@@ -107,8 +107,8 @@ header .ui.menu:last-child {
 
 @font-face {
     font-family: 'BarbaraHand';
-    src: url(../fonts/barbarahand-webfont.eot);
-    src: url(../fonts/barbarahand-webfont.eot?#iefix) format('embedded-opentype'), url(../fonts/barbarahand-webfont.woff2) format('woff2'), url(../fonts/barbarahand-webfont.woff) format('woff'), url(../fonts/barbarahand-webfont.ttf) format('truetype'), url(../fonts/barbarahand-webfont.svg#BarbaraHand) format('svg');
+    src: url(https://static.wyduang.com/fonts/barbarahand-webfont.eot);
+    src: url(https://static.wyduang.com/fonts/barbarahand-webfont.eot?#iefix) format('embedded-opentype'), url(https://static.wyduang.com/fonts/barbarahand-webfont.woff2) format('woff2'), url(https://static.wyduang.com/fonts/barbarahand-webfont.woff) format('woff'), url(../fonts/barbarahand-webfont.ttf) format('truetype'), url(https://static.wyduang.com/fonts/barbarahand-webfont.svg#BarbaraHand) format('svg');
     font-weight: 400;
     font-style: normal;
 }

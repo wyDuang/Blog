@@ -37,6 +37,9 @@
         <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     </environment>
     <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" href="https://static.wyduang.com/css/gloable.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://static.wyduang.com/css/main.css" asp-append-version="true" />
         @*<link rel="stylesheet" href="~/css/index.all.css" asp-append-version="true" />*@
     </environment>
     @RenderSection("styles", required: false)
@@ -53,7 +56,7 @@
     <environment exclude="Development">
         <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
-        <script src="~/js/main.js" asp-append-version="true"></script>
+        <script src="https://static.wyduang.com/js/main.js" asp-append-version="true"></script>
 
         @*<script src="~/libs/layui/dist/layui.js"></script>
         <script src="~/libs/wowjs/dist/wow.min.js"></script>
