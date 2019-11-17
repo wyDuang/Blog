@@ -18,7 +18,7 @@ namespace Blog.Infrastructure.Repositories
 
         public async Task<PaginatedList<Article>> GetPageListAsync(ArticleParameter parameter, IPropertyMapping propertyMapping = null)
         {
-            var query = Context.Articles.AsQueryable();
+            var query = Context.Set<Article>().AsQueryable();
 
             if (!string.IsNullOrEmpty(parameter.Title))
             {

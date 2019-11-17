@@ -1,14 +1,17 @@
 [
   //首页
-  //{
-  //  "outputFileName": "wwwroot/css/index.all.css",
-  //  "inputFiles": [
-  //    "wwwroot/libs/layui/dist/css/layui.css",
-  //    "wwwroot/libs/font-awesome/css/font-awesome.css",
-  //    "wwwroot/libs/animate/animate.css",
-  //    "wwwroot/css/index.css"
-  //  ]
-  //},
+  {
+    "outputFileName": "wwwroot/css/all.min.css",
+    "inputFiles": [
+      "wwwroot/libs/font-awesome/css/font-awesome.css",
+      "wwwroot/css/gloable.css",
+      "wwwroot/css/main.css"
+    ],
+    "minify": {
+      "enabled": true, //是否压缩
+      "renameLocals": true //重命名
+    }
+  }
   //{
   //  "outputFileName": "wwwroot/js/index.all.js",
   //  "inputFiles": [

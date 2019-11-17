@@ -14,41 +14,41 @@ namespace Blog.Infrastructure.Repositories
 {
     public class EFRepository<T> : IRepositoryBase<T> where T : Entity
     {
-        protected readonly DbSet<T> dbSets;
+        protected readonly DbSet<T> dbSet;
         protected readonly MyContext Context;
         public EFRepository(MyContext context)
         {
             Context = context;
-            dbSets = Context.Set<T>();
+            dbSet = Context.Set<T>();
         }
 
         public virtual T Get(int id)
         {
-            return dbSets.Find(id);
+            return dbSet.Find(id);
         }
 
         public virtual async Task<T> GetAsync(int id)
         {
-            return await dbSets.FindAsync(id);
+            return await dbSet.FindAsync(id);
         }
 
         public virtual async Task<T> GetAsync(int id, params Expression<Func<T, object>>[] includes)
         {
             var queryableResultWithIncludes = includes
-                .Aggregate(dbSets.AsQueryable(), (current, include) => current.Include(include));
+                .Aggregate(dbSet.AsQueryable(), (current, include) => current.Include(include));
 
             return await queryableResultWithIncludes.SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public virtual async Task<T> GetSingleAsync(Expression<Func<T, bool>> whereLambd)
         {
-            return await dbSets.FirstOrDefaultAsync(whereLambd);
+            return await dbSet.FirstOrDefaultAsync(whereLambd);
         }
 
         public virtual async Task<T> GetSingleAsync(Expression<Func<T, bool>> whereLambd, params Expression<Func<T, object>>[] includes)
         {
             var queryableResultWithIncludes = includes
-                .Aggregate(dbSets.AsQueryable(), (current, include) => current.Include(include));
+                .Aggregate(dbSet.AsQueryable(), (current, include) => current.Include(include));
 
             return await queryableResultWithIncludes.FirstOrDefaultAsync(whereLambd);
         }
@@ -56,53 +56,53 @@ namespace Blog.Infrastructure.Repositories
 
         public virtual IEnumerable<T> GetAllList()
         {
-            return dbSets.AsEnumerable();
+            return dbSet.AsEnumerable();
         }
 
         public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> whereLambd)
         {
-            return dbSets.Where(whereLambd).AsEnumerable();
+            return dbSet.Where(whereLambd).AsEnumerable();
         }
 
         public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> whereLambd, params Expression<Func<T, object>>[] includes)
         {
             var queryableResultWithIncludes = includes
-                .Aggregate(dbSets.AsQueryable(), (current, include) => current.Include(include));
+                .Aggregate(dbSet.AsQueryable(), (current, include) => current.Include(include));
 
             return queryableResultWithIncludes.Where(whereLambd).AsEnumerable();
         }
 
         public virtual async Task<List<T>> GetAllListAsync()
         {
-            return await dbSets.ToListAsync();
+            return await dbSet.ToListAsync();
         }
 
         public virtual async Task<List<T>> GetListAsync(Expression<Func<T, bool>> whereLambd)
         {
-            return await dbSets.Where(whereLambd).ToListAsync();
+            return await dbSet.Where(whereLambd).ToListAsync();
         }
 
         public virtual async Task<List<T>> GetListAsync(Expression<Func<T, bool>> whereLambd, params Expression<Func<T, object>>[] includes)
         {
             var queryableResultWithIncludes = includes
-                .Aggregate(dbSets.AsQueryable(), (current, include) => current.Include(include));
+                .Aggregate(dbSet.AsQueryable(), (current, include) => current.Include(include));
 
             return await queryableResultWithIncludes.Where(whereLambd).ToListAsync();
         }
 
         public virtual async Task<int> GetCountAsync()
         {
-            return await dbSets.CountAsync();
+            return await dbSet.CountAsync();
         }
 
         public virtual async Task<int> GetCountAsync(Expression<Func<T, bool>> whereLambd)
         {
-            return await dbSets.CountAsync(whereLambd);
+            return await dbSet.CountAsync(whereLambd);
         }
 
         public void Add(T entity, bool autoSave = false)
         {
-            dbSets.Add(entity);
+            dbSet.Add(entity);
             if (autoSave)
                 Save();
         }
@@ -116,14 +116,14 @@ namespace Blog.Infrastructure.Repositories
 
         public void Delete(T entity, bool autoSave = false)
         {
-            dbSets.Remove(entity);
+            dbSet.Remove(entity);
             if (autoSave)
                 Save();
         }
 
         public void DeleteWhere(Expression<Func<T, bool>> whereLambd, bool autoSave = false)
         {
-            IEnumerable<T> entities = dbSets.Where(whereLambd);
+            IEnumerable<T> entities = dbSet.Where(whereLambd);
             foreach (var entity in entities)
             {
                 Context.Entry(entity).State = EntityState.Deleted;
@@ -134,14 +134,14 @@ namespace Blog.Infrastructure.Repositories
 
         public void AddRange(IEnumerable<T> entities, bool autoSave = false)
         {
-            dbSets.AddRange(entities);
+            dbSet.AddRange(entities);
             if (autoSave)
                 Save();
         }
 
         public void DeleteRange(IEnumerable<T> entities, bool autoSave = false)
         {
-            entities.ToList().ForEach(entity => dbSets.Remove(entity));
+            entities.ToList().ForEach(entity => dbSet.Remove(entity));
             if (autoSave)
                 Save();
         }
@@ -149,7 +149,7 @@ namespace Blog.Infrastructure.Repositories
 
         public void Attach(T entity)
         {
-            dbSets.Attach(entity);
+            dbSet.Attach(entity);
         }
 
         public void AttachRange(IEnumerable<T> entities)
@@ -197,7 +197,7 @@ namespace Blog.Infrastructure.Repositories
 
         public virtual async Task<PaginatedList<T>> GetPageListAsync(PaginationBase parameters, IPropertyMapping propertyMapping)
         {
-            var collectionBeforePaging = dbSets.ApplySort(parameters.OrderBy, propertyMapping);
+            var collectionBeforePaging = dbSet.ApplySort(parameters.OrderBy, propertyMapping);
 
             var count = await collectionBeforePaging.CountAsync();
             var items = await collectionBeforePaging
@@ -211,7 +211,7 @@ namespace Blog.Infrastructure.Repositories
 
         public virtual async Task<PaginatedList<T>> GetPageListAsync(PaginationBase parameters, IPropertyMapping propertyMapping, Expression<Func<T, bool>> whereLambd)
         {
-            var collectionBeforePaging = dbSets.Where(whereLambd).ApplySort(parameters.OrderBy, propertyMapping);
+            var collectionBeforePaging = dbSet.Where(whereLambd).ApplySort(parameters.OrderBy, propertyMapping);
 
             var count = await collectionBeforePaging.CountAsync();
             var items = await collectionBeforePaging
@@ -225,7 +225,7 @@ namespace Blog.Infrastructure.Repositories
 
         public virtual async Task<PaginatedList<T>> GetPageListAsync(PaginationBase parameters, IPropertyMapping propertyMapping, Expression<Func<T, bool>> whereLambd, params Expression<Func<T, object>>[] includes)
         {
-            var collectionBeforePaging = includes.Aggregate(dbSets.Where(whereLambd).ApplySort(parameters.OrderBy, propertyMapping), (current, include) => current.Include(include));
+            var collectionBeforePaging = includes.Aggregate(dbSet.Where(whereLambd).ApplySort(parameters.OrderBy, propertyMapping), (current, include) => current.Include(include));
 
             var count = await collectionBeforePaging.CountAsync();
             var items = await collectionBeforePaging

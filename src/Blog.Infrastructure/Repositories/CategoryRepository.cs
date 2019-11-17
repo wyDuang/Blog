@@ -19,12 +19,12 @@ namespace Blog.Infrastructure.Repositories
 
         public async Task<PaginatedList<Category>> GetPageListAsync(CategoryParameter parameter, IPropertyMapping propertyMapping = null)
         {
-            var query = Context.Categories.AsQueryable();
+            var query = dbSet.AsQueryable();
 
             if (!string.IsNullOrEmpty(parameter.Name))
             {
                 var name = parameter.Name.ToLowerInvariant();
-                query = query.Where(x => x.DisplayName.ToLowerInvariant() == name);
+                query = query.Where(x => x.CategoryName.ToLowerInvariant() == name);
             }
 
             if (propertyMapping != null)

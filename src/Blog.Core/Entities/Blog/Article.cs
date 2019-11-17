@@ -4,55 +4,70 @@ using System.Text;
 
 namespace Blog.Core.Entities
 {
+    /// <summary>
+	/// 文章表
+	/// </summary>
     public class Article : Entity
     {
         /// <summary>
-        /// 博客key
-        /// </summary>
-        public string ArticleKey { get; set; }
+		/// 文章分类
+		/// </summary>
+		public Int32 CategoryId { get; set; }
         /// <summary>
-        /// 博客标题
+        /// 文章类型1-原，2-转，3-译
         /// </summary>
-        public string Title { get; set; }
+        public SByte ArticleType { get; set; }
         /// <summary>
-        /// 博客类别
+        /// 文章Key
         /// </summary>
-        public int CategoryId { get; set; }
+        public String ArticleKey { get; set; }
         /// <summary>
-        /// 博客内容 HTML
+        /// 标题
         /// </summary>
-        public string Html { get; set; }
+        public String Title { get; set; }
         /// <summary>
-        /// 博客内容 Markdown
+        /// 内容Html
         /// </summary>
-        public string Markdown { get; set; }
+        public String Html { get; set; }
+        /// <summary>
+        /// 内容Markdown
+        /// </summary>
+        public String Markdown { get; set; }
         /// <summary>
         /// 作者
         /// </summary>
-        public string Author { get; set; }
+        public String Author { get; set; }
         /// <summary>
-        /// 来源
+        /// 链接
         /// </summary>
-        public string Source { get; set; }
+        public String LinkUrl { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
-        public string Remark { get; set; }
+        public String Remark { get; set; }
         /// <summary>
         /// 点击数量
         /// </summary>
-        public int ClickCount { get; set; }
+        public Int32 ClickCount { get; set; }
         /// <summary>
         /// 评论数量
         /// </summary>
-        public int CommentCount { get; set; }
+        public Int32 CommentCount { get; set; }
+        /// <summary>
+        /// 伪删除
+        /// </summary>
+        public SByte IsDeleted { get; set; }
+        /// <summary>
+        /// 是否置顶
+        /// </summary>
+        public SByte IsTop { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreateDate { get; set; } = DateTime.Now;
-        ///// <summary>
-        ///// 博客标签
-        ///// </summary>
-        //public virtual ICollection<Tag> ArticleTags { get; set; } = new List<Tag>();
+        public DateTime CreateDate { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
+        public DateTime UpdateDate { get; set; }
     }
 }

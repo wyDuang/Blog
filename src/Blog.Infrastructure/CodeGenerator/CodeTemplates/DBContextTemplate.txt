@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using YDQZ.Core.Entities;
-using YDQZ.Infrastructure.Database.EntityConfigurations;
+using Blog.Core.Entities;
+using Blog.Infrastructure.Database.EntityConfigurations;
 
 namespace {TemplateNamespace}
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.Infrastructure.Resources.Blog
+namespace Blog.Infrastructure.Resources
 {
     public class FriendLinkResource
     {

@@ -9,19 +9,45 @@ namespace Blog.Infrastructure.Resources.Validators
     {
         public ArticleAddOrUpdateResourceValidator()
         {
+            RuleFor(x => x.CategoryId)
+                .NotEqual(0)
+                .WithName("文章分类")
+                .WithMessage("required|{PropertyName}必须大于0");              
+
             RuleFor(x => x.Title)
-                .NotNull()
+                .NotEmpty()
                 .WithName("标题")
                 .WithMessage("required|{PropertyName}是必填的")
-                .MaximumLength(50)
+                .MaximumLength(200)
                 .WithMessage("maxlength|{PropertyName}的最大长度是{MaxLength}");
 
             RuleFor(x => x.Html)
-                .NotNull()
-                .WithName("正文")
+                .NotEmpty()
+                .WithName("正文Html")
                 .WithMessage("required|{{PropertyName}是必填的")
-                .MinimumLength(100)
+                .MinimumLength(1)
                 .WithMessage("minlength|{PropertyName}的最小长度是{MinLength}");
+
+            RuleFor(x => x.Html)
+                .NotEmpty()
+                .WithName("正文Markdown")
+                .WithMessage("required|{{PropertyName}是必填的")
+                .MinimumLength(1)
+                .WithMessage("minlength|{PropertyName}的最小长度是{MinLength}");
+
+            RuleFor(x => x.Author)
+                .NotEmpty()
+                .WithName("作者")
+                .WithMessage("required|{{PropertyName}是必填的")
+                .MaximumLength(50)
+                .WithMessage("maxlength|{PropertyName}的最小长度是{MaxLength}");
+
+            RuleFor(x => x.Remark)
+                .NotNull()
+                .WithName("备注")
+                .WithMessage("required|{{PropertyName}是必填的")
+                .MaximumLength(1000)
+                .WithMessage("maxlength|{PropertyName}的最小长度是{MaxLength}");
         }
     }
 }

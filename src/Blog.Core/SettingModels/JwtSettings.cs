@@ -21,7 +21,7 @@ namespace Blog.Core.SettingModels
         /// <summary>
         /// 访问令牌过期分钟数
         /// </summary>
-        public int TokenExpiresMinutes { get; set; }
+        public int AccessTokenExpiresMinutes { get; set; }
         /// <summary>
         /// 刷新令牌接受者
         /// </summary>

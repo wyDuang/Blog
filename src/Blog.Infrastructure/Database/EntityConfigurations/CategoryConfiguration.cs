@@ -16,8 +16,10 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
 
             builder.Property(x => x.CategoryKey).HasMaxLength(200).IsRequired();
             builder.Property(x => x.CategoryName).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.DisplayName).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Sort).HasDefaultValue(0).IsRequired();
+            builder.Property(x => x.Remark).HasMaxLength(2000).IsRequired();
+            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
+            builder.Property(x => x.IsDeleted).HasDefaultValue(0).IsRequired();
 
             builder.ToTable(BlogDbTableNames.Categories);
         }

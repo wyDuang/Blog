@@ -13,8 +13,4 @@
     <Compile Remove="Interfaces\Blog\IBaseRepository.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Blog\" />
-  </ItemGroup>
-
 </Project>

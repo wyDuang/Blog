@@ -13,6 +13,8 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
 
             builder.Property(x => x.TagName).HasMaxLength(50).IsRequired();
             builder.Property(x => x.TagKey).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.IsDeleted).HasDefaultValue(0).IsRequired();
+            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
 
             builder.ToTable(BlogDbTableNames.Tags);
         }

@@ -4,11 +4,10 @@
         <name>Blog.Api</name>
     </assembly>
     <members>
-        <member name="M:Blog.Api.Controllers.AuthController.PostToken(Blog.Core.Entities.AccountEntity)">
+        <member name="M:Blog.Api.Controllers.AuthController.PostToken(Blog.Infrastructure.Resources.LoginResource)">
             <summary>
             Post 获取Token
             </summary>
-            <param name="account"></param>
             <returns></returns>
         </member>
         <member name="M:Blog.Api.Controllers.AuthController.GetGithubLoginUrlAsync">
@@ -87,6 +86,11 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Blog.Api.Controllers.FriendLinkController.GetFriendLinks">
+            <summary>
+            获取所有的友情链接
+            </summary>
+        </member>
         <member name="M:Blog.Api.Controllers.Blog.TagController.Gets(Blog.Core.QueryParameters.TagParameter,System.String)">
             <summary>
             分页获取标签
@@ -107,7 +111,7 @@
             判断是存在
             </summary>
         </member>
-        <member name="M:Blog.Api.Controllers.SignatureController.Get(Blog.Core.Entities.SignatureEntity)">
+        <member name="M:Blog.Api.Controllers.SignatureController.Get(Blog.Infrastructure.Resources.SignatureResource)">
             <summary>
             艺术签名
             </summary>

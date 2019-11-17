@@ -11,6 +11,6 @@ namespace Blog.Core.Interfaces
 {
     public interface ICategoryRepository : IRepositoryBase<Category>
     {
-        Task<PaginatedList<Category>> GetPageListAsync(CategoryParameter parameter, IPropertyMapping propertyMapping = null);
+
     }
 }

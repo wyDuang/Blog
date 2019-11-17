@@ -1,18 +1,15 @@
-﻿using System.Threading.Tasks;
-using YDQZ.Core.Entities;
-using YDQZ.Infrastructure.Resources;
+﻿using Blog.Core.BaseModels;
+using Blog.Core.Entities;
+using Blog.Core.QueryParameters;
+using System.Threading.Tasks;
 
 namespace {IRepositoryNamespace}
 {
 	/// <summary>
 	/// {Comment}（仓储层）
 	/// </summary>
-    public interface I{ClassName}Repository
+    public interface I{ClassName}Repository : IRepositoryBase<{ClassName}>
     {
-		Task<PaginatedList<{ClassName}>> GetPageListAsync({ClassName}Parameters parm);
-        Task<{ClassName}> GetAsync(int id);
-        void Add({ClassName} model);
-        void Delete({ClassName} model);
-        void Update({ClassName} model);
+		Task<PaginatedList<{ClassName}>> GetPageListAsync({ClassName}Parameter parameter, IPropertyMapping propertyMapping);
     }
 }

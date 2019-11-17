@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+<div id="body-left" class="eleven wide column">
+    <div class="ui segment">
+        <h2 class="ui header">
+            <a class="ui red circular label">原</a>device-mapper-libs安装docker失败
+        </h2>
+        <div class="ui meta">
+            &nbsp;&nbsp;&nbsp;
+            <i class="tags icon"></i><button class="ui mini button" style="padding: .4em .8em .4em;" href="/tags/">tags</button>
+            &nbsp;<span><i class="user icon"></i>阅读(6)</span>
+            &nbsp;<span><i class="calendar icon"></i>2019-11-15 13:22:02</span>
+            &nbsp;&nbsp;<a href="/admin/edit/" style="color:#000;"><i class="edit icon"></i></a>&nbsp;
+            <a class="postDelete" style="color:#000;display:none;" href="javascript:void(0)" url="/admin/delete/1"><i class="trash icon"></i></a>&nbsp;
+        </div>
+        <br />
+        <article class="markdown-body entry-content">
+            markdown
+            markdown
+        </article>
+        <footer class="reference">
+            <strong>（转载本站文章请注明作者和出处：<a href="https://wyduang.com">wyDuang - wyduang.com</a>）</strong>
+        </footer>
+    </div>
+    <div class="ui buttons center aligned container">
+        <button class="ui labeled icon button" href="/post/1">
+            <i class="left arrow icon"></i>上一篇
+        </button>
+        <button class="ui right labeled icon button" href="/post/2">
+            <i class="right arrow icon"></i>go mod graph 图表
+        </button>
+    </div>
+    <div class="ui segment">
+        <div id="post_comments" class="ui minimal comments">
+            <h3 class="ui dividing header">文章评论</h3>
+            <div class="comment" id="Id">
+                <div class="content">
+                    <a class="author">author</a>
+                    <div class="metadata">
+                        <span class="date">时间</span>
+                    </div>
+                    <div class="text">
+                        {{ .Content }}
+                    </div>
+                    <div class="actions">
+                        <a id="reply"><i class="icon reply"></i></a>
+                        {{ if eq $.User.Id $.PostData.Author }}
+                        <a id="delete"><i class="icon trash"></i></a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+            <form class="ui reply form comments commentInput" role="form" action="/comments/add" method="post">
+                <input type="hidden" name="postId" value="Id" />
+                <div class="field">
+                    <textarea id="content" maxlength="2048" name="content"></textarea>
+                </div>
+                <div class="row field">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>验证码</label>
+                            <input id="captcha" name="captcha" type="text" placeholder="验证码">
+                        </div>
+                        <img id="imgCaptcha" src="" alt="">
+                        <input id="keyCaptcha" name="keyCaptcha" style="display:none;" type="text">
+                    </div>
+                    <div class="ui field">
+                        <label>用户名</label>
+                        <input id="name" name="name" type="text" placeholder="用户名">
+                    </div>
+                </div>
+                <button class="ui blue labeled submit icon button" type="submit">
+                    <i class="icon edit"></i> 发表评论
+                </button>
+            </form>
+            <div class="ui bottom attached warning message" style="display:none;">
+                <i class="icon help"></i>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>

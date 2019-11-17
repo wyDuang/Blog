@@ -21,7 +21,7 @@ namespace Blog.Infrastructure.Repositories
 
         public async Task<PaginatedList<FriendLink>> GetPageListAsync(FriendLinkParameter parameter, IPropertyMapping propertyMapping = null)
         {
-            var query = Context.FriendLinks.AsQueryable();
+            var query = dbSet.AsQueryable();
 
             if (!string.IsNullOrEmpty(parameter.Title))
             {

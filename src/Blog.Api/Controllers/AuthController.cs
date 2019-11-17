@@ -4,6 +4,7 @@ using Blog.Core.Interfaces;
 using Blog.Core.SettingModels;
 using Blog.Infrastructure.Extensions;
 using Blog.Infrastructure.Resources;
+using Blog.Infrastructure.ResultModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -26,6 +27,7 @@ namespace Blog.Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IUserRepository _userRepository;
         private readonly IHttpClientFactory _httpClient;
         private readonly JwtSettings _jwtSettings;
         private readonly GitHubSettings _gitHubSettings;
@@ -47,10 +49,12 @@ namespace Blog.Api.Controllers
         //}
 
         public AuthController(
-        IHttpClientFactory httpClient,
-        IOptions<JwtSettings> jwtSettings,
-        IOptions<GitHubSettings> gitHubSettings)
+            IUserRepository userRepository,
+            IHttpClientFactory httpClient,
+            IOptions<JwtSettings> jwtSettings,
+            IOptions<GitHubSettings> gitHubSettings)
         {
+            _userRepository = userRepository;
             _httpClient = httpClient;
             _jwtSettings = jwtSettings.Value;
             _gitHubSettings = gitHubSettings.Value;
@@ -59,28 +63,32 @@ namespace Blog.Api.Controllers
         /// <summary>
         /// Post 获取Token
         /// </summary>
-        /// <param name="account"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("login")]
-        public IActionResult PostToken(AccountEntity account)
+        public IActionResult PostToken(LoginResource loginResource)
         {
-            if (account == null) return Unauthorized();
+            if (loginResource == null) return BadRequest();
 
-            if (account.UserName == "UserNameasdasda" && account.Password == "Passwordasd")
+            if (!ModelState.IsValid)
+            {
+                return new MyUnprocessableEntityObjectResult(ModelState);
+            }
+            var user = _userRepository.GetUserByNameAndPwd(loginResource.Username, loginResource.Password);
+            if(user != null)
             {
                 var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
-                var expiresAt = authTime.Add(TimeSpan.FromMinutes(_jwtSettings.TokenExpiresMinutes));//Exp 过期时间，在此之后不可用
+                var expiresAt = authTime.Add(TimeSpan.FromMinutes(_jwtSettings.AccessTokenExpiresMinutes));//Exp 过期时间，在此之后不可用
 
                 var claims = new Claim[]
                 {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Sub, account.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, loginResource.Username),
                     new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(authTime).ToUnixTimeSeconds()}"),
                     new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(expiresAt).ToUnixTimeSeconds()}")
                 };
 
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.IssuerSigningKey));
+                var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.IssuerSigningKey));
                 var token = new JwtSecurityToken(
                     issuer: _jwtSettings.Issuer,
                     audience: _jwtSettings.Audience,
@@ -97,7 +105,7 @@ namespace Blog.Api.Controllers
                     token_type = "Bearer",
                     profile = new
                     {
-                        name = account.UserName,
+                        name = loginResource.Username,
                         auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
                         expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
                     }

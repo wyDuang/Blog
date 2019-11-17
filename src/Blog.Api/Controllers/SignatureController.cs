@@ -1,6 +1,7 @@
 ﻿using Blog.Core.Entities;
 using Blog.Core.SettingModels;
 using Blog.Infrastructure.Helpers;
+using Blog.Infrastructure.Resources;
 using Blog.Infrastructure.ResultModel;
 using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Authorization;
@@ -46,7 +47,7 @@ namespace Blog.Api.Controllers
         /// <param name="signatureEntity">参数对象</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<DataResult> Get(SignatureEntity signatureEntity)
+        public async Task<DataResult> Get(SignatureResource signatureEntity)
         {
             return await GetSignature(signatureEntity.Name, (SignatureEnum)signatureEntity.Type);
 
@@ -94,7 +95,7 @@ namespace Blog.Api.Controllers
                     FileHelper.SaveFile(bytes, _webHostEnvironment + signatureUrl);
                     FileHelper.Delete(signaturePath);
 
-                    var entity = new SignatureEntity
+                    var entity = new SignatureResource
                     {
                         Name = name,
                         Type = (int)signature,

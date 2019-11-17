@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using AutoMapper;
 using Blog.Core.Interfaces;
@@ -6,9 +8,13 @@ using Blog.Core.SettingModels;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
 using Blog.Infrastructure.Repositories;
+using Blog.Infrastructure.Resources;
 using Blog.Infrastructure.Resources.PropertyMappings;
+using Blog.Infrastructure.Resources.Validators;
 using Blog.Infrastructure.Services;
 using Blog.Infrastructure.Swagger;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,8 +46,6 @@ namespace Blog.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             var jwtStrings = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtStrings);
 
@@ -56,6 +60,20 @@ namespace Blog.Api
                 options.LowercaseUrls = true;//true：采用小写的URL路由模式
                 options.AppendTrailingSlash = false; //true：URL最后面默认加斜杠
             });
+
+            services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)
+                .AddFluentValidation();
+
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.GetInterfaces().Any(x => x == typeof(IValidator)));
+            foreach (var type in types)
+            {
+                if (type.BaseType != null)
+                {
+                    var genericType = typeof(IValidator<>).MakeGenericType(type.BaseType.GenericTypeArguments[0]);
+                    services.AddTransient(genericType, type);
+                }
+            }
 
             services.AddSwagger();
             services.AddAuthentication(options =>
@@ -73,14 +91,12 @@ namespace Blog.Api
                     ValidateLifetime = true,//是否验证失效时间 
                     ValidIssuer = jwtStrings["Issuer"],//Issuer，这两项和前面签发jwt的设置一致
                     ValidAudience = jwtStrings["Audience"],//Audience
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtStrings["IssuerSigningKey"])),//拿到SecurityKey
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtStrings["IssuerSigningKey"])),//拿到SecurityKey
                     ClockSkew = TimeSpan.FromMinutes(1), //默认5分钟缓冲期，例如Token设置有效期为30，到了30分钟的时候是不会过期，会有5缓冲时间。
-                    RequireExpirationTime = true,
+                    RequireExpirationTime = true,//必须有过期时间
                 };
             });
-            services.AddAuthorization();
-            //services.AddResponseCaching();
-            services.AddMemoryCache();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(_defaultCorsPolicyName, builder =>
@@ -89,27 +105,7 @@ namespace Blog.Api
                            .AllowAnyHeader());//.AllowCredentials()//指定处理cookie;
             });
 
-            services.AddHttpClient("github", config =>
-            {
-                config.BaseAddress = new Uri("https://github.com/");
-                config.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
-            });
-            services.AddHttpClient("translate", config =>
-            {
-                config.BaseAddress = new Uri("https://translate.google.cn");
-                config.DefaultRequestHeaders.Add("Accept", "*/*");
-                config.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
-                config.DefaultRequestHeaders.Referrer = new Uri("https://translate.google.cn");
-            });
-            services.AddHttpClient();
-
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IArticleRepository, ArticleRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IArticleTagRepository, ArticleTagRepository>();
-            services.AddScoped<IFriendLinkRepository, FriendLinkRepository>();
-            services.AddScoped<ITagRepository, TagRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -122,8 +118,9 @@ namespace Blog.Api
             var propertyMappingContainer = new PropertyMappingContainer();
             propertyMappingContainer.Register<ArticlePropertyMapping>();
             services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
-
             services.AddTransient<ITypeHelperService, TypeHelperService>();
+
+            services.AddMyServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -143,12 +140,12 @@ namespace Blog.Api
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
             app.UseRouting();
-            //app.UseResponseCaching();
             app.UseCors(_defaultCorsPolicyName);
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
-            app.UseSwagger().UseSwaggerUI();
+            app.UseSwagger()
+                .UseSwaggerUI();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

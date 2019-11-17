@@ -20,9 +20,9 @@ namespace Blog.Infrastructure.Database
                 // 只有在使用真正的数据库时才运行这个
                 // myContext.Database.Migrate();
 
-                if (!myContext.Articles.Any())
+                if (!myContext.Set<Article>().Any())
                 {
-                    myContext.Articles.AddRange(
+                    myContext.Set<Article>().AddRange(
                         new List<Article>{
                             new Article{
                                 Title = "Post Title 1",

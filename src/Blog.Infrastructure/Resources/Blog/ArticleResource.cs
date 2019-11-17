@@ -6,7 +6,6 @@ namespace Blog.Infrastructure.Resources
 {
     public class ArticleResource
     {
-        public int Id { get; set; }
         /// <summary>
         /// 博客key
         /// </summary>
@@ -16,10 +15,6 @@ namespace Blog.Infrastructure.Resources
         /// </summary>
         public string Title { get; set; }
         /// <summary>
-        /// 博客类别
-        /// </summary>
-        public int CategoryId { get; set; }
-        /// <summary>
         /// 博客内容 HTML
         /// </summary>
         public string Html { get; set; }
@@ -28,20 +23,19 @@ namespace Blog.Infrastructure.Resources
         /// </summary>
         public string Author { get; set; }
         /// <summary>
-        /// 来源
+        /// 链接
         /// </summary>
-        public string Source { get; set; }
-        /// <summary>
-        /// 点击数量
-        /// </summary>
-        public int ClickCount { get; set; }
-        /// <summary>
-        /// 评论数量
-        /// </summary>
-        public int CommentCount { get; set; }
+        public string LinkUrl { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateDate { get; set; }
+
+        /// <summary>
+        /// 博客类别Key
+        /// </summary>
+        public string CategoryName { get; set; }
+
+        public string[] Tags { get; set; }
     }
 }

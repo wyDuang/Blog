@@ -57,16 +57,20 @@ namespace Blog.Infrastructure.CodeGenerator
             {
                 foreach (var table in tables)
                 {
-                    table.ClassName = table.TableName;
-                    if (table.ClassName.Substring(table.ClassName.Length - 3, 3) == "ies")
+                    table.ClassName = "";
+                    var arrClassName = table.TableName.Split("_");
+                    if(arrClassName.Length > 1)
                     {
-                        table.ClassName = table.ClassName.Replace("ies", "y");
+                        foreach (var item in arrClassName)
+                        {
+                            table.ClassName += item.UpperFirstChar();
+                        }
                     }
-                    if (table.ClassName.Substring(table.ClassName.Length - 1, 1) == "s")
+                    else
                     {
-                        table.ClassName = table.ClassName[0..^1];
+                        table.ClassName = table.TableName.UpperFirstChar();
                     }
-
+                    
                     GenerateEntity(table, isCoveredExsited);
                     GenerateConfiguration(table, isCoveredExsited);
                     GenerateIRepository(table, isCoveredExsited);
@@ -119,7 +123,7 @@ namespace Blog.Infrastructure.CodeGenerator
         /// <param name="isCoveredExsited"></param>
         private void GenerateResource(DbTable table, bool isCoveredExsited = true)
         {
-            var modelPath = _options.OutputPath + Delimiter + "Models";
+            var modelPath = _options.OutputPath + Delimiter + "ModelResources";
             if (!Directory.Exists(modelPath))
             {
                 Directory.CreateDirectory(modelPath);
@@ -151,13 +155,13 @@ namespace Blog.Infrastructure.CodeGenerator
         /// <param name="isCoveredExsited"></param>
         private void GenerateParameters(DbTable table, bool isCoveredExsited = true)
         {
-            var modelPath = _options.OutputPath + Delimiter + "Models";
+            var modelPath = _options.OutputPath + Delimiter + "ModelParameters";
             if (!Directory.Exists(modelPath))
             {
                 Directory.CreateDirectory(modelPath);
             }
 
-            var fullPath = modelPath + Delimiter + table.ClassName + "Parameters.cs";
+            var fullPath = modelPath + Delimiter + table.ClassName + "Parameter.cs";
             if (File.Exists(fullPath) && !isCoveredExsited) return;
 
             var content = ReadTemplate("ParametersTemplate.txt");
@@ -375,7 +379,7 @@ namespace Blog.Infrastructure.CodeGenerator
         {
             var currentAssembly = Assembly.GetExecutingAssembly();//获取当前正在执行的程序集
             var content = string.Empty;
-            using (var stream = currentAssembly.GetManifestResourceStream($"{currentAssembly.GetName().Name}.CodeGenerator.CodeTemplate.{templateName}"))
+            using (var stream = currentAssembly.GetManifestResourceStream($"{currentAssembly.GetName().Name}.CodeGenerator.CodeTemplates.{templateName}"))
             {
                 if (stream != null)
                 {

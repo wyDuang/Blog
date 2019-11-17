@@ -1,0 +1,193 @@
+﻿@model Article
+@{
+    ///admin/write
+    ////admin/edit/
+}
+@section styles {
+    <environment include="Development">
+        <link href="~/libs/editor.md/css/editormd.css" rel="stylesheet" />
+        <link href="~/css/admin.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <style>
+        .editormd-image-dialog {
+            height:auto !important;
+        }
+        .editormd-toolbar {
+            z-index:11;
+        }
+    </style>
+}
+<div id="body-left" style="width:100%!important;" class="eleven wide column">
+    <div class="ui segment">
+        <form class="ui edit form" action="/admin/write" method="post" role="form">
+            @Html.Hidden("Id", Model.Id)
+            <input id="type" type="text" name="type" style="display:none;" value="">
+            <input id="selectedTag" type="text" name="tags" style="display:none;" value="">
+            <div class="field">
+                <label>文章标题</label>
+                <div class="fields">
+                    <div class="fourteen field">
+                        <input type="text" name="title" placeholder="请输入文章标题" value="@Model.Title">
+                    </div>
+                    <div class="two field">
+                        <select name="ArticleType" value="@Model.ArticleType" class="ui compact dropdown">
+                            <option value="0" selected>默认</option>
+                            <option value="1">原</option>
+                            <option value="2">转</option>
+                            <option value="3">译</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>文章作者</label>
+                <div class="fields">
+                    <div class="eight field">
+                        <input type="text" name="author" placeholder="请输入文章作者" value="@Model.Author">
+                    </div>
+                    <div class="four field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="IsTop" tabindex="0" class="hidden">
+                            <label>是否置顶</label>
+                        </div>
+                    </div>
+                    <div class="four field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="IsDeleted" tabindex="0" class="hidden">
+                            <label>是否删除</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="two fields">
+                    <div class="field">
+                        <label>文章Key</label>
+                        <input type="text" name="articleKey" placeholder="请输入文章Key" value="@Model.ArticleKey">
+                    </div>
+                    <div class="field">
+                        <label>文章分类</label>
+                        <select value="@Model.CategoryId" class="ui compact dropdown">
+                            @foreach (Category item in ViewBag.CategoryAllList)
+                            {
+                                <option value="@item.Id">@item.CategoryName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>文章标签</label>
+                @foreach (Tag item in ViewBag.TagAllList)
+                {
+                    <div class="ui itemTag checked checkbox" style="margin-right:10px;">
+                        <input type="checkbox">
+                        <label>@item.TagName</label>
+                    </div>
+                }
+            </div>
+            <div class="field">
+                <label>文章内容</label>
+                <div id="editor" style="width:100%; height: 600px;">
+                    <textarea style="display:none;">@Model.Markdown</textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label>备注</label>
+                <textarea name="Remark" rows="8">@Model.Remark</textarea>
+            </div>
+            <div class="field">
+                <button type="submit" class="ui positive right labeled icon button">
+                    提交<i class="checkmark icon"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/libs/jquery-form/jquery.form.js"></script>
+    <script src="~/libs/editor.md/editormd.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var editor = editormd("editor", {
+                width: "100%",
+                height: "600",
+                path: "/libs/editor.md/lib/",
+                theme: "dark",
+                previewTheme: "dark",
+                editorTheme: "pastel-on-dark",
+                markdown: "",
+                saveHTMLToTextarea: true,// 保存 HTML 到 Textarea
+                flowChart: true,             // 开启流程图支持，默认关闭
+                sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭
+                //dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+                //dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+                //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+                //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+                //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
+                codeFold: true,
+                atLink: false,
+                emoji: true,
+                editorTheme: 'default',
+                //toolbarIcons: function () {
+                //    return ["bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "hr", "link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "watch", "preview", "fullscreen", "clear"]
+                //}
+            });
+
+            $('.ui.form').form({
+                inline: true,
+                on: 'blur',
+                fields: {
+                    title: {
+                        identifier: 'title',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: '请输入文章标题'
+                            },
+                            {
+                                type: 'length[1]',
+                                prompt: '您的文章标题太短，请重新输入。'
+                            }
+                        ]
+                    },
+                    articleKey: {
+                        identifier: 'articleKey',
+                        rules: [{
+                            type: 'length[10]',
+                            prompt: '您的文章内容太短，请重新输入。'
+                        }]
+                    }
+                },
+                onSuccess: function () {
+                    var markdown = editor.getMarkdown();
+                    var html = editor.getHTML();
+
+                    $(this).ajaxForm({
+                        dataType: "json",
+                        data: {
+                            "html": html,
+                            "markdown": markdown,
+                        },
+                        clearForm: true,
+                        resetForm: true,
+                        success: function (data) {
+                            console.info(data);
+                            //if (data.ResultCode ==  = 0) {
+                            //    layer.msg(data.ResultMsg, { icon: 6, time: 2000 });
+                            //    $(form).resetForm();
+                            //    window.location.href = "/";
+                            //} else {
+                            //    layer.msg(data.ResultMsg, { icon: 5, time: 5000 });
+                            //}
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert('ERROR:' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5, time: 5000 });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,6 +1,5 @@
 @{
-
-
+    var returnUrl = Context.Request.Path.Value;
 }
 <header>
     @if (Context.Request.Path == @Url.Action("Index", "Home"))
@@ -17,7 +16,7 @@
             <div class="header item">
                 <a href="javascript:void(0)" id="logo" class="logo">wyDuang</a>
             </div>
-            <a class="item" href="@Url.Action("Index","Home")">首页</a>
+            <a class="item" rel="nofollow" href="@Url.Action("Index","Home")">首页</a>
             @*<a class="item" href="javascript:void(0)">IT聚合</a>
                 <a class="item" href="javascript:void(0)">小程序</a>*@
             <a class="item" href="javascript:void(0)">书签</a>
@@ -42,7 +41,7 @@
                         <input id="search" type="text" placeholder="Search">
                     </div>
                 </div>
-                <a class="item" href="/login">登录</a>
+                <a class="item" href="@Url.Action("Login","Admin", new { rurl = returnUrl })">登录</a>
             </div>
         </div>
     </div>

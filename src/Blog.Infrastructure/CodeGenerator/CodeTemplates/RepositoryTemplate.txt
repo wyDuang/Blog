@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YDQZ.Core.Entities;
-using YDQZ.Core.Interfaces;
-using YDQZ.Infrastructure.Database;
-using YDQZ.Infrastructure.Extensions;
-using YDQZ.Infrastructure.Resources;
-using YDQZ.Infrastructure.Services;
+using Blog.Core.Entities;
+using Blog.Core.Interfaces;
+using Blog.Infrastructure.Database;
+using Blog.Infrastructure.Extensions;
+using Blog.Infrastructure.Resources;
+using Blog.Infrastructure.Services;
 
 namespace {RepositoryNamespace}
 {
@@ -44,26 +44,6 @@ namespace {RepositoryNamespace}
                 .ToListAsync();
 
             return new PaginatedList<{ClassName}>(parm.PageIndex, parm.PageSize, count, data);
-        }
-
-		public async Task<{ClassName}> GetAsync(int id)
-        {
-            return await _myContext.{TableName}.FindAsync(id);
-        }
-
-		public void Add({ClassName} model)
-        {
-            _myContext.{TableName}.Add(model);
-        }
-
-        public void Delete({ClassName} model)
-        {
-            _myContext.{TableName}.Remove(model);
-        }
-
-        public void Update({ClassName} model)
-        {
-            _myContext.Entry(model).State = EntityState.Modified;
         }
     }
 }

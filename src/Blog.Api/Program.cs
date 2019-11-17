@@ -22,7 +22,7 @@ namespace Blog.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:5001");
+                    .UseUrls("http://*:5011");
                 })
                 .UseNLog();
     }

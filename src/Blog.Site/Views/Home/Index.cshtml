@@ -3,47 +3,27 @@
 
 
 }
-<div class="ui mini test modal" id="post_del_modal">
-    <div class="header">
-        <a href="">添加文章</a>
-    </div>
-</div>
-<div class="content ui column centered grid container">
-    <div class="row">
-        <div id="body-home-left" class="eleven wide column">
-            <div class="ui segment">
-                <div class="ui divided items">
-                    @if (Model.TotalItemsCount > 0 && Model.Count > 0)
-                    {
-                        foreach (var item in Model)
-                        {
-                            <div class="item">
-                                <div class="ui content">
-                                    <a class="ui header" href="/a/@item.ArticleKey"><h3>@item.Title</h3></a>
-                                    <div class="ui meta">
-                                        <i class="tags icon"></i>
-                                        <button class="ui mini button" href="/tags/Linux">Linux</button>
-                                    </div>
-                                    <div class="ui description">
-                                        @Html.Raw(item.Html)
-                                    </div>
-                                    <div class="ui extra">
-                                        <div class="right floated">22天前</div>
-                                        <div><i class="user icon"></i>阅读(59)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    }
+@*   <div class="ui mini test modal" id="post_del_modal">
+        <div class="header">
+            <a href="">添加文章</a>
+        </div>
+    </div>*@
+<div id="body-left" class="eleven wide column">
+    <div class="ui segment">
+        <div class="ui divided items">
+            @if (Model.TotalItemsCount > 0 && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
                     <div class="item">
                         <div class="ui content">
-                            <a class="ui header" href="javascript:;"><h2>VritualBox centos NAT、Host-Only网络配置</h2></a>
+                            <a class="ui header" href="/a/@item.ArticleKey"><h3>@item.Title</h3></a>
                             <div class="ui meta">
                                 <i class="tags icon"></i>
                                 <button class="ui mini button" href="/tags/Linux">Linux</button>
                             </div>
                             <div class="ui description">
-                                
+                                @Html.Raw(item.Html)
                             </div>
                             <div class="ui extra">
                                 <div class="right floated">22天前</div>
@@ -51,114 +31,130 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="divider">&nbsp;</div>
-                    <div class="ui buttons center aligned container">
-                        <a class="alink ui labeled icon button disabled" href="">
-                            <i class="left chevron icon"></i>上一页
-                        </a>
-                        <a class="alink ui right labeled icon button" page="2">下一页<i class="right chevron icon"></i></a>
+                }
+            }
+            <div class="item">
+                <div class="ui content">
+                    <a class="ui header" href="javascript:;"><h2>VritualBox centos NAT、Host-Only网络配置</h2></a>
+                    <div class="ui meta">
+                        <i class="tags icon"></i>
+                        <button class="ui mini button" href="/tags/Linux">Linux</button>
                     </div>
+                    <div class="ui description">
+
+                    </div>
+                    <div class="ui extra">
+                        <div class="right floated">22天前</div>
+                        <div><i class="user icon"></i>阅读(59)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider">&nbsp;</div>
+            <div class="ui buttons center aligned container">
+                <a class="alink ui labeled icon button disabled" href="">
+                    <i class="left chevron icon"></i>上一页
+                </a>
+                <a class="alink ui right labeled icon button" page="2">下一页<i class="right chevron icon"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="body-right" class="five wide right column">
+    <div class="profile ui raised segment">
+        <div class="ui divided items">
+            <div class="item">
+                <div class="ui tiny image">
+                    <img src="https://static.wyduang.com/images/avatar.png" class="ui tiny image">
+                </div>
+                <div class="signature middle aligned content">
+                    wyDuang
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="middle aligned content">
+                    <div class="name">文章数</div>
+                    <div class="num">300</div>
+                </div>
+                <div class="middle aligned content">
+                    <div class="name">总访问量</div>
+                    <div class="num">468105</div>
+                </div>
+                <div class="middle aligned content">
+                    <div class="name">今日访问</div>
+                    <div class="num">2044</div>
                 </div>
             </div>
         </div>
-        <div id="body-home-right" class="five wide right column">
-            <div class="profile ui raised segment">
-                <div class="ui divided items">
-                    <div class="item">
-                        <div class="ui tiny image">
-                            <img src="https://static.wyduang.com/images/avatar.png" class="ui tiny image">
-                        </div>
-                        <div class="signature middle aligned content">
-                            wyDuang
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="middle aligned content">
-                            <div class="name">文章数</div>
-                            <div class="num">300</div>
-                        </div>
-                        <div class="middle aligned content">
-                            <div class="name">总访问量</div>
-                            <div class="num">468105</div>
-                        </div>
-                        <div class="middle aligned content">
-                            <div class="name">今日访问</div>
-                            <div class="num">2044</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="ui raised segment article_category">
-                <a class="ui blue ribbon label">文章分类</a>
-                <p></p>
-                <div class="ui mini tag labels">
-                    <a class="ui mini label" href="/tags/C/C++">
-                        C/C++ 134
-                    </a>
-                    <a class="ui mini label" href="/tags/Windows">
-                        Windows 65
-                    </a>
-                    <a class="ui mini label" href="/tags/Linux">
-                        Linux 39
-                    </a>
-                    <a class="ui mini label" href="/tags/Qt">
-                        Qt 35
-                    </a>
-                    <a class="ui mini label" href="/tags/Web">
-                        Web 31
-                    </a>
-                    <a class="ui mini label" href="/tags/Node.js">
-                        Node.js 17
-                    </a>
-                    <a class="ui mini label" href="/tags/Go">
-                        Go 15
-                    </a>
-                    <a class="ui mini label" href="/tags/Javascript">
-                        Javascript 14
-                    </a>
-                    <a class="ui mini label" href="/tags/Mobile">
-                        Mobile 12
-                    </a>
-                    <a class="ui mini label" href="/tags/Database">
-                        Database 9
-                    </a>
-                    <a class="ui mini label" href="/tags/Tools">
-                        Tools 8
-                    </a>
-                    <a class="ui mini label" href="/tags/MongoDB">
-                        MongoDB 7
-                    </a>
-                    <a class="ui mini label" href="/tags/Life">
-                        Life 6
-                    </a>
-                    <a class="ui mini label" href="/tags/Tips">
-                        Tips 5
-                    </a>
-                    <a class="ui mini label" href="/tags/React">
-                        React 5
-                    </a>
-                    <a class="ui mini label" href="/tags/Shell">
-                        Shell 5
-                    </a>
-                    <a class="ui mini label" href="/tags/Design">
-                        Design 4
-                    </a>
-                    <a class="ui mini label" href="/tags/MQ">
-                        MQ 3
-                    </a>
-                    <a class="ui mini label" href="/tags/Boost">
-                        Boost 3
-                    </a>
-                    <a class="ui mini label" href="/tags/Product">
-                        Product 3
-                    </a>
-                    <a class="ui mini label" href="/tags/Java">
-                        Java 1
-                    </a>
-                </div>
-            </div>
+    </div>
+    <div class="ui raised segment article_category">
+        <a class="ui blue ribbon label">文章分类</a>
+        <p></p>
+        <div class="ui mini tag labels">
+            <a class="ui mini label" href="/tags/C/C++">
+                C/C++ 134
+            </a>
+            <a class="ui mini label" href="/tags/Windows">
+                Windows 65
+            </a>
+            <a class="ui mini label" href="/tags/Linux">
+                Linux 39
+            </a>
+            <a class="ui mini label" href="/tags/Qt">
+                Qt 35
+            </a>
+            <a class="ui mini label" href="/tags/Web">
+                Web 31
+            </a>
+            <a class="ui mini label" href="/tags/Node.js">
+                Node.js 17
+            </a>
+            <a class="ui mini label" href="/tags/Go">
+                Go 15
+            </a>
+            <a class="ui mini label" href="/tags/Javascript">
+                Javascript 14
+            </a>
+            <a class="ui mini label" href="/tags/Mobile">
+                Mobile 12
+            </a>
+            <a class="ui mini label" href="/tags/Database">
+                Database 9
+            </a>
+            <a class="ui mini label" href="/tags/Tools">
+                Tools 8
+            </a>
+            <a class="ui mini label" href="/tags/MongoDB">
+                MongoDB 7
+            </a>
+            <a class="ui mini label" href="/tags/Life">
+                Life 6
+            </a>
+            <a class="ui mini label" href="/tags/Tips">
+                Tips 5
+            </a>
+            <a class="ui mini label" href="/tags/React">
+                React 5
+            </a>
+            <a class="ui mini label" href="/tags/Shell">
+                Shell 5
+            </a>
+            <a class="ui mini label" href="/tags/Design">
+                Design 4
+            </a>
+            <a class="ui mini label" href="/tags/MQ">
+                MQ 3
+            </a>
+            <a class="ui mini label" href="/tags/Boost">
+                Boost 3
+            </a>
+            <a class="ui mini label" href="/tags/Product">
+                Product 3
+            </a>
+            <a class="ui mini label" href="/tags/Java">
+                Java 1
+            </a>
         </div>
     </div>
 </div>

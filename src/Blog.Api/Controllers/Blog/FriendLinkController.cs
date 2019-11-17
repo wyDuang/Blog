@@ -25,23 +25,35 @@ namespace Blog.Api.Controllers
     [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v1)]
     public class FriendLinkController: BaseController
     {
-        public FriendLinkController()
-        {
-
-        }
-
-        private readonly IFriendLinkRepository _tagRepository;
+        private readonly IFriendLinkRepository _friendLinkRepository;
         public FriendLinkController(
-            IFriendLinkRepository tagRepository,
             IUnitOfWork unitOfWork,
             ILogger<FriendLinkController> logger,
             IMapper mapper,
             IUrlHelper urlHelper,
             ITypeHelperService typeHelperService,
-            IPropertyMappingContainer propertyMappingContainer)
+            IPropertyMappingContainer propertyMappingContainer,
+            IFriendLinkRepository friendLinkRepository)
             : base(unitOfWork, logger, mapper, urlHelper, typeHelperService, propertyMappingContainer)
         {
-            _tagRepository = tagRepository;
+            _friendLinkRepository = friendLinkRepository;
         }
+
+        /// <summary>
+        /// 获取所有的友情链接
+        /// </summary>
+        //[AllowAnonymous]
+        [HttpGet(Name = "GetFriendLinks")]
+        public async Task<IActionResult> GetFriendLinks()
+        {
+            var allList = await _friendLinkRepository.GetListAsync(x => x.IsDeleted == 0);
+                
+            var friendLinkResources = _mapper.Map<IEnumerable<FriendLink>, IEnumerable<FriendLinkResource>>(allList);
+
+            return Ok(friendLinkResources);
+        }
+
+
+
     }
 }

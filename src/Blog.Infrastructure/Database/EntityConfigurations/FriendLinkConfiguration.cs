@@ -15,10 +15,11 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
             builder.Property(x => x.Title).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.LinkUrl).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.Avatar).HasMaxLength(150).IsRequired();
+            builder.Property(x => x.LinkUrl).HasMaxLength(512).IsRequired();
+            builder.Property(x => x.Avatar).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(200).IsRequired();
             builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
+            builder.Property(x => x.IsDeleted).HasDefaultValue(0).IsRequired();
 
             builder.ToTable(BlogDbTableNames.FriendLinks);
         }

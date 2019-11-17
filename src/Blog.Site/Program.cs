@@ -23,7 +23,7 @@ namespace Blog.Site
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:5000");
+                    .UseUrls("http://*:5010");
                 })
                 .UseNLog();
     }

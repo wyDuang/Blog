@@ -1,6 +1,5 @@
 ﻿using Blog.Core.BaseModels;
 using Blog.Core.Entities;
-using Blog.Core.Interfaces;
 using Blog.Core.QueryParameters;
 using System.Threading.Tasks;
 
