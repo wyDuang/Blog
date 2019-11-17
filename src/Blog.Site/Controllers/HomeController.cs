@@ -16,7 +16,7 @@ namespace Blog.Site.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private readonly CodeGenerator CodeGenerator;
+        //private readonly CodeGenerator CodeGenerator;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IArticleRepository _articleRepository;
         private readonly ITagRepository _tagRepository;
@@ -24,7 +24,7 @@ namespace Blog.Site.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         public HomeController(
-            CodeGenerator codeGenerator,
+            //CodeGenerator codeGenerator,
             ICategoryRepository categoryRepository,
             IArticleRepository articleRepository,
             ITagRepository tagRepository,
@@ -38,7 +38,7 @@ namespace Blog.Site.Controllers
             _logger = logger;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            CodeGenerator = codeGenerator;
+            //CodeGenerator = codeGenerator;
         }
 
         [Route("/")]
