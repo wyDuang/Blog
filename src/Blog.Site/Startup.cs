@@ -35,8 +35,8 @@ namespace Blog.Site
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CodeGenerateSettings>(Configuration.GetSection("CodeGenerateSettings"));
-            services.AddScoped<CodeGenerator>();
+            //services.Configure<CodeGenerateSettings>(Configuration.GetSection("CodeGenerateSettings"));
+            //services.AddScoped<CodeGenerator>();
 
             services.AddDbContext<MyContext>(options =>
             {

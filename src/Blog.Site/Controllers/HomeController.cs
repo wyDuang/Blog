@@ -44,7 +44,7 @@ namespace Blog.Site.Controllers
         [Route("/")]
         public async Task<IActionResult> Index(ArticleParameter articleParameter)
         {
-            CodeGenerator.GenerateTemplateCodesFromDatabase(true);
+            //CodeGenerator.GenerateTemplateCodesFromDatabase(true);
 
             var pageList = await _articleRepository.GetPageListAsync(articleParameter, null);
             return View(pageList);
