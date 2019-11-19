@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Blog.Infrastructure.Extensions
 {
@@ -86,6 +85,7 @@ namespace Blog.Infrastructure.Extensions
                 });
 
                 options.DocumentFilter<SwaggerDocumentFilter>();
+                options.OperationFilter<AddAuthTokenHeaderFilter>();
 
                 options.OperationFilter<AddResponseHeadersFilter>();
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();

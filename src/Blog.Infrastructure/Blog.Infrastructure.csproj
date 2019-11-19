@@ -31,6 +31,7 @@
   <ItemGroup>
     <Folder Include="CodeGenerator\CodeGenerateModels\" />
     <Folder Include="Database\EntityConfigurations\" />
+    <Folder Include="Filter\" />
     <Folder Include="Middlewares\" />
     <Folder Include="Services\" />
     <Folder Include="ResultModel\" />
@@ -54,7 +55,6 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0-rc1.final" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0007" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0007" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.0.0-rc8" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
   </ItemGroup>

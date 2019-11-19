@@ -33,12 +33,12 @@ namespace Blog.Infrastructure.Swagger
                 },
                 new OpenApiTag {
                     Name = "Common",
-                    Description = "通用数据接口",
+                    Description = "2、通用数据接口",
                     ExternalDocs = new OpenApiExternalDocs { Description = "Common 未开发..." }
                 },
                 new OpenApiTag {
                     Name = "Auth",
-                    Description = "JWT模式认证授权",
+                    Description = "1、JWT模式认证授权",
                     ExternalDocs = new OpenApiExternalDocs { Description = "JSON Web Token" }
                 }
                 //new OpenApiTag {
@@ -58,7 +58,7 @@ namespace Blog.Infrastructure.Swagger
                 //}
             };
 
-            swaggerDoc.Tags = tags.OrderBy(x => x.Name).ToList();
+            swaggerDoc.Tags = tags.OrderBy(x => x.Description).ToList();
         }
     }
 }

@@ -47,11 +47,6 @@ namespace Blog.Infrastructure.Resources
         public String Remark { get; set; }
 
         /// <summary>
-        /// 伪删除
-        /// </summary>
-        public SByte IsDeleted { get; set; }
-
-        /// <summary>
         /// 是否置顶
         /// </summary>
         public SByte IsTop { get; set; }

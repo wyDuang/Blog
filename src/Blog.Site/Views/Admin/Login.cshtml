@@ -119,12 +119,14 @@
                     event.preventDefault(); // [*] 如果需要使用 Ajax 提交时，防止表单自动提交
 
                     $.ajax({
-                        type: "post",
-                        url: "http://localhost:5011/login",
+                        type: 'post',
+                        url: 'http://localhost:5011/login',
                         contentType: 'application/json',
-                        data: JSON.stringify({ username: fields.username, password: password }),
+                        data: JSON.stringify(fields),
                         success: function (data, status) {
                             if (status === 'success') {
+                                console.log(data.access_token);
+
                                 window.localStorage.setItem('token', data.access_token);
                                 window.location.href = fields.rurl;
                             }

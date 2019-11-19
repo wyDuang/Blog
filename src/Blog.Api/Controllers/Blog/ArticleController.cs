@@ -136,9 +136,9 @@ namespace Blog.Api.Controllers
         /// 创建文章
         /// </summary>
         [HttpPost(Name = "CreateArticle")]
-        [RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.create+json" })]
-        [RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
-        public async Task<IActionResult> CreateArticle([FromBody] ArticleAddResource articleAddResource)
+        //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.create+json" })]
+        //[RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.wyduang.article.display+json" })]
+        public async Task<IActionResult> CreateArticle(ArticleAddResource articleAddResource)
         {
             if (null == articleAddResource) return BadRequest();
 
