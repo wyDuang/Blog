@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    string rurl = ViewBag.ReturnUrl;
 }
 <!DOCTYPE html>
 <html>
@@ -64,8 +65,8 @@
                             <input type="password" name="password" placeholder="密码">
                         </div>
                     </div>
-                    <input type="text" name="referer" style="display:none;" value="">
-                    <button type="submit" class="ui fluid large teal submit button">登录</button>
+                    @Html.Hidden("rurl", rurl)
+                    <button type="button" class="ui fluid large teal submit button">登录</button>
                     <div class="ui error message"></div>
                 </div>
             </form>
@@ -77,15 +78,23 @@
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
-    <script src="~/libs/jquery-form/jquery.form.js"></script>
     <script>
         $(document).ready(function () {
+            // [*] 自定义校验函数，返回 false 校验不通过
+            $.fn.form.settings.rules.passwordStrong = function(value) {
+                return value.length > 6;
+            };
+
             $('.ui.form').form({
                 on: 'blur',
                 fields: {
                     username: {
                         identifier: 'username',
                         rules: [
+                            {
+                                type:   'empty',
+                                prompt: '名字不能为空'
+                            },
                             {
                                 type: 'length[6]',
                                 prompt: '您的用户名输入错误，请重新输入。'
@@ -96,35 +105,34 @@
                         identifier: 'password',
                         rules: [
                             {
-                                type: 'length[6]',
-                                prompt: '您的密码输入错误，请重新输入。'
+                                type:   'empty',
+                                prompt: '名字不能为空'
+                            },
+                            {
+                                type: 'passwordStrong',
+                                prompt: '您的密码强度太弱，请重新输入。'
                             }
                         ]
                     }
                 },
-                onSuccess: function () {
-                    var username = $("input[name=username]").val();
-                    var password = $("input[name=password]").val();
+                onSuccess: function (event, fields) {
+                    event.preventDefault(); // [*] 如果需要使用 Ajax 提交时，防止表单自动提交
 
-                    $(this).ajaxSubmit({
-                        dataType: "json",
-                        type: "Post",
+                    $.ajax({
+                        type: "post",
                         url: "http://localhost:5011/login",
-                        data: { username, password },
-                        success: function (data) {
-                            console.info(data);
-
-                            //if (data.ResultCode === 0) {
-                            //    layer.msg(data.ResultMsg, { icon: 6, time: 2000 });
-                            //    $(form).resetForm();
-                            //    window.location.reload();
-                            //} else {
-                            //    layer.msg(data.ResultMsg, { icon: 5, time: 5000 });
-                            //}
-                            //$(this).resetForm();
+                        contentType: 'application/json',
+                        data: JSON.stringify({ username: fields.username, password: password }),
+                        success: function (data, status) {
+                            if (status === 'success') {
+                                window.localStorage.setItem('token', data.access_token);
+                                window.location.href = fields.rurl;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log('ERROR:' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5, time: 5000 });
                         }
                     });
-                    //return false;
                 }
             });
         });

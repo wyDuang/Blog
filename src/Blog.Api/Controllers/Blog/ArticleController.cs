@@ -177,6 +177,27 @@ namespace Blog.Api.Controllers
             return StatusCode(StatusCodes.Status409Conflict);//此Key已存在！
         }
 
+        [HttpPut("{id}", Name = "UpdateArticle")]
+        //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
+        public async Task<IActionResult> UpdateArticle(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
+        {
+            if (null == articleUpdateResource || id <= 0) return BadRequest();
+
+            if (!ModelState.IsValid)
+                return new UnprocessableEntityObjectResult(ModelState);
+
+            var article = await _articleRepository.GetAsync(id);
+            if (null == article) return NotFound();
+
+            _mapper.Map(articleUpdateResource, article);
+
+            if (!await _unitOfWork.SaveAsync())
+            {
+                throw new Exception($"更新文章 {id} 时保存失败。");
+            }
+            return NoContent();
+        }
+
         /// <summary>
         /// 根据Id删除
         /// </summary>
@@ -195,27 +216,6 @@ namespace Blog.Api.Controllers
             if (!await _unitOfWork.SaveAsync())
             {
                 throw new Exception($"执行 {id} 删除时保存失败。");
-            }
-            return NoContent();
-        }
-
-        [HttpPut("{id}", Name = "UpdateArticle")]
-        //[RequestHeaderMatchingMediaType("Content-Type", new[] { "application/vnd.wyduang.article.update+json" })]
-        public async Task<IActionResult> UpdateArticle(int id, [FromBody] ArticleUpdateResource articleUpdateResource)
-        {
-            if (null == articleUpdateResource || id <= 0) return BadRequest();
-
-            if (!ModelState.IsValid)
-                return new UnprocessableEntityObjectResult(ModelState);
-
-            var article = await _articleRepository.GetAsync(id);
-            if (null == article) return NotFound();
-
-            _mapper.Map(articleUpdateResource, article);
-
-            if (!await _unitOfWork.SaveAsync())
-            {
-                throw new Exception($"更新文章 {id} 时保存失败。");
             }
             return NoContent();
         }

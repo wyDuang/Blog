@@ -77,6 +77,11 @@ namespace Blog.Api.Controllers
             var user = _userRepository.GetUserByNameAndPwd(loginResource.Username, loginResource.Password);
             if(user != null)
             {
+                user.LastLoginIp = HttpContext.GetClientUserIp();
+                user.LastLoginTime = DateTime.Now;
+
+                _userRepository.Update(user, true);
+
                 var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
                 var expiresAt = authTime.Add(TimeSpan.FromMinutes(_jwtSettings.AccessTokenExpiresMinutes));//Exp 过期时间，在此之后不可用
 

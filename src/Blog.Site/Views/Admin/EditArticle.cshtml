@@ -19,7 +19,7 @@
 }
 <div id="body-left" style="width:100%!important;" class="eleven wide column">
     <div class="ui segment">
-        <form class="ui edit form" action="/admin/write" method="post" role="form">
+        <form class="ui edit form">
             @Html.Hidden("Id", Model.Id)
             <input id="type" type="text" name="type" style="display:none;" value="">
             <input id="selectedTag" type="text" name="tags" style="display:none;" value="">
@@ -97,7 +97,7 @@
                 <textarea name="Remark" rows="8">@Model.Remark</textarea>
             </div>
             <div class="field">
-                <button type="submit" class="ui positive right labeled icon button">
+                <button type="button" class="ui positive right labeled icon button">
                     提交<i class="checkmark icon"></i>
                 </button>
             </div>
@@ -117,22 +117,17 @@
                 theme: "dark",
                 previewTheme: "dark",
                 editorTheme: "pastel-on-dark",
-                markdown: "",
+                //markdown: "",
                 saveHTMLToTextarea: true,// 保存 HTML 到 Textarea
                 flowChart: true,             // 开启流程图支持，默认关闭
                 sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭
-                //dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
-                //dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
-                //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
-                //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
-                //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
                 codeFold: true,
                 atLink: false,
                 emoji: true,
                 editorTheme: 'default',
-                //toolbarIcons: function () {
-                //    return ["bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "hr", "link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "watch", "preview", "fullscreen", "clear"]
-                //}
+                toolbarIcons: function () {
+                    return ["bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "hr", "link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "watch", "preview", "fullscreen", "clear"]
+                }
             });
 
             $('.ui.form').form({
@@ -160,16 +155,23 @@
                         }]
                     }
                 },
-                onSuccess: function () {
+                onSuccess: function (event, fields) {
+                    event.preventDefault();
+                    console.log(fields);
+
+
+
                     var markdown = editor.getMarkdown();
                     var html = editor.getHTML();
 
                     $(this).ajaxForm({
-                        dataType: "json",
-                        data: {
-                            "html": html,
-                            "markdown": markdown,
+                        headers: {
+                            headers: {
+                                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                            }
                         },
+                        data: { markdown, html },
+                        dataType: "json",
                         clearForm: true,
                         resetForm: true,
                         success: function (data) {
@@ -183,7 +185,7 @@
                             //}
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert('ERROR:' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5, time: 5000 });
+                            console.log('ERROR:' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5, time: 5000 });
                         }
                     });
                 }
