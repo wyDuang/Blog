@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers
 {
-    [AllowAnonymous]
-    [Route("api/[action]")]
     [ApiExplorerSettings(GroupName = ApiVersionConsts.GroupName_v2)]
     public class CommonController: BaseController
     {

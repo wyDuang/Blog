@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Blog.Infrastructure.Extensions
+namespace Blog.Infrastructure.Swagger
 {
     public static class SwaggerExtensions
     {
@@ -27,7 +27,7 @@ namespace Blog.Infrastructure.Extensions
                     Version = "v1.0",
                     Title = "博客数据接口 - 接口文档",
                     Description = $"wyDuang - .Net Core 3.0 - RESTful API ",
-                    Contact = new OpenApiContact { Url = new Uri("https://wyduang.com"), Name = "110@wyduang.com", Email = "110@wyduang.com" }
+                    Contact = new OpenApiContact { Url = new Uri("https://wyduang.com"), Name = "wyDuang", Email = "110@wyduang.com" }
                 }
             },
             new SwaggerApiInfo
@@ -39,7 +39,12 @@ namespace Blog.Infrastructure.Extensions
                     Version = "v1.0",
                     Title = "其他数据接口 - 接口文档",
                     Description = $"wyDuang - .Net Core 3.0 - RESTful API ",
-                    Contact = new OpenApiContact { Name = "wyDuang", Email = "110@wyduang.com", Url = new Uri("https://wyduang.com") }
+                    Contact = new OpenApiContact { 
+                        Name = "wyDuang", 
+                        Email = "110@wyduang.com", 
+                        Url = new Uri("https://wyduang.com") 
+                    },
+                    TermsOfService = new Uri("https://wyduang.com")
                 }
             },
         };
@@ -61,11 +66,18 @@ namespace Blog.Infrastructure.Extensions
                 {
                     if (!apiDes.TryGetMethodInfo(out MethodInfo method)) return false;
 
+                    /* 使用ApiExplorerSettingsAttribute里面的GroupName进行特性标识
+                     * DeclaringType只能获取controller上的特性
+                     * 我们这里是想以action的特性为主
+                     */
+
                     var version = method.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
 
-                    if (!version.Any()) return true;
+                    if (docName == "v1" && !version.Any()) return true;
 
+                    //这里获取action的特性
                     var actionVersion = method.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
+                    
                     if (actionVersion.Any())
                         return actionVersion.Any(v => v == docName);
 
@@ -74,19 +86,19 @@ namespace Blog.Infrastructure.Extensions
 
                 var security = new OpenApiSecurityScheme
                 {
-                    Description = "JWT模式授权，请输入 Bearer[空格]{Token} 进行身份验证",
+                    Description = "JWT授权(数据将在请求头中进行传输)直接在下框中输入Bearer[空格]{Token}",
                     Name = "Authorization",//jwt默认的参数名称
                     In = ParameterLocation.Header,//jwt默认存放Authorization信息的位置(请求头中)
                     Type = SecuritySchemeType.ApiKey
                 };
                 options.AddSecurityDefinition("oauth2", security); // Token绑定到ConfigureServices
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { security, Array.Empty<string>() }
+                options.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement {
+                        { security, Array.Empty<string>() }
                 });
 
                 options.DocumentFilter<SwaggerDocumentFilter>();
-                options.OperationFilter<AddAuthTokenHeaderFilter>();
-
+                options.OperationFilter<SwaggerAuthTokenHeaderFilter>();
                 options.OperationFilter<AddResponseHeadersFilter>();
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
                 options.OperationFilter<SecurityRequirementsOperationFilter>();

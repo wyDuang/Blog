@@ -13,7 +13,7 @@ namespace Blog.Infrastructure.Swagger
     /// <summary>
     /// 控制swagger中是否需要添加accesstoken验证
     /// </summary>
-    public class AddAuthTokenHeaderFilter : IOperationFilter
+    public class SwaggerAuthTokenHeaderFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
@@ -39,7 +39,7 @@ namespace Blog.Infrastructure.Swagger
                     {
                         Name = "Authorization",
                         In = ParameterLocation.Header,//查询头正文路径formData
-                        Description = "JWT模式授权，请输入 Bearer[空格]{Token} 进行身份验证",
+                        Description = "JWT授权(数据将在请求头中进行传输)直接在下框中输入Bearer[空格]{Token}",
                         Schema = new OpenApiSchema()
                         {
                             Type = "string",

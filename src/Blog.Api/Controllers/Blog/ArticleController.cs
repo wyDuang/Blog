@@ -43,7 +43,13 @@ namespace Blog.Api.Controllers
         /// <summary>
         /// 分页获取文章
         /// </summary>
-        //[AllowAnonymous]
+        /// <param name="parameter">查询参数</param>
+        /// <param name="mediaType"></param>
+        /// <returns>返回文章List</returns>
+        /// <response code="200">返回文章List</response>
+        /// <response code="400">找不到要排序的字段/查询指定字段</response>  
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [HttpGet(Name = "GetArticles")]
         public async Task<IActionResult> GetArticles(ArticleParameter parameter, [FromHeader(Name = "Accept")] string mediaType)
         {

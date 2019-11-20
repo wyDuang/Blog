@@ -111,6 +111,18 @@
             判断是存在
             </summary>
         </member>
+        <member name="T:Blog.Api.Controllers.UploadController">
+            <summary>
+            文件上传
+            </summary>
+        </member>
+        <member name="M:Blog.Api.Controllers.UploadController.Tests(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="formFile">文件</param>
+            <returns></returns>
+        </member>
         <member name="M:Blog.Api.Controllers.SignatureController.Get(Blog.Infrastructure.Resources.SignatureResource)">
             <summary>
             艺术签名
