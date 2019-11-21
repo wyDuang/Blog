@@ -7,6 +7,10 @@ namespace Blog.Infrastructure.Resources
     public class ArticleResource
     {
         /// <summary>
+        /// 文章类型1-原，2-转，3-译
+        /// </summary>
+        public Int32 ArticleType { get; set; }
+        /// <summary>
         /// 博客key
         /// </summary>
         public string ArticleKey { get; set; }
@@ -30,6 +34,16 @@ namespace Blog.Infrastructure.Resources
         /// 创建时间
         /// </summary>
         public DateTime CreateDate { get; set; }
+
+        /// <summary>
+        /// 是否置顶
+        /// </summary>
+        public bool IsTop { get; set; }
+
+        /// <summary>
+        /// 伪删除
+        /// </summary>
+        public bool IsDeleted { get; set; }
 
         /// <summary>
         /// 博客类别Key

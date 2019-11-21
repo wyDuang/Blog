@@ -1,14 +1,6 @@
 using AutoMapper;
-using Blog.Core.Interfaces;
-using Blog.Infrastructure.CodeGenerator;
-using Blog.Infrastructure.CodeGenerator.CodeSettings;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
-using Blog.Infrastructure.Repositories;
-using Blog.Infrastructure.Resources;
-using Blog.Infrastructure.Resources.Validators;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -81,12 +73,7 @@ namespace Blog.Site
                 options.ReturnHttpNotAcceptable = true;//设为true,如果客户端请求不支持的数据格式,就会返回406
             })
                 .AddRazorRuntimeCompilation()//并且在程序启动时，需要启动运行时编译的功能
-                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);//默认CamelCase风格，首字母小写，在此将改成PascalCase风格，首字母大写
-                //.AddNewtonsoftJson(options => {
-                //    options.SerializerSettings.ContractResolver = new DefaultContractResolver(){
-                //        NamingStrategy = new DefaultNamingStrategy() 
-                //    };
-                //})
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
             services.AddAutoMapper(typeof(Startup));
 

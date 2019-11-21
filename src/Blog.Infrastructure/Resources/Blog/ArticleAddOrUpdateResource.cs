@@ -14,7 +14,7 @@ namespace Blog.Infrastructure.Resources
         /// <summary>
         /// 文章类型1-原，2-转，3-译
         /// </summary>
-        public SByte ArticleType { get; set; }
+        public Int32 ArticleType { get; set; }
 
         /// <summary>
         /// 文章Key
@@ -49,7 +49,12 @@ namespace Blog.Infrastructure.Resources
         /// <summary>
         /// 是否置顶
         /// </summary>
-        public SByte IsTop { get; set; }
+        public bool IsTop { get; set; }
+
+        /// <summary>
+        /// 伪删除
+        /// </summary>
+        public bool IsDeleted { get; set; }
 
         /// <summary>
         /// 标签

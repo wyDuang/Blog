@@ -34,6 +34,11 @@
             <summary>
             分页获取文章
             </summary>
+            <param name="parameter">查询参数</param>
+            <param name="mediaType"></param>
+            <returns>返回文章List</returns>
+            <response code="200">返回文章List</response>
+            <response code="400">找不到要排序的字段/查询指定字段</response>  
         </member>
         <member name="M:Blog.Api.Controllers.ArticleController.GetArticle(System.Int32,System.String)">
             <summary> 

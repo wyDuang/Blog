@@ -30,6 +30,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using NLog.Web;
 
 namespace Blog.Api
@@ -62,7 +64,14 @@ namespace Blog.Api
             });
 
             services.AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;// 忽略循环引用
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();//不使用驼峰
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 设置时间格式
+
+                    //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;// 如字段为null值，该字段不会返回到前端
+                })
                 .AddFluentValidation();
 
             var types = Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.GetInterfaces().Any(x => x == typeof(IValidator)));

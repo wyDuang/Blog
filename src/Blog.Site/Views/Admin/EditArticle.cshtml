@@ -21,9 +21,8 @@
 <div id="body-left" style="width:100%!important;" class="eleven wide column">
     <div class="ui segment">
         <form class="ui edit form">
-            @Html.Hidden("Id", Model.Id)
-            <input id="type" type="text" name="type" style="display:none;" value="">
-            <input id="selectedTag" type="text" name="tags" style="display:none;" value="">
+            @Html.Hidden("id", Model.Id)
+            <input type="hidden" id="selected-tag" name="selectedTag" value="">
             <div class="field">
                 <label>文章标题</label>
                 <div class="fields">
@@ -31,32 +30,12 @@
                         <input type="text" name="title" placeholder="请输入文章标题" value="@Model.Title">
                     </div>
                     <div class="two wide field">
-                        <select name="ArticleType" value="@Model.ArticleType" class="ui compact dropdown">
+                        <select name="articleType" value="@Model.ArticleType" class="ui compact dropdown">
                             <option value="0" selected>默认</option>
                             <option value="1">原</option>
                             <option value="2">转</option>
                             <option value="3">译</option>
                         </select>
-                    </div>
-                </div>
-            </div>
-            <div class="field">
-                <label>文章作者</label>
-                <div class="fields">
-                    <div class="eight wide field">
-                        <input type="text" name="author" placeholder="请输入文章作者" value="@Model.Author">
-                    </div>
-                    <div class="four wide field">
-                        <div class="ui toggle checkbox">
-                            <input type="checkbox" name="IsTop" tabindex="0" class="hidden">
-                            <label>是否置顶</label>
-                        </div>
-                    </div>
-                    <div class="four wide field">
-                        <div class="ui toggle checkbox">
-                            <input type="checkbox" name="IsDeleted" tabindex="0" class="hidden">
-                            <label>是否删除</label>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -78,12 +57,35 @@
                 </div>
             </div>
             <div class="field">
+                <label>文章作者</label>
+                <div class="fields">
+                    <div class="eight wide field">
+                        <input type="text" name="author" placeholder="请输入文章作者" value="@Model.Author">
+                    </div>
+                    <div class="four wide field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="isTop" tabindex="0" class="hidden">
+                            <label>是否置顶</label>
+                        </div>
+                    </div>
+                    <div class="four wide field">
+                        @if (Model.Id > 0)
+                        {
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="isDeleted" tabindex="0" class="hidden">
+                                <label>是否删除</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="field">
                 <label>文章标签</label>
                 @foreach (Tag item in ViewBag.TagAllList)
                 {
                     <div class="ui itemTag checked checkbox" style="margin-right:10px;">
                         <input type="checkbox">
-                        <label>@item.TagName</label>
+                        <label data-id="@item.Id">@item.TagName</label>
                     </div>
                 }
             </div>
@@ -107,116 +109,6 @@
 </div>
 
 @section scripts{
-    <script src="~/libs/jquery-form/jquery.form.js"></script>
     <script src="~/libs/editor.md/editormd.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var editor = editormd("editor", {
-                width: "100%",
-                height: "600",
-                path: "/libs/editor.md/lib/",
-                theme: "dark",
-                previewTheme: "dark",
-                editorTheme: "pastel-on-dark",
-                saveHTMLToTextarea: true,// 保存 HTML 到 Textarea
-                flowChart: true,             // 开启流程图支持，默认关闭
-                sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭
-                codeFold: true,
-                atLink: false,
-                emoji: true,
-                editorTheme: 'default',
-            });
-
-            $('.ui.form').form({
-                inline: true,
-                on: 'blur',
-                fields: {
-                    title: {
-                        identifier: 'title',
-                        rules: [
-                            {
-                                type: 'empty',
-                                prompt: '请输入文章标题'
-                            },
-                            {
-                                type: 'length[5]',
-                                prompt: '您的文章标题太短，请重新输入。'
-                            }
-                        ]
-                    },
-                    articleKey: {
-                        identifier: 'articleKey',
-                        rules: [{
-                            type: 'length[3]',
-                            prompt: '您的文章内容太短，请重新输入。'
-                        }]
-                    }
-                },
-                onSuccess: function (event, fields) {
-                    event.preventDefault();
-                    console.info(fields);
-
-                    //debugger
-
-                    //var markdown = editor.getMarkdown();
-                    //var html = editor.getHTML();
-
-                    console.log(window.localStorage.getItem('token'));
-
-                    //$.post('http://localhost:5011/articles', $.param({markdown, html})+'&'+$('#fm').serialize())
-
-                    fields.markdown = editor.getMarkdown();
-                    fields.html = editor.getHTML();
-
-                    delete fields['editor-html-code'];
-                    delete fields['editor-markdown-doc'];
-
-                    $.ajax({
-                        type: 'post',
-                        headers: {
-                            'Authorization': 'Bearer ' + window.localStorage.getItem('token')
-                        },
-                        contentType: 'application/json',
-                        cache: false,
-                        url: 'http://localhost:5011/articles',
-                        data: JSON.stringify(fields),
-                        success: function (data, status) {
-                            if (status === 'success') {
-                                console.info(data);
-
-                                //window.localStorage.setItem('token', data.access_token);
-                                //window.location.href = "/";
-                            }
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            console.log('ERROR:' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5, time: 5000 });
-                        }
-                    });
-
-                    //$(this).ajaxForm({
-                    //    headers: {
-                    //        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
-                    //    },
-                    //    data: { markdown, html },
-                    //    dataType: "json",
-                    //    clearForm: true,
-                    //    resetForm: true,
-                    //    success: function (data) {
-                    //        console.info(data);
-                    //        //if (data.ResultCode ==  = 0) {
-                    //        //    layer.msg(data.ResultMsg, { icon: 6, time: 2000 });
-                    //        //    $(form).resetForm();
-                    //        //    window.location.href = "/";
-                    //        //} else {
-                    //        //    layer.msg(data.ResultMsg, { icon: 5, time: 5000 });
-                    //        //}
-                    //    },
-                    //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    //        console.log('ERROR:' + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus, { icon: 5, time: 5000 });
-                    //    }
-                    //});
-                }
-            });
-        });
-    </script>
+    <script src="~/js/admin.js"></script>
 }
