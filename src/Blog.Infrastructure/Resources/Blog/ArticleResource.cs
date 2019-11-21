@@ -43,7 +43,7 @@ namespace Blog.Infrastructure.Resources
         /// <summary>
         /// 伪删除
         /// </summary>
-        public bool IsDeleted { get; set; }
+        public sbyte IsDeleted { get; set; }
 
         /// <summary>
         /// 博客类别Key

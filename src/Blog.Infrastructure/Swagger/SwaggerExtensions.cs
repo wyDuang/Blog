@@ -61,28 +61,28 @@ namespace Blog.Infrastructure.Swagger
                     options.OrderActionsBy(o => o.RelativePath);
                 });
 
-                //设置要展示的接口
-                options.DocInclusionPredicate((docName, apiDes) =>
-                {
-                    if (!apiDes.TryGetMethodInfo(out MethodInfo method)) return false;
+                ////设置要展示的接口
+                //options.DocInclusionPredicate((docName, apiDes) =>
+                //{
+                //    if (!apiDes.TryGetMethodInfo(out MethodInfo method)) return false;
 
-                    /* 使用ApiExplorerSettingsAttribute里面的GroupName进行特性标识
-                     * DeclaringType只能获取controller上的特性
-                     * 我们这里是想以action的特性为主
-                     */
+                //    /* 使用ApiExplorerSettingsAttribute里面的GroupName进行特性标识
+                //     * DeclaringType只能获取controller上的特性
+                //     * 我们这里是想以action的特性为主
+                //     */
 
-                    var version = method.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
+                //    var version = method.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
 
-                    if (docName == "v1" && !version.Any()) return true;
+                //    if (docName == "v1" && !version.Any()) return true;
 
-                    //这里获取action的特性
-                    var actionVersion = method.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
+                //    //这里获取action的特性
+                //    var actionVersion = method.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(m => m.GroupName);
                     
-                    if (actionVersion.Any())
-                        return actionVersion.Any(v => v == docName);
+                //    if (actionVersion.Any())
+                //        return actionVersion.Any(v => v == docName);
 
-                    return version.Any(v => v == docName);
-                });
+                //    return version.Any(v => v == docName);
+                //});
 
                 var security = new OpenApiSecurityScheme
                 {

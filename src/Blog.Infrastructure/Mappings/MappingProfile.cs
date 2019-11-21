@@ -12,7 +12,6 @@ namespace Blog.Infrastructure.Mappings
         public MappingProfile()
         {
             CreateMap<Article, ArticleResource>()
-                .ForMember(dest => dest.IsDeleted == true ? 1 : 0, opt => opt.MapFrom(src => src.IsDeleted))
                 .ForMember(dest => dest.IsTop == true ? 1 : 0, opt => opt.MapFrom(src => src.IsTop));
 
             CreateMap<ArticleResource, Article>();

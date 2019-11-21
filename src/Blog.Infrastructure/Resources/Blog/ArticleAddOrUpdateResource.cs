@@ -49,12 +49,7 @@ namespace Blog.Infrastructure.Resources
         /// <summary>
         /// 是否置顶
         /// </summary>
-        public bool IsTop { get; set; }
-
-        /// <summary>
-        /// 伪删除
-        /// </summary>
-        public bool IsDeleted { get; set; }
+        public bool IsTop { get; set; } = false;
 
         /// <summary>
         /// 标签
