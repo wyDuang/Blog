@@ -64,10 +64,10 @@ namespace Blog.Core.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
         /// <summary>
         /// 修改时间
         /// </summary>
-        public DateTime UpdateDate { get; set; }
+        public DateTime UpdateDate { get; set; } = DateTime.Now;
     }
 }

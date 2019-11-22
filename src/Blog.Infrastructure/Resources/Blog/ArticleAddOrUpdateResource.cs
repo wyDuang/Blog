@@ -9,42 +9,47 @@ namespace Blog.Infrastructure.Resources
         /// <summary>
 		/// 文章分类
 		/// </summary>
-		public Int32 CategoryId { get; set; }
+		public Int32 CategoryId { get; set; } = 1;
 
         /// <summary>
         /// 文章类型1-原，2-转，3-译
         /// </summary>
-        public Int32 ArticleType { get; set; }
+        public Int32 ArticleType { get; set; } = 1;
 
         /// <summary>
         /// 文章Key
         /// </summary>
-        public String ArticleKey { get; set; }
+        public String ArticleKey { get; set; } = "dasdadadasdasda";
 
         /// <summary>
         /// 标题
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = "dasdadadasdasda";
 
         /// <summary>
         /// 内容Html
         /// </summary>
-        public String Html { get; set; }
+        public String Html { get; set; } = "dasdadadasdasda";
 
         /// <summary>
         /// 内容Markdown
         /// </summary>
-        public String Markdown { get; set; }
+        public String Markdown { get; set; } = "dasdadadasdasda";
 
         /// <summary>
         /// 作者
         /// </summary>
-        public String Author { get; set; }
+        public String Author { get; set; } = "dasdadadasdasda";
 
         /// <summary>
         /// 备注
         /// </summary>
-        public String Remark { get; set; }
+        public String Remark { get; set; } = "dasdadadasdasda";
+
+        /// <summary>
+        /// 链接
+        /// </summary>
+        public String LinkUrl { get; set; }
 
         /// <summary>
         /// 是否置顶

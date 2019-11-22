@@ -16,7 +16,7 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
 
             builder.Property(x => x.ArticleId).HasDefaultValue(0).IsRequired();
             builder.Property(x => x.TagId).HasDefaultValue(0).IsRequired();
-            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
+            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)").HasDefaultValue(DateTime.Now);
 
             builder.ToTable(BlogDbTableNames.Article_Tags);
         }

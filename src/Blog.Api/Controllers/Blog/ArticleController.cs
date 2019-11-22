@@ -16,8 +16,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Blog.Api.Controllers
 {
@@ -72,7 +73,10 @@ namespace Blog.Api.Controllers
                     pagedList.PageCount
                 };
 
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(meta, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }));
 
                 var links = CreateLinksForArticles(parameter, pagedList.HasPrevious, pagedList.HasNext);
 
@@ -107,7 +111,10 @@ namespace Blog.Api.Controllers
                     nextPageLink
                 };
 
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(meta, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }));
 
                 return Ok(articleResources.ToDynamicIEnumerable(parameter.Fields));
             }
@@ -138,6 +145,7 @@ namespace Blog.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         /// <summary>
         /// 创建文章
         /// </summary>

@@ -4,11 +4,11 @@ using Blog.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers
@@ -36,7 +36,8 @@ namespace Blog.Api.Controllers
             var api = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&pid=hp&FORM=BEHPTB";
             using var httpClient = _httpClient.CreateClient();
             var json = await httpClient.GetStringAsync(api);
-            var obj = JsonSerializer.Deserialize<dynamic>(json);
+
+            var obj = JsonConvert.DeserializeObject<dynamic>(json);
             var url = "https://cn.bing.com" + obj["images"][0]["url"].ToString();
             var bytes = await httpClient.GetByteArrayAsync(url);
 

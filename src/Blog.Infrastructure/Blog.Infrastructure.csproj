@@ -31,7 +31,6 @@
   <ItemGroup>
     <Folder Include="CodeGenerator\CodeGenerateModels\" />
     <Folder Include="Database\EntityConfigurations\" />
-    <Folder Include="Filter\" />
     <Folder Include="Middlewares\" />
     <Folder Include="Services\" />
     <Folder Include="ResultModel\" />

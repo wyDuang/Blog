@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Blog.Core.Entities;
+using System;
 
 namespace Blog.Infrastructure.Database.EntityConfigurations
 {
@@ -13,7 +14,7 @@ namespace Blog.Infrastructure.Database.EntityConfigurations
 
             builder.Property(x => x.ModuleId).HasDefaultValue(0).IsRequired();
             builder.Property(x => x.PermissionId).HasDefaultValue(0).IsRequired();
-            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)");
+            builder.Property(x => x.CreateDate).HasColumnType("datetime(6)").HasDefaultValue(DateTime.Now);
 
             builder.ToTable(BlogDbTableNames.ModulePermissions);
         }

@@ -11,7 +11,8 @@ namespace Blog.Core.Entities
     {
         public Int32 ArticleId { get; set; }
         public Int32 ParentId { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime UpdateDate { get; set; } = DateTime.Now;
         public String UserName { get; set; }
         public String MobilePhone { get; set; }
         public String Email { get; set; }

@@ -40,14 +40,21 @@ namespace Blog.Infrastructure.Resources.Validators
                 .WithName("作者")
                 .WithMessage("required|{{PropertyName}是必填的")
                 .MaximumLength(50)
-                .WithMessage("maxlength|{PropertyName}的最小长度是{MaxLength}");
+                .WithMessage("maxlength|{PropertyName}的最大长度是{MaxLength}");
 
             RuleFor(x => x.Remark)
                 .NotNull()
                 .WithName("备注")
                 .WithMessage("required|{{PropertyName}是必填的")
                 .MaximumLength(1000)
-                .WithMessage("maxlength|{PropertyName}的最小长度是{MaxLength}");
+                .WithMessage("maxlength|{PropertyName}的最大长度是{MaxLength}");
+
+            RuleFor(x => x.LinkUrl)
+                .NotEmpty()
+                .WithName("链接")
+                .WithMessage("required|{{PropertyName}是必填的")
+                .MaximumLength(512)
+                .WithMessage("maxlength|{PropertyName}的最大长度是{MaxLength}");
         }
     }
 }

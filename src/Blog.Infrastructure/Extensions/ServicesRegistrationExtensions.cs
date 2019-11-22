@@ -1,11 +1,22 @@
-﻿using Blog.Core.Interfaces;
+﻿using AutoMapper;
+using Blog.Core.Interfaces;
+using Blog.Infrastructure.AutoMapper;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Repositories;
+using Blog.Infrastructure.Resources;
 using Blog.Infrastructure.Resources.PropertyMappings;
+using Blog.Infrastructure.Resources.Validators;
 using Blog.Infrastructure.Services;
+using FluentValidation;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Blog.Infrastructure.Extensions
 {
@@ -13,22 +24,38 @@ namespace Blog.Infrastructure.Extensions
     {
         public static void AddMyServices(this IServiceCollection services)
         {
-            //services.TryAddTransient<IValidator<CityAddResource>, CityAddOrUpdateResourceValidator<CityAddResource>>();
-            //services.TryAddTransient<IValidator<CityUpdateResource>, CityUpdateResourceValidator>();
-            //services.TryAddTransient<IValidator<CountryAddResource>, CountryAddResourceValidator>();
+            services.AddAutoMapper(typeof(AutoMapperConfig));
+            AutoMapperConfig.RegisterMappings();
 
-            //services.TryAddTransient<IValidator<ProductAddResource>, ProductAddOrUpdateResourceValidator<ProductAddResource>>();
-            //services.TryAddTransient<IValidator<ProductUpdateResource>, ProductAddOrUpdateResourceValidator<ProductUpdateResource>>();
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.GetInterfaces().Any(x => x == typeof(IValidator)));
+            foreach (var type in types)
+            {
+                if (type.BaseType != null)
+                {
+                    var genericType = typeof(IValidator<>).MakeGenericType(type.BaseType.GenericTypeArguments[0]);
+                    services.AddTransient(genericType, type);
+                }
+            }
+
+            //services.TryAddTransient<IValidator<ArticleAddResource>, ArticleAddOrUpdateResourceValidator<ArticleAddResource>>();
+            //services.TryAddTransient<IValidator<ArticleUpdateResource>, ArticleAddOrUpdateResourceValidator<ArticleUpdateResource>>();
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IUrlHelper>(factory =>
+            {
+                var actionContext = factory.GetService<IActionContextAccessor>().ActionContext;
+                return new UrlHelper(actionContext);
+            });
 
             var propertyMappingContainer = new PropertyMappingContainer();
             propertyMappingContainer.Register<ArticlePropertyMapping>();
-            //propertyMappingContainer.Register<ProductPropertyMapping>();
 
             services.TryAddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
             services.TryAddTransient<ITypeHelperService, TypeHelperService>();
 
             services.TryAddScoped(typeof(IRepositoryBase<>), typeof(EFRepository<>));
-
             services.TryAddScoped<IUnitOfWork, UnitOfWork>();
 
             services.TryAddScoped<IUserRepository, UserRepository>();

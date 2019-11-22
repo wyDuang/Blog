@@ -5,12 +5,11 @@ using System.Text;
 using AutoMapper;
 using Blog.Core.Interfaces;
 using Blog.Core.SettingModels;
+using Blog.Infrastructure.AutoMapper;
 using Blog.Infrastructure.Database;
 using Blog.Infrastructure.Extensions;
-using Blog.Infrastructure.Repositories;
-using Blog.Infrastructure.Resources;
+using Blog.Infrastructure.Filter;
 using Blog.Infrastructure.Resources.PropertyMappings;
-using Blog.Infrastructure.Resources.Validators;
 using Blog.Infrastructure.Services;
 using Blog.Infrastructure.Swagger;
 using FluentValidation;
@@ -63,26 +62,19 @@ namespace Blog.Api
                 options.AppendTrailingSlash = false; //true：URL最后面默认加斜杠
             });
 
-            services.AddControllers()
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;// 忽略循环引用
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();//不使用驼峰
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 设置时间格式
-
-                    //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;// 如字段为null值，该字段不会返回到前端
-                })
-                .AddFluentValidation();
-
-            var types = Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.GetInterfaces().Any(x => x == typeof(IValidator)));
-            foreach (var type in types)
+            services.AddControllers(options => 
             {
-                if (type.BaseType != null)
-                {
-                    var genericType = typeof(IValidator<>).MakeGenericType(type.BaseType.GenericTypeArguments[0]);
-                    services.AddTransient(genericType, type);
-                }
-            }
+                options.Filters.Add(typeof(GlobalExceptionsFilter));
+            })
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;// 忽略循环引用
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();//不使用驼峰
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 设置时间格式
+
+                //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;// 如字段为null值，该字段不会返回到前端
+            })
+            .AddFluentValidation();
 
             services.AddSwagger();
             services.AddAuthentication(options =>
@@ -113,21 +105,6 @@ namespace Blog.Api
                            .AllowAnyMethod()
                            .AllowAnyHeader());//.AllowCredentials()//指定处理cookie;
             });
-
-            services.AddAutoMapper(typeof(Startup));
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddHttpContextAccessor();
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<IUrlHelper>(factory =>
-            {
-                var actionContext = factory.GetService<IActionContextAccessor>().ActionContext;
-                return new UrlHelper(actionContext);
-            });
-
-            var propertyMappingContainer = new PropertyMappingContainer();
-            propertyMappingContainer.Register<ArticlePropertyMapping>();
-            services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
-            services.AddTransient<ITypeHelperService, TypeHelperService>();
 
             services.AddMyServices();
         }

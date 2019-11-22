@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -18,7 +19,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers
@@ -184,7 +184,7 @@ namespace Blog.Api.Controllers
                 return Unauthorized();//参数access_token无效
 
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var userResource = JsonSerializer.Deserialize<GitHubUserResource>(content);
+            var userResource = JsonConvert.DeserializeObject<GitHubUserResource>(content);
             if (null == userResource)
                 return NotFound();//github user资源不存在
 

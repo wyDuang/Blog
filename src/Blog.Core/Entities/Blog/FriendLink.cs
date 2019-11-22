@@ -28,7 +28,7 @@ namespace Blog.Core.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
         /// <summary>
         /// 伪删除
         /// </summary>

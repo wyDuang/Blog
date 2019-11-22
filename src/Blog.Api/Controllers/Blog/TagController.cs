@@ -12,10 +12,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Blog.Api.Controllers.Blog
@@ -64,7 +65,10 @@ namespace Blog.Api.Controllers.Blog
                     pagedList.PageCount
                 };
 
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(meta, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }));
 
                 var links = CreateLinks(parameter, pagedList.HasPrevious, pagedList.HasNext);
 
@@ -99,7 +103,10 @@ namespace Blog.Api.Controllers.Blog
                     nextPageLink
                 };
 
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(meta));
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(meta, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }));
 
                 return Ok(tagResources.ToDynamicIEnumerable(parameter.Fields));
             }

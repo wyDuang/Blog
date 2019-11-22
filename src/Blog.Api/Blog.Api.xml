@@ -45,11 +45,6 @@
             根据ID获取一篇文章
             </summary>
         </member>
-        <member name="M:Blog.Api.Controllers.ArticleController.CreateArticle(Blog.Infrastructure.Resources.ArticleAddResource)">
-            <summary>
-            创建文章
-            </summary>
-        </member>
         <member name="M:Blog.Api.Controllers.ArticleController.IsExistArticle(System.String)">
             <summary>
             根据key判断是否存在

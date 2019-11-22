@@ -80,7 +80,7 @@ namespace Blog.Infrastructure.CodeGenerator
                     //GenerateIServices(table, isCoveredExsited);
                     //GenerateServices(table, isCoveredExsited);
                 }
-                GenerateDBContext(tables, isCoveredExsited);
+                //GenerateDBContext(tables, isCoveredExsited);
             }
         }
 
@@ -225,12 +225,24 @@ namespace Blog.Infrastructure.CodeGenerator
             var fullPath = dbContextPath + Delimiter + table.ClassName + "Configuration.cs";
             if (File.Exists(fullPath) && !isCoveredExsited) return;
 
-            //var sb = new StringBuilder();
-            //sb.AppendLine();
+            var sb = new StringBuilder();
+            sb.AppendLine();
+
+            foreach (var column in table.Columns)
+            {
+                if (column.CSharpType.ToLower() == "string")
+                {
+                    sb.AppendLine($"\t\t\t\tentity.Property(x => x.{column.ColName}).HasDefaultValue(\"\").IsRequired();");
+                }
+                else if (column.CSharpType.ToLower() == "datetime")
+                {
+                    sb.AppendLine($"\t\t\t\tentity.Property(x => x.{column.ColName}).HasDefaultValue(DateTime.Now).IsRequired();");
+                }
+            }
 
             var content = ReadTemplate("ConfigurationTemplate.txt");
             content = content.Replace("{TemplateNamespace}", _options.DbContextNamespace)
-                .Replace("{ClassName}", table.ClassName);
+                .Replace("{ClassName}", table.ClassName).Replace("{TemplateColumns}", sb.ToString());
 
             WriteAndSave(fullPath, content);
         }

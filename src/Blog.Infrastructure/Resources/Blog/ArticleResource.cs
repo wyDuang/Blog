@@ -41,11 +41,6 @@ namespace Blog.Infrastructure.Resources
         public bool IsTop { get; set; }
 
         /// <summary>
-        /// 伪删除
-        /// </summary>
-        public sbyte IsDeleted { get; set; }
-
-        /// <summary>
         /// 博客类别Key
         /// </summary>
         public string CategoryName { get; set; }
