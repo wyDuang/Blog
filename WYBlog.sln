@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.Domain", "src\WYBlog.Domain\WYBlog.Domain.csproj", "{DE012ACF-4D26-4907-BCFE-49394D5ED537}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.Domain.Shared", "src\WYBlog.Domain.Shared\WYBlog.Domain.Shared.csproj", "{16DFBF85-CCB5-42D5-B048-C96FFF572465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Application", "src\WYBlog.Application\WYBlog.Application.csproj", "{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Application.Contracts", "src\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj", "{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.EntityFrameworkCore", "src\WYBlog.EntityFrameworkCore\WYBlog.EntityFrameworkCore.csproj", "{BE9675C6-F8C4-48C5-B601-DF425E08F605}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE012ACF-4D26-4907-BCFE-49394D5ED537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE012ACF-4D26-4907-BCFE-49394D5ED537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE012ACF-4D26-4907-BCFE-49394D5ED537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE012ACF-4D26-4907-BCFE-49394D5ED537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16DFBF85-CCB5-42D5-B048-C96FFF572465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DFBF85-CCB5-42D5-B048-C96FFF572465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DFBF85-CCB5-42D5-B048-C96FFF572465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DFBF85-CCB5-42D5-B048-C96FFF572465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE012ACF-4D26-4907-BCFE-49394D5ED537} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{16DFBF85-CCB5-42D5-B048-C96FFF572465} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{8DCB5E48-8BED-445E-B52D-B68ACF5235F3} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{BE9675C6-F8C4-48C5-B601-DF425E08F605} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {304352D5-ABB5-4A08-B8E4-41C1F143B3D0}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="3.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj" />
+    <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
