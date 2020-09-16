@@ -1,8 +1,6 @@
-﻿using Volo.Abp.Domain.Entities;
-
-namespace WYBlog.Entities
+﻿namespace WYBlog.Dtos
 {
-    public class Tag : Entity<int>
+    public class TagDto
     {
         /// <summary>
         /// 标签名称

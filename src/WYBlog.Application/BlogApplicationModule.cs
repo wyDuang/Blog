@@ -1,10 +1,12 @@
-﻿using Volo.Abp.Modularity;
+﻿using Volo.Abp.AutoMapper;
+using Volo.Abp.Modularity;
 
 namespace WYBlog
 {
     [DependsOn(
         typeof(BlogDomainModule),
-        typeof(BlogApplicationContractsModule)
+        typeof(BlogApplicationContractsModule),
+        typeof(AbpAutoMapperModule)
         )]
     public class BlogApplicationModule : AbpModule
     {

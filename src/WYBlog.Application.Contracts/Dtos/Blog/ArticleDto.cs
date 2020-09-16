@@ -1,12 +1,12 @@
 ﻿using System;
-using Volo.Abp.Domain.Entities;
+using WYBlog.Enums;
 
-namespace WYBlog.Entities
+namespace WYBlog.Dtos
 {
     /// <summary>
     /// 文章表
     /// </summary>
-    public class Article : AggregateRoot<int>
+    public class ArticleDto
     {
         /// <summary>
 		/// 文章分类
@@ -16,7 +16,7 @@ namespace WYBlog.Entities
         /// <summary>
         /// 文章类型
         /// </summary>
-        public sbyte ArticleType { get; set; }
+        public ArticleTypeEnum ArticleType { get; set; }
 
         /// <summary>
         /// 文章Key

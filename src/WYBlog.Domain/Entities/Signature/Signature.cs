@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Volo.Abp.Domain.Entities;
 
 namespace WYBlog.Entities
@@ -18,7 +16,7 @@ namespace WYBlog.Entities
         /// <summary>
         /// 签名类型
         /// </summary>
-        public int Type { get; set; }
+        public sbyte Type { get; set; }
 
         /// <summary>
         /// 返回签名地址
@@ -33,6 +31,6 @@ namespace WYBlog.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreationTime { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

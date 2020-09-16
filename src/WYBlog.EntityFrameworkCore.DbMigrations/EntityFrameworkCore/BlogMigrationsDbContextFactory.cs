@@ -1,21 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WYBlog.EntityFrameworkCore
 {
-    public class BlogMigrationsDbContextFactory: IDesignTimeDbContextFactory<BlogMigrationsDbContext>
+    public class BlogMigrationsDbContextFactory : IDesignTimeDbContextFactory<BlogMigrationsDbContext>
     {
         public BlogMigrationsDbContext CreateDbContext(string[] args)
         {
-            //BookStoreEfCoreEntityExtensionMappings.Configure();
-
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<BlogMigrationsDbContext>()

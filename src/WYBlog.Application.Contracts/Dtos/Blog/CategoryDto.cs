@@ -1,8 +1,6 @@
-﻿using Volo.Abp.Domain.Entities;
-
-namespace WYBlog.Entities
+﻿namespace WYBlog.Dtos
 {
-    public class Category : Entity<int>
+    public class CategoryDto
     {
         /// <summary>
         /// 分类名称

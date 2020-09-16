@@ -1,9 +1,11 @@
-﻿using Volo.Abp.Modularity;
+﻿using Volo.Abp.FluentValidation;
+using Volo.Abp.Modularity;
 
 namespace WYBlog
 {
     [DependsOn(
-        typeof(BlogDomainSharedModule)
+        typeof(BlogDomainSharedModule),
+        typeof(AbpFluentValidationModule)
         )]
     public class BlogApplicationContractsModule : AbpModule
     {

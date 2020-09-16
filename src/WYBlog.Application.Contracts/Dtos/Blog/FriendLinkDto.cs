@@ -1,9 +1,8 @@
 ﻿using System;
-using Volo.Abp.Domain.Entities;
 
-namespace WYBlog.Entities
+namespace WYBlog.Dtos
 {
-    public class FriendLink : Entity<int>
+    public class FriendLinkDto
     {
         /// <summary>
         /// 标题
