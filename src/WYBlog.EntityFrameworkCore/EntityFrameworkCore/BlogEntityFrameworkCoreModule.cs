@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Modularity;
 
-namespace WYBlog
+namespace WYBlog.EntityFrameworkCore
 {
     public class BlogEntityFrameworkCoreModule : AbpModule
     {

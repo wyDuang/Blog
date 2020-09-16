@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace WYBlog
+namespace WYBlog.EntityFrameworkCore
 {
-    [ConnectionStringName("Default")]
-    public class BlogDbContext : AbpDbContext<BlogDbContext>
+    public class BlogMigrationsDbContext : AbpDbContext<BlogMigrationsDbContext>
     {
-        public BlogDbContext(DbContextOptions<BlogDbContext> options)
+        public BlogMigrationsDbContext(DbContextOptions<BlogMigrationsDbContext> options)
             : base(options)
         {
         }
@@ -15,8 +13,6 @@ namespace WYBlog
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ConfigureBlog();
         }
     }
 }

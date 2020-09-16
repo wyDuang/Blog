@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp;
 
-namespace WYBlog
+namespace WYBlog.EntityFrameworkCore
 {
     public static class BlogDbContextModelCreatingExtensions
     {

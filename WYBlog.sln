@@ -9,11 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF7ED3F0-154
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.Domain.Shared", "src\WYBlog.Domain.Shared\WYBlog.Domain.Shared.csproj", "{16DFBF85-CCB5-42D5-B048-C96FFF572465}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Application", "src\WYBlog.Application\WYBlog.Application.csproj", "{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.Application", "src\WYBlog.Application\WYBlog.Application.csproj", "{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Application.Contracts", "src\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj", "{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.Application.Contracts", "src\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj", "{8DCB5E48-8BED-445E-B52D-B68ACF5235F3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.EntityFrameworkCore", "src\WYBlog.EntityFrameworkCore\WYBlog.EntityFrameworkCore.csproj", "{BE9675C6-F8C4-48C5-B601-DF425E08F605}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.EntityFrameworkCore.DbMigrations", "src\WYBlog.EntityFrameworkCore.DbMigrations\WYBlog.EntityFrameworkCore.DbMigrations.csproj", "{54EF1998-E940-4ECE-B652-92761DB4FA44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.DbMigrator", "src\WYBlog.DbMigrator\WYBlog.DbMigrator.csproj", "{F9D7F11B-C0B3-497D-960C-C660560DED43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,14 @@ Global
 		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE9675C6-F8C4-48C5-B601-DF425E08F605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54EF1998-E940-4ECE-B652-92761DB4FA44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54EF1998-E940-4ECE-B652-92761DB4FA44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54EF1998-E940-4ECE-B652-92761DB4FA44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54EF1998-E940-4ECE-B652-92761DB4FA44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D7F11B-C0B3-497D-960C-C660560DED43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D7F11B-C0B3-497D-960C-C660560DED43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D7F11B-C0B3-497D-960C-C660560DED43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D7F11B-C0B3-497D-960C-C660560DED43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +63,8 @@ Global
 		{05EDE6B8-71D8-4B4D-BBC8-0D10D84D84CC} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 		{8DCB5E48-8BED-445E-B52D-B68ACF5235F3} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 		{BE9675C6-F8C4-48C5-B601-DF425E08F605} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{54EF1998-E940-4ECE-B652-92761DB4FA44} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{F9D7F11B-C0B3-497D-960C-C660560DED43} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {304352D5-ABB5-4A08-B8E4-41C1F143B3D0}
