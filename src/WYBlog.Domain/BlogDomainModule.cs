@@ -2,7 +2,9 @@
 
 namespace WYBlog
 {
-    [DependsOn(typeof(BlogDomainSharedModule))]
+    [DependsOn(
+        typeof(BlogDomainSharedModule)
+        )]
     public class BlogDomainModule : AbpModule
     {
     }

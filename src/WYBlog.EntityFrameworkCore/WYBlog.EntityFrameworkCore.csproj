@@ -6,4 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="3.1.2" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
+  </ItemGroup>
 </Project>

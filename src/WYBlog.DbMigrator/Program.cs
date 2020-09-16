@@ -1,12 +1,38 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Events;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace WYBlog
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
+#if DEBUG
+                .MinimumLevel.Override("WYBlog", LogEventLevel.Debug)
+#else
+                .MinimumLevel.Override("WYBlog", LogEventLevel.Information)
+#endif
+                .Enrich.FromLogContext()
+                .WriteTo.File(Path.Combine(Directory.GetCurrentDirectory(), "Logs/logs.txt"))
+                .WriteTo.Console()
+                .CreateLogger();
+
+            await CreateHostBuilder(args).RunConsoleAsync();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddHostedService<DbMigratorHostedService>();
+                });
     }
 }

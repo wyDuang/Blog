@@ -2,6 +2,9 @@
 
 namespace WYBlog
 {
+    [DependsOn(
+        typeof(BlogDomainSharedModule)
+        )]
     public class BlogApplicationContractsModule : AbpModule
     {
     }
