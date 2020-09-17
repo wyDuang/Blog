@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WYBlog.Entities;
 
-namespace WYBlog.EntityFrameworkCore.EntityConfigurations
+namespace WYBlog.EntityFrameworkCore.EntityTypeConfigurations
 {
-    public class TagConfiguration : IEntityTypeConfiguration<Tag>
+    public class TagEntityTypeConfiguration : IEntityTypeConfiguration<Tag>
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {

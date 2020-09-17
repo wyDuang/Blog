@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using WYBlog.Entities;
 
-namespace WYBlog.EntityFrameworkCore.EntityConfigurations
+namespace WYBlog.EntityFrameworkCore.EntityTypeConfigurations
 {
-    public class FriendLinkConfiguration : IEntityTypeConfiguration<FriendLink>
+    public class FriendLinkEntityTypeConfiguration : IEntityTypeConfiguration<FriendLink>
     {
         public void Configure(EntityTypeBuilder<FriendLink> builder)
         {

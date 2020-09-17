@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using WYBlog.Entities;
 
-namespace WYBlog.EntityFrameworkCore.EntityConfigurations
+namespace WYBlog.EntityFrameworkCore.EntityTypeConfigurations
 {
-    public class GuestbookConfiguration : IEntityTypeConfiguration<GuestBook>
+    public class GuestbookEntityTypeConfiguration : IEntityTypeConfiguration<GuestBook>
     {
         public void Configure(EntityTypeBuilder<GuestBook> builder)
         {

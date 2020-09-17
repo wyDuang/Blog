@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using WYBlog.Entities;
 
-namespace WYBlog.EntityFrameworkCore.EntityConfigurations
+namespace WYBlog.EntityFrameworkCore.EntityTypeConfigurations
 {
-    public class ArticleConfiguration : IEntityTypeConfiguration<Article>
+    public class ArticleEntityTypeConfiguration : IEntityTypeConfiguration<Article>
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
