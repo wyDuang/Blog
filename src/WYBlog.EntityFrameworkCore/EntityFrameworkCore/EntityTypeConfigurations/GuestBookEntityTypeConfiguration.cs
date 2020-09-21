@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using WYBlog.Entities;
 
-namespace WYBlog.EntityFrameworkCore.EntityTypeConfigurations
+namespace WYBlog.EntityFrameworkCore
 {
     public class GuestbookEntityTypeConfiguration : IEntityTypeConfiguration<GuestBook>
     {
