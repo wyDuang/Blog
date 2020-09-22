@@ -20,7 +20,7 @@
     <PackageReference Include="Volo.Abp.Autofac" Version="3.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
+    <ProjectReference Include="..\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj" />
     <ProjectReference Include="..\WYBlog.EntityFrameworkCore.DbMigrations\WYBlog.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>
 

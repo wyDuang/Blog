@@ -2,10 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
@@ -18,17 +14,26 @@ namespace WYBlog
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
+        typeof(BlogHttpApiModule),
         typeof(BlogApplicationModule),
         typeof(BlogEntityFrameworkCoreModule),
         typeof(BlogEntityFrameworkCoreDbMigrationsModule)
         )]
-    public class BlogApiModule:AbpModule
+    public class BlogHttpApiHostModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            Configure<AbpAspNetCoreMvcOptions>(options => {
-                options.ConventionalControllers.Create(typeof(ArticleService).Assembly);
+            Configure<AbpAspNetCoreMvcOptions>(options =>
+            {
+                options.ConventionalControllers
+                    .Create(typeof(BlogApplicationModule).Assembly, opts =>
+                    {
+                        opts.TypePredicate = type => { return false; };
+                    });
             });
+
+            // Http请求
+            context.Services.AddHttpClient();
 
             ConfigureSwaggerServices(context.Services);
         }
