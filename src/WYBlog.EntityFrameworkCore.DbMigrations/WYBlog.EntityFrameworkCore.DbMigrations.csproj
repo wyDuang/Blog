@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20200921110946_init_db.cs" />
+    <Compile Remove="Migrations\20200921110946_init_db.Designer.cs" />
+    <Compile Remove="Migrations\20200921111501_init_db1.cs" />
+    <Compile Remove="Migrations\20200921111501_init_db1.Designer.cs" />
+    <Compile Remove="Migrations\20200922022805_Initial.cs" />
+    <Compile Remove="Migrations\20200922022805_Initial.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.EntityFrameworkCore\WYBlog.EntityFrameworkCore.csproj" />

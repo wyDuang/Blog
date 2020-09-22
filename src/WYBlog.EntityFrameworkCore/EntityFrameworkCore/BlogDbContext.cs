@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using WYBlog.Entities;
@@ -26,8 +25,7 @@ namespace WYBlog.EntityFrameworkCore
         {
             base.OnModelCreating(modelBuilder);
 
-            // 批量注入EntityTypeConfiguration
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ConfigureBlog();
         }
     }
 }

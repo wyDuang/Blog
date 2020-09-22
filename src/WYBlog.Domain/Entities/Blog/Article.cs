@@ -6,7 +6,7 @@ namespace WYBlog.Entities
     /// <summary>
     /// 文章表
     /// </summary>
-    public class Article : AggregateRoot<int>
+    public class Article : Entity<int>
     {
         /// <summary>
 		/// 文章分类
