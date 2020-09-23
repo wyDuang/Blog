@@ -8,7 +8,7 @@ namespace WYBlog.EntityFrameworkCore
     {
         public void Configure(EntityTypeBuilder<ArticleTag> builder)
         {
-            builder.ToTable(BlogConsts.DbTablePrefix + BlogDbTableConsts.ArticleTags);
+            builder.ToTable(BlogDbTableConsts.ArticleTags);
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.ArticleId).HasDefaultValue(0).IsRequired();

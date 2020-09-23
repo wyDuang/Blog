@@ -28,12 +28,10 @@ namespace WYBlog
                 options.ConventionalControllers
                     .Create(typeof(BlogApplicationModule).Assembly, opts =>
                     {
-                        opts.TypePredicate = type => { return false; };
+                        opts.RootPath = "appp";
+                        //opts.TypePredicate = type => { return false; };
                     });
             });
-
-            // Http请求
-            context.Services.AddHttpClient();
 
             ConfigureSwaggerServices(context.Services);
         }

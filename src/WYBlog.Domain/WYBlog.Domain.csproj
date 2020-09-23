@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>H:\GithubProjects\wyDuang\Blog\src\WYBlog.HttpApi.Host\Resources\WYBlog.Domain.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="3.1.2" />
   </ItemGroup>

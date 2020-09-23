@@ -9,6 +9,7 @@ using WYBlog.Entities;
 
 namespace WYBlog.Services
 {
+    [RemoteService(IsEnabled = false)]
     public class ArticleService : ApplicationService, IArticleService
     {
         private readonly IRepository<Article> _repository;

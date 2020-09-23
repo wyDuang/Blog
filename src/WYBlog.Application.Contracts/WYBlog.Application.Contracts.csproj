@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>H:\GithubProjects\wyDuang\Blog\src\WYBlog.HttpApi.Host\Resources\WYBlog.Application.Contracts.xml</DocumentationFile>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="3.1.2" />

@@ -8,7 +8,7 @@ namespace WYBlog.EntityFrameworkCore
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.ToTable(BlogConsts.DbTablePrefix + BlogDbTableConsts.Categories);
+            builder.ToTable(BlogDbTableConsts.Categories);
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.CategoryKey).HasMaxLength(32).HasDefaultValue("").IsRequired();

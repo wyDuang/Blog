@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WYBlog.Application.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:WYBlog.Dtos.ArticleDto">
+            <summary>
+            文章表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.CategoryId">
+            <summary>
+            文章分类
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.ArticleType">
+            <summary>
+            文章类型
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.ArticleKey">
+            <summary>
+            文章Key
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.Html">
+            <summary>
+            内容Html
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.Markdown">
+            <summary>
+            内容Markdown
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.LinkUrl">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.ClickCount">
+            <summary>
+            点击数量
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.CommentCount">
+            <summary>
+            评论数量
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.IsTop">
+            <summary>
+            是否置顶
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.ArticleDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.CategoryDto.CategoryName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.CategoryDto.CategoryKey">
+            <summary>
+            url的key值
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.CategoryDto.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.FriendLinkDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.FriendLinkDto.LinkUrl">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.FriendLinkDto.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.FriendLinkDto.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.FriendLinkDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.FriendLinkDto.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="T:WYBlog.Dtos.GuestBookDto">
+            <summary>
+            留言表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.ArticleId">
+            <summary>
+            文章Id
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.ArticleTitle">
+            <summary>
+            文章标题
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.ParentId">
+            <summary>
+            父Id
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.MobilePhone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.CreateTime">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.GuestBookDto.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.TagDto.TagName">
+            <summary>
+            标签名称
+            </summary>
+        </member>
+        <member name="P:WYBlog.Dtos.TagDto.TagKey">
+            <summary>
+            标签Key
+            </summary>
+        </member>
+    </members>
+</doc>

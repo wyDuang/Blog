@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WYBlog.HttpApi</name>
+    </assembly>
+    <members>
+        <member name="P:WYBlog.TestModel.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:WYBlog.TestModel.BirthTime">
+            <summary>
+            出生日期
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -9,7 +9,7 @@ namespace WYBlog.EntityFrameworkCore
     {
         public void Configure(EntityTypeBuilder<FriendLink> builder)
         {
-            builder.ToTable(BlogConsts.DbTablePrefix + BlogDbTableConsts.FriendLinks);
+            builder.ToTable(BlogDbTableConsts.FriendLinks);
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 

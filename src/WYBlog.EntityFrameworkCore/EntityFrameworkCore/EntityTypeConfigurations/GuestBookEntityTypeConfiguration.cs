@@ -9,7 +9,7 @@ namespace WYBlog.EntityFrameworkCore
     {
         public void Configure(EntityTypeBuilder<GuestBook> builder)
         {
-            builder.ToTable(BlogConsts.DbTablePrefix + BlogDbTableConsts.GuestBooks);
+            builder.ToTable(BlogDbTableConsts.GuestBooks);
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.ParentId).HasDefaultValue(0).IsRequired();

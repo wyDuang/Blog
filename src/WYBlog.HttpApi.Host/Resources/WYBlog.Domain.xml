@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WYBlog.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:WYBlog.Configurations.AppSettings">
+            <summary>
+            appsettings.json配置文件数据读取类
+            </summary>
+        </member>
+        <member name="F:WYBlog.Configurations.AppSettings._config">
+            <summary>
+            配置文件的根节点
+            </summary>
+        </member>
+        <member name="M:WYBlog.Configurations.AppSettings.#cctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.AppSettings.ApiVersion">
+            <summary>
+            ApiVersion
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.Article">
+            <summary>
+            文章表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.CategoryId">
+            <summary>
+            文章分类
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.ArticleType">
+            <summary>
+            文章类型
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.ArticleKey">
+            <summary>
+            文章Key
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.Html">
+            <summary>
+            内容Html
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.Markdown">
+            <summary>
+            内容Markdown
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.LinkUrl">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.ClickCount">
+            <summary>
+            点击数量
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.CommentCount">
+            <summary>
+            评论数量
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.IsTop">
+            <summary>
+            是否置顶
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Article.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.ArticleTag.ArticleId">
+            <summary>
+            文章Id
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.ArticleTag.TagId">
+            <summary>
+            标签Id
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Category.CategoryName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Category.CategoryKey">
+            <summary>
+            url的key值
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Category.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.FriendLink.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.FriendLink.LinkUrl">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.FriendLink.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.FriendLink.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.FriendLink.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.FriendLink.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.GuestBook">
+            <summary>
+            留言表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.ArticleId">
+            <summary>
+            文章Id
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.ParentId">
+            <summary>
+            父Id
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.MobilePhone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.CreateTime">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.GuestBook.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Tag.TagName">
+            <summary>
+            标签名称
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Tag.TagKey">
+            <summary>
+            标签Key
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.Signature">
+            <summary>
+            签名实体表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Signature.Name">
+            <summary>
+            签名姓名
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Signature.Type">
+            <summary>
+            签名类型
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Signature.Url">
+            <summary>
+            返回签名地址
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Signature.Ip">
+            <summary>
+            IP
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Signature.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+    </members>
+</doc>
