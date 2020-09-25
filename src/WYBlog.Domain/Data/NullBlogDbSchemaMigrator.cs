@@ -3,7 +3,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace WYBlog.Data
 {
-    public class NullBookStoreDbSchemaMigrator : IBlogDbSchemaMigrator, ITransientDependency
+    public class NullBlogDbSchemaMigrator : IBlogDbSchemaMigrator, ITransientDependency
     {
         public Task MigrateAsync()
         {

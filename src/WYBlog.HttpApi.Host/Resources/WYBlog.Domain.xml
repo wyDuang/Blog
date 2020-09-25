@@ -24,6 +24,16 @@
             ApiVersion
             </summary>
         </member>
+        <member name="P:WYBlog.Configurations.AppSettings.CorsOrigins">
+            <summary>
+            允许跨域访问地址
+            </summary>
+        </member>
+        <member name="T:WYBlog.Configurations.AppSettings.JwtAuth">
+            <summary>
+            JwtAuth
+            </summary>
+        </member>
         <member name="T:WYBlog.Entities.Article">
             <summary>
             文章表
@@ -191,7 +201,7 @@
         </member>
         <member name="P:WYBlog.Entities.GuestBook.CreateTime">
             <summary>
-            伪删除
+            创建时间
             </summary>
         </member>
         <member name="P:WYBlog.Entities.GuestBook.IsDeleted">

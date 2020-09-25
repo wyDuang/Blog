@@ -4,15 +4,30 @@
         <name>WYBlog.HttpApi</name>
     </assembly>
     <members>
-        <member name="P:WYBlog.TestModel.Name">
+        <member name="M:WYBlog.Controllers.BlogController.QueryArticlesAsync">
             <summary>
-            姓名
+            查询文章列表
             </summary>
+            <returns></returns>
         </member>
-        <member name="P:WYBlog.TestModel.BirthTime">
+        <member name="M:WYBlog.Controllers.CommonController.GetBingAsync">
             <summary>
-            出生日期
+            获取必应图片
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.CommonController.GetIp2ReginAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.SignatureController.GetAsync">
+            <summary>
+            获取签名
+            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -39,7 +39,7 @@ namespace WYBlog.Entities
         public string Content { get; set; }
 
         /// <summary>
-        /// 伪删除
+        /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
 

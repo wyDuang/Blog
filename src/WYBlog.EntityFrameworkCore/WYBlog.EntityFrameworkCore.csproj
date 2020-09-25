@@ -9,4 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
 </Project>

@@ -9,14 +9,12 @@ namespace WYBlog
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddSwaggerGen();
+            context.Services.AddSwagger();
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
-            var app = context.GetApplicationBuilder();
-
-            app.UseSwagger().UseSwaggerUI();
+            context.GetApplicationBuilder().UseSwagger().UseSwaggerUI();
         }
     }
 }

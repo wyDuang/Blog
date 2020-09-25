@@ -6,8 +6,9 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Uow;
 using WYBlog.Dtos;
 using WYBlog.Entities;
+using WYBlog.IAppServices;
 
-namespace WYBlog.Services
+namespace WYBlog.AppServices
 {
     [RemoteService(IsEnabled = false)]
     public class ArticleService : ApplicationService, IArticleService

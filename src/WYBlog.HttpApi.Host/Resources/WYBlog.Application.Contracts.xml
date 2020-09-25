@@ -166,7 +166,7 @@
         </member>
         <member name="P:WYBlog.Dtos.GuestBookDto.CreateTime">
             <summary>
-            伪删除
+            创建时间
             </summary>
         </member>
         <member name="P:WYBlog.Dtos.GuestBookDto.IsDeleted">

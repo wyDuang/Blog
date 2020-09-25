@@ -32,6 +32,25 @@ namespace WYBlog.Configurations
         /// <summary>
         /// ApiVersion
         /// </summary>
-        public static string ApiVersion => _config["ApiVersion"];
+        public static string ApiVersion => _config["App:ApiVersion"];
+
+        /// <summary>
+        /// 允许跨域访问地址
+        /// </summary>
+        public static string CorsOrigins => _config["App:CorsOrigins"];
+
+        /// <summary>
+        /// JwtAuth
+        /// </summary>
+        public static class JwtAuth
+        {
+            public static string Audience => _config["JwtAuth:Audience"];
+
+            public static string Issuer => _config["JwtAuth:Issuer"];
+
+            public static string SecurityKey => _config["JwtAuth:SecurityKey"];
+
+            public static int Expires => Convert.ToInt32(_config["JWT:Expires"]);
+        }
     }
 }
