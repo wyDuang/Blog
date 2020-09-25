@@ -53,7 +53,8 @@ namespace WYBlog
             // 注意：配置的OpenApiTag，Name名称要与Controller的Name对应才会生效。
             var controllers = apis
                 .Where(x => x.GroupName == groupName || x.GroupName == null)
-                .Select(x => ((ControllerActionDescriptor)x.ActionDescriptor).ControllerName).Distinct();
+                .Select(x => ((ControllerActionDescriptor)x.ActionDescriptor).ControllerName)
+                .Distinct();
 
             // 筛选一下tags
             swaggerDoc.Tags = tags.Where(x => controllers.Contains(x.Name))

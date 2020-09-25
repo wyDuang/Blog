@@ -73,6 +73,7 @@ namespace WYBlog
                 ApiInfos.ForEach(x =>
                 {
                     options.SwaggerDoc(x.UrlPrefix, x.OpenApiInfo);
+                    options.OrderActionsBy(o => o.RelativePath);
                 });
 
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Resources/WYBlog.HttpApi.xml"));
@@ -90,7 +91,7 @@ namespace WYBlog
                 };
                 options.AddSecurityDefinition("oauth2", security);
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { security, new List<string>() }
+                    { security, Array.Empty<string>() }
                 });
 
                 options.OperationFilter<AddResponseHeadersFilter>();

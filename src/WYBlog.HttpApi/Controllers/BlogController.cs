@@ -6,7 +6,6 @@ using WYBlog.IAppServices;
 
 namespace WYBlog.Controllers
 {
-    [Authorize]
     [ApiExplorerSettings(GroupName = ApiGroupingConsts.GroupName_v1)]
     public class BlogController : BaseController
     {

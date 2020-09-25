@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.HttpApi.Host", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Swagger", "src\WYBlog.Swagger\WYBlog.Swagger.csproj", "{261300C5-9F03-441B-81B9-F6C0DAC23F77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.ToolKits", "src\WYBlog.ToolKits\WYBlog.ToolKits.csproj", "{39C2FBDF-BD97-4326-938B-84FF5313554D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{261300C5-9F03-441B-81B9-F6C0DAC23F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{261300C5-9F03-441B-81B9-F6C0DAC23F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{261300C5-9F03-441B-81B9-F6C0DAC23F77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{93CCA80F-E55D-4F01-BB47-AB755092EB29} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 		{E2ABCD4A-2808-4F5B-B3E6-42DA56CE8185} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 		{261300C5-9F03-441B-81B9-F6C0DAC23F77} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{39C2FBDF-BD97-4326-938B-84FF5313554D} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {304352D5-ABB5-4A08-B8E4-41C1F143B3D0}

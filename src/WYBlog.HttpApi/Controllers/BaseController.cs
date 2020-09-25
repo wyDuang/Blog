@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace WYBlog.Controllers
-{
+{    
     [ApiController]
     [Route("[controller]")]
     [Produces("application/json")]
