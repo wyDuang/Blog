@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Text;
 
-namespace WYBlog.ToolKits
+namespace WYBlog
 {
     /// <summary>
     /// HttpContext扩展类

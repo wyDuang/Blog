@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="GitHub\" />
   </ItemGroup>
 

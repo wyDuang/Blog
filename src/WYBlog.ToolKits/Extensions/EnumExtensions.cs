@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace WYBlog.ToolKits
+namespace WYBlog
 {
     /// <summary>
     /// 针对Enum类型添加扩展方法，并使用反射读取当前枚举值所对应的显示值

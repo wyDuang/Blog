@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj" />
     <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
+    <ProjectReference Include="..\WYBlog.ToolKits\WYBlog.ToolKits.csproj" />
   </ItemGroup>
 
 </Project>

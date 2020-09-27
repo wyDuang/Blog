@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WYBlog.ToolKits
+namespace WYBlog.EntityFrameworkCore
 {
-    public class ResultCode
+    class BlogEntityFrameworkCoreTestBase
     {
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
+using WYBlog.Dtos;
 using WYBlog.IAppServices;
 
 namespace WYBlog.Controllers
@@ -10,12 +11,17 @@ namespace WYBlog.Controllers
     public class BlogController : BaseController
     {
         private readonly IArticleService _articleService;
+        private readonly ITagService _tagService;
 
-        public BlogController(IArticleService articleService)
+        public BlogController(
+            IArticleService articleService,
+            ITagService tagService)
         {
             _articleService = articleService;
+            _tagService = tagService;
         }
 
+        #region article
 
         /// <summary>
         /// 查询文章列表
@@ -30,5 +36,33 @@ namespace WYBlog.Controllers
             var result = await _articleService.GetListAsync();
             return Ok(result);
         }
+
+        #endregion
+
+        #region Tag
+
+        [AllowAnonymous]
+        [HttpPost("tag", Name = "GetTag")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<IActionResult> AddTag(CreateOrEditTagDto input)
+        {
+            var result = await _tagService.CreateAsync(input);
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("tag/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<IActionResult> EditTag(int id, CreateOrEditTagDto input)
+        {
+            await _tagService.UpdateAsync(id, input);
+            return Ok();
+        }
+
+        #endregion
     }
 }

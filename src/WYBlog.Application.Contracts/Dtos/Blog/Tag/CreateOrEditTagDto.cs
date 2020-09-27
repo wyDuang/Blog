@@ -1,6 +1,11 @@
-﻿namespace WYBlog.Dtos
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Volo.Abp.Application.Dtos;
+
+namespace WYBlog.Dtos
 {
-    public class TagDto
+    public class CreateOrEditTagDto
     {
         /// <summary>
         /// 标签名称

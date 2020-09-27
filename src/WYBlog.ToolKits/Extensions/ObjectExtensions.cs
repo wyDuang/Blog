@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace WYBlog.ToolKits
+namespace WYBlog
 {
     public static class ObjectExtensions
     {

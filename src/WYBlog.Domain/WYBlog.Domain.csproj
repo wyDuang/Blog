@@ -7,12 +7,9 @@
     <DocumentationFile>H:\GithubProjects\wyDuang\Blog\src\WYBlog.HttpApi.Host\Resources\WYBlog.Domain.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="3.1.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.Domain.Shared\WYBlog.Domain.Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IRepository\" />
   </ItemGroup>
 </Project>

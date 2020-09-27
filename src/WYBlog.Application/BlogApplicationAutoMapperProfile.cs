@@ -8,8 +8,12 @@ namespace WYBlog
     {
         public BlogApplicationAutoMapperProfile()
         {
-            CreateMap<Article, ArticleDto>().ReverseMap();
-            CreateMap<ArticleDto, Article>().ReverseMap();
+            CreateMap<Article, ArticleDto>();
+
+            CreateMap<Tag, TagDto>();
+
+            //CreateMap<Tag, CreateOrEditTagDto>();
+            CreateMap<CreateOrEditTagDto, Tag>().ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

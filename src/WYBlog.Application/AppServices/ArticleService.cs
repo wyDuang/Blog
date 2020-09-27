@@ -10,7 +10,6 @@ using WYBlog.IAppServices;
 
 namespace WYBlog.AppServices
 {
-    [RemoteService(IsEnabled = false)]
     public class ArticleService : ApplicationService, IArticleService
     {
         private readonly IRepository<Article> _repository;

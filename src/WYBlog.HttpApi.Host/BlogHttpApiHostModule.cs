@@ -1,21 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.Autofac;
-using Volo.Abp.Modularity;
-using WYBlog.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using WYBlog.Configurations;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.OpenApi.Models;
-using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Linq;
-using Microsoft.AspNetCore.Cors;
+using System.Text;
+using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
+using Volo.Abp.Autofac;
+using Volo.Abp.Modularity;
+using WYBlog.Configurations;
+using WYBlog.EntityFrameworkCore;
+using WYBlog.Filters;
+using WYBlog.Middleware;
 
 namespace WYBlog
 {
@@ -32,6 +35,7 @@ namespace WYBlog
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            ConfigureExceptionFilter();
             ConfigureAutoApiControllers();
             ConfigureRouting(context.Services);
             ConfigureCors(context.Services);
@@ -46,6 +50,12 @@ namespace WYBlog
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseBlogExceptionPage();
+            }
+
+            app.UseHsts();
 
             // 转发将标头代理到当前请求，配合 Nginx 使用，获取用户真实IP
             app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -54,7 +64,8 @@ namespace WYBlog
             });
 
             app.UseRouting();
-            app.UseCors(BlogAppConsts.DefaultCorsPolicyName);
+            app.UseCors(BlogAppConsts.DefaultCorsPolicyName);            
+            app.UseMiddleware<BlogExceptionHandlerMiddleware>();// 异常处理中间件
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
@@ -64,23 +75,41 @@ namespace WYBlog
         }
 
         /// <summary>
+        /// 异常过滤器
+        /// </summary>
+        private void ConfigureExceptionFilter()
+        {
+            Configure<MvcOptions>(options =>
+            {
+                //先移除Abp默认的
+                var index = options.Filters.ToList()
+                    .FindIndex(filter => filter is ServiceFilterAttribute attr && attr.ServiceType.Equals(typeof(AbpExceptionFilter)));
+                if (index > -1)
+                {
+                    options.Filters.RemoveAt(index);
+                }
+                //再添加自定义的
+                options.Filters.Add(typeof(BlogGlobalExceptionFilter));
+            });
+        }
+
+        /// <summary>
         /// 跨域配置
         /// </summary>
         /// <param name="configuration"></param>
         private void ConfigureCors(IServiceCollection services)
         {
-
             services.AddCors(options =>
             {
-                options.AddPolicy(BlogAppConsts.DefaultCorsPolicyName, builder => {
-
+                options.AddPolicy(BlogAppConsts.DefaultCorsPolicyName, builder =>
+                {
                     builder.WithOrigins(
                             AppSettings.CorsOrigins.Split(",", StringSplitOptions.RemoveEmptyEntries)
                                 .Select(o => o.RemovePostFix("/"))
                                 .ToArray()
                         )
                     .WithAbpExposedHeaders()
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()                    
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                     //AllowAnyOrigin()//允许任何来源的主机访问
@@ -88,7 +117,7 @@ namespace WYBlog
                 });
             });
         }
-        
+
         /// <summary>
         /// JWT认证授权
         /// </summary>
@@ -142,8 +171,9 @@ namespace WYBlog
             {
                 options.ConventionalControllers
                     .Create(typeof(BlogApplicationModule).Assembly, opts =>
-                    {                        
-                        opts.TypePredicate = type => { return false; };
+                    {
+                        //opts.RootPath = "blog";
+                        opts.TypePredicate = type => { return false; };//过滤这些类以成为API控制器
                     });
             });
         }

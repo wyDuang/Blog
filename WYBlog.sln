@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Swagger", "src\WYBlo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.ToolKits", "src\WYBlog.ToolKits\WYBlog.ToolKits.csproj", "{39C2FBDF-BD97-4326-938B-84FF5313554D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FAE30B3B-6A8F-47E0-BCF3-649E04B155DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.BackgroundJobs", "src\WYBlog.BackgroundJobs\WYBlog.BackgroundJobs.csproj", "{F1C20121-5BF3-435E-A1BE-D110FAB68A39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39C2FBDF-BD97-4326-938B-84FF5313554D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1C20121-5BF3-435E-A1BE-D110FAB68A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1C20121-5BF3-435E-A1BE-D110FAB68A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1C20121-5BF3-435E-A1BE-D110FAB68A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1C20121-5BF3-435E-A1BE-D110FAB68A39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,7 @@ Global
 		{E2ABCD4A-2808-4F5B-B3E6-42DA56CE8185} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 		{261300C5-9F03-441B-81B9-F6C0DAC23F77} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 		{39C2FBDF-BD97-4326-938B-84FF5313554D} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
+		{F1C20121-5BF3-435E-A1BE-D110FAB68A39} = {DF7ED3F0-1540-4992-AE0D-FF85EDA2A4B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {304352D5-ABB5-4A08-B8E4-41C1F143B3D0}
