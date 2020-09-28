@@ -4,6 +4,38 @@
         <name>WYBlog.Application.Contracts</name>
     </assembly>
     <members>
+        <member name="T:WYBlog.BaseResult">
+            <summary>
+            返回结果基类 
+            </summary>
+        </member>
+        <member name="P:WYBlog.BaseResult.Code">
+            <summary>
+            结果编码
+            </summary>
+        </member>
+        <member name="P:WYBlog.BaseResult.Msg">
+            <summary>
+            结果消息 如果不成功，返回的错误信息
+            </summary>
+        </member>
+        <member name="P:WYBlog.BaseResult.Timestamp">
+            <summary>
+            时间戳(毫秒)
+            </summary>
+        </member>
+        <member name="M:WYBlog.BaseResult.#ctor">
+            <summary>
+            无参构造函数
+            </summary>
+        </member>
+        <member name="M:WYBlog.BaseResult.#ctor(WYBlog.Enums.ResultCodeEnum,System.String)">
+            <summary>
+            有参构造函数
+            </summary>
+            <param name="Code">结果代码</param>
+            <param name="Msg">结果信息</param>
+        </member>
         <member name="T:WYBlog.Dtos.ArticleDto">
             <summary>
             文章表
@@ -193,6 +225,33 @@
             <summary>
             标签Key
             </summary>
+        </member>
+        <member name="M:WYBlog.IAppServices.IAuthorizeService.GetLoginAddressAsync">
+            <summary>
+            获取登录地址(GitHub)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.IAppServices.IAuthorizeService.GetAccessTokenAsync(System.String)">
+            <summary>
+            获取AccessToken
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.IAppServices.IAuthorizeService.GenerateTokenAsync(System.String)">
+            <summary>
+            登录成功，生成Token
+            </summary>
+            <param name="access_token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.IAppServices.IAuthorizeService.VerifyToken(System.String)">
+            <summary>
+            验证Token是否合法
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
         </member>
         <member name="M:WYBlog.IAppServices.ITagService.GetPagedListAsync(WYBlog.Dtos.QueryTagDto)">
             <summary>

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+
 namespace WYBlog.Middleware
 {
     /// <summary>
@@ -51,7 +51,7 @@ namespace WYBlog.Middleware
             context.Response.ContentType = "application/json;charset=utf-8";
 
             var result = new JsonResult(new { code = context.Response.StatusCode, msg = message });
-            await context.Response.WriteAsync(result.ToJson());
+            await context.Response.WriteAsync(JsonConvert.SerializeObject(result));
         }
     }
 }

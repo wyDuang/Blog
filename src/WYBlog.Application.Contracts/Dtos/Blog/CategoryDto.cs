@@ -1,6 +1,8 @@
-﻿namespace WYBlog.Dtos
+﻿using Volo.Abp.Application.Dtos;
+
+namespace WYBlog.Dtos
 {
-    public class CategoryDto
+    public class CategoryDto : EntityDto<int>
     {
         /// <summary>
         /// 分类名称

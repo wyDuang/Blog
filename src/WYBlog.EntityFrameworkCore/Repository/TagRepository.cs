@@ -28,5 +28,15 @@ namespace WYBlog.Repository
                 .Take(maxResultCount)
                 .ToListAsync();
         }
+
+        public async Task<Tag> FindByNameAsync(string name)
+        {
+            return await DbSet.FirstOrDefaultAsync(x => x.TagName == name);
+        }
+
+        public async Task<Tag> FindByKeyAsync(string key)
+        {
+            return await DbSet.FirstOrDefaultAsync(x => x.TagKey == key);
+        }
     }
 }

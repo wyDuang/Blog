@@ -6,7 +6,7 @@ namespace WYBlog.Enums
     public enum SignatureEnum
     {
         [Display(Name = "签名字体"), Description("签名字体")]
-        qmzt = 6,
+        签名字体 = 6,
 
         [Display(Name = "明星手写体"), Description("明星手写体")]
         mxsxt = 5,

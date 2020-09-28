@@ -13,6 +13,7 @@ using System.Text;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
+using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using WYBlog.Configurations;
@@ -23,9 +24,10 @@ using WYBlog.Middleware;
 namespace WYBlog
 {
     [DependsOn(
-        typeof(AbpAspNetCoreMvcModule),
-        typeof(BlogSwaggerModule),
         typeof(AbpAutofacModule),
+        typeof(AbpAspNetCoreMvcModule),
+        typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
+        typeof(BlogSwaggerModule),
         typeof(BlogHttpApiModule),
         typeof(BlogApplicationModule),
         typeof(BlogEntityFrameworkCoreModule),

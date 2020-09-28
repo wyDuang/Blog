@@ -46,7 +46,7 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        public async Task<IActionResult> AddTag(CreateOrEditTagDto input)
+        public async Task<IActionResult> AddTag([FromBody] CreateOrEditTagDto input)
         {
             var result = await _tagService.CreateAsync(input);
             return Ok(result);
@@ -57,7 +57,7 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        public async Task<IActionResult> EditTag(int id, CreateOrEditTagDto input)
+        public async Task<IActionResult> EditTag(int id, [FromBody] CreateOrEditTagDto input)
         {
             await _tagService.UpdateAsync(id, input);
             return Ok();

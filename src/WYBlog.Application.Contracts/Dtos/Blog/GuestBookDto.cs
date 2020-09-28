@@ -1,11 +1,12 @@
 ﻿using System;
+using Volo.Abp.Application.Dtos;
 
 namespace WYBlog.Dtos
 {
     /// <summary>
     /// 留言表
     /// </summary>
-    public class GuestBookDto
+    public class GuestBookDto : EntityDto<int>
     {
         /// <summary>
         /// 文章Id

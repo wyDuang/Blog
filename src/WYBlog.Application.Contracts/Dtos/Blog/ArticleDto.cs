@@ -1,4 +1,5 @@
 ﻿using System;
+using Volo.Abp.Application.Dtos;
 using WYBlog.Enums;
 
 namespace WYBlog.Dtos
@@ -6,7 +7,7 @@ namespace WYBlog.Dtos
     /// <summary>
     /// 文章表
     /// </summary>
-    public class ArticleDto
+    public class ArticleDto : EntityDto<int>
     {
         /// <summary>
 		/// 文章分类

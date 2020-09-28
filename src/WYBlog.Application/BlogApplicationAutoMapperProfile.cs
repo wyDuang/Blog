@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Volo.Abp.AutoMapper;
 using WYBlog.Dtos;
 using WYBlog.Entities;
 
@@ -8,12 +9,12 @@ namespace WYBlog
     {
         public BlogApplicationAutoMapperProfile()
         {
-            CreateMap<Article, ArticleDto>();
+            CreateMap<Article, ArticleDto>()
+                .ForMember(dest => (int)dest.ArticleType, opt => opt.MapFrom(src => src.ArticleType));
 
             CreateMap<Tag, TagDto>();
 
-            //CreateMap<Tag, CreateOrEditTagDto>();
-            CreateMap<CreateOrEditTagDto, Tag>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<CreateOrEditTagDto, Tag>();//.Ignore(x => x.Id);
         }
     }
 }

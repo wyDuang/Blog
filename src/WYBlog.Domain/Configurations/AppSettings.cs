@@ -50,7 +50,77 @@ namespace WYBlog.Configurations
 
             public static string SecurityKey => _config["JwtAuth:SecurityKey"];
 
-            public static int Expires => Convert.ToInt32(_config["JWT:Expires"]);
+            public static int Expires => Convert.ToInt32(_config["JwtAuth:Expires"]);
         }
+
+        /// <summary>
+        /// Caching
+        /// </summary>
+        public static class Caching
+        {
+            /// <summary>
+            /// RedisConnectionString
+            /// </summary>
+            public static string RedisConnectionString => _config["Caching:RedisConnectionString"];
+
+            /// <summary>
+            /// 是否开启
+            /// </summary>
+            public static bool IsOpen => Convert.ToBoolean(_config["Caching:IsOpen"]);
+        }
+
+        /// <summary>
+        /// RabbitMQ
+        /// </summary>
+        public static class RabbitMQ
+        {
+            public static class Connections
+            {
+                public static class Default
+                {
+                    public static string Username => _config["RabbitMQ:Connections:Default:Username"];
+
+                    public static string Password => _config["RabbitMQ:Connections:Default:Password"];
+
+                    public static string HostName => _config["RabbitMQ:Connections:Default:HostName"];
+
+                    public static int Port => Convert.ToInt32(_config["RabbitMQ:Connections:Default:Port"]);
+                }
+            }
+
+            public static class EventBus
+            {
+                public static string ClientName => _config["RabbitMQ:EventBus:ClientName"];
+
+                public static string ExchangeName => _config["RabbitMQ:EventBus:ExchangeName"];
+            }
+        }
+
+        /// <summary>
+        /// GitHub
+        /// </summary>
+        public static class GitHub
+        {
+            public static int UserId => Convert.ToInt32(_config["Github:UserId"]);
+
+            public static string Client_ID => _config["Github:ClientID"];
+
+            public static string Client_Secret => _config["Github:ClientSecret"];
+
+            public static string Redirect_Uri => _config["Github:RedirectUri"];
+
+            public static string ApplicationName => _config["Github:ApplicationName"];
+
+            public static string Scope => _config["Github:Scope"];
+        }
+
+        ///// <summary>
+        ///// UploadConfig
+        ///// </summary>
+        //public static class UploadConfig
+        //{
+        //    public static string UploadFile => _config["UploadConfig:UploadFile"];
+        //    public static string Domain => _config["UploadConfig:Domain"];
+        //}
     }
 }

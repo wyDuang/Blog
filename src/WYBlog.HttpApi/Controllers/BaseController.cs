@@ -6,7 +6,7 @@ namespace WYBlog.Controllers
 {    
     [ApiController]
     [Route("[controller]")]
-    [Produces("application/json")]
+    //[Produces("application/json")]
     public abstract class BaseController : AbpController
     {
     }
