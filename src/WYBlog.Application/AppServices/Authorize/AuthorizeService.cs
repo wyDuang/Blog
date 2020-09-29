@@ -101,12 +101,15 @@ namespace WYBlog.AppServices
                         var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
                         var expiresAt = authTime.Add(TimeSpan.FromMinutes(AppSettings.JwtAuth.Expires));//Exp 过期时间，在此之后不可用
 
+                        var nbf = new DateTimeOffset(authTime).ToUnixTimeSeconds();
+                        var exp = new DateTimeOffset(expiresAt).ToUnixTimeSeconds();
+
                         var claims = new[] {
                             new Claim(ClaimTypes.Name, user.Name),
                             new Claim(ClaimTypes.Email, user.Email),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(DateTime.Now.AddMinutes(AppSettings.JwtAuth.Expires)).ToUnixTimeSeconds()}"),
-                            new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}")
+                            new Claim(JwtRegisteredClaimNames.Nbf, $"{nbf}"),
+                            new Claim(JwtRegisteredClaimNames.Exp, $"{exp}")
                         };
 
                         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey));
@@ -128,8 +131,8 @@ namespace WYBlog.AppServices
                             profile = new
                             {
                                 name = user.Name,
-                                auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
-                                expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
+                                auth_time = nbf,
+                                expires_at = exp
                             }
                         };
 
