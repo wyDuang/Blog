@@ -16,12 +16,10 @@ namespace WYBlog.AppServices
     public class TagService : ApplicationService, ITagService
     {
         private readonly ITagRepository _repository;
-        private readonly IUnitOfWorkManager _unitOfWork;
 
-        public TagService(ITagRepository repository, IUnitOfWorkManager unitOfWork)
+        public TagService(ITagRepository repository)
         {
             _repository = repository;
-            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -84,7 +82,7 @@ namespace WYBlog.AppServices
         public async Task<TagDto> CreateAsync(CreateOrEditTagDto input)
         {
             var tagEntity = ObjectMapper.Map<CreateOrEditTagDto, Tag>(input);
-            var resultEntity = await _repository.InsertAsync(tagEntity);
+            var resultEntity = await _repository.InsertAsync(tagEntity, true);
 
             return ObjectMapper.Map<Tag, TagDto>(resultEntity);
         }

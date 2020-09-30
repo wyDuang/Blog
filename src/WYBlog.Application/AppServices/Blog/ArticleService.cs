@@ -27,5 +27,41 @@ namespace WYBlog.AppServices
 
             return ObjectMapper.Map<List<Article>, List<ArticleDto>>(entities);
         }
+
+        /// <summary>
+        /// 新增文章
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ArticleDto> CreateAsync(CreateOrEditArticleDto input)
+        {
+            var articleEntity = ObjectMapper.Map<CreateOrEditArticleDto, Article>(input);
+            var resultEntity = await _repository.InsertAsync(articleEntity, true);
+
+            return ObjectMapper.Map<Article, ArticleDto>(resultEntity);
+        }
+
+        /// <summary>
+        /// 编辑文章
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task UpdateAsync(int id, CreateOrEditArticleDto input)
+        {
+            var articleEntity = await _repository.GetAsync(x => x.Id == id);
+            articleEntity = ObjectMapper.Map<CreateOrEditArticleDto, Article>(input);
+
+            await _repository.UpdateAsync(articleEntity);
+        }
+
+        /// <summary>
+        /// 删除文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task DeleteAsync(int id)
+        {
+            await _repository.DeleteAsync(x => x.Id == id);
+        }
     }
 }

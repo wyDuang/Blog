@@ -65,11 +65,6 @@ namespace WYBlog.Dtos
         public int CommentCount { get; set; }
 
         /// <summary>
-        /// 伪删除
-        /// </summary>
-        public bool IsDeleted { get; set; }
-
-        /// <summary>
         /// 是否置顶
         /// </summary>
         public bool IsTop { get; set; }

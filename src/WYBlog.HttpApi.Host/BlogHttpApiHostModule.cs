@@ -5,20 +5,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Linq;
 using System.Text;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
-using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using WYBlog.Configurations;
 using WYBlog.EntityFrameworkCore;
-using WYBlog.Filters;
 using WYBlog.Middleware;
 
 namespace WYBlog
@@ -146,8 +144,6 @@ namespace WYBlog
                         context.HandleResponse();// 跳过默认的处理逻辑，返回下面的模型数据
                         context.Response.ContentType = "application/json;charset=utf-8";
                         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        //var result = new ServiceResult();
-                        //result.IsFailed("UnAuthorized");
 
                         await context.Response.WriteAsync("{\"message\":\"Unauthorized\",\"success\":false}");
                     }
