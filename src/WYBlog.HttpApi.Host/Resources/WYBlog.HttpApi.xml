@@ -37,10 +37,144 @@
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:WYBlog.Controllers.BlogController.QueryArticlesAsync">
+        <member name="M:WYBlog.Controllers.BlogController.QueryArticlesAsync(WYBlog.Dtos.QueryArticleDto)">
             <summary>
             查询文章列表
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.AddArticle(WYBlog.Dtos.CreateOrEditArticleDto)">
+            <summary>
+            新增文章
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.EditCategory(System.Int32,WYBlog.Dtos.CreateOrEditArticleDto)">
+            <summary>
+            编辑文章
+            </summary>
+            <param name="id"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.DeleteArticle(System.Int32)">
+            <summary>
+            删除文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.QueryAllCategoriesAsync">
+            <summary>
+            查询所有分类列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.AddCategory(WYBlog.Dtos.CreateOrEditCategoryDto)">
+            <summary>
+            新增分类
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.EditCategory(System.Int32,WYBlog.Dtos.CreateOrEditCategoryDto)">
+            <summary>
+            编辑分类
+            </summary>
+            <param name="id"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.DeleteCategory(System.Int32)">
+            <summary>
+            删除分类
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.QueryAllTagsAsync">
+            <summary>
+            查询所有标签列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.AddTag(WYBlog.Dtos.CreateOrEditTagDto)">
+            <summary>
+            新增标签
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.EditTag(System.Int32,WYBlog.Dtos.CreateOrEditTagDto)">
+            <summary>
+            编辑标签
+            </summary>
+            <param name="id"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.DeleteTag(System.Int32)">
+            <summary>
+            删除标签
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.QueryFriendLinksAsync(WYBlog.Dtos.QueryFriendLinkDto)">
+            <summary>
+            查询友情链接列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.AddFriendLink(WYBlog.Dtos.CreateOrEditFriendLinkDto)">
+            <summary>
+            添加友情链接
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.EditFriendLink(System.Int32,WYBlog.Dtos.CreateOrEditFriendLinkDto)">
+            <summary>
+            编辑友情链接
+            </summary>
+            <param name="id"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.DeleteFriendLink(System.Int32)">
+            <summary>
+            删除友情链接
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.QueryGuestBooksAsync(WYBlog.Dtos.QueryGuestBookDto)">
+            <summary>
+            查询留言列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.AddFriendLink(WYBlog.Dtos.CreateOrEditGuestBookDto)">
+            <summary>
+            添加留言
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.EditGuestBook(System.Int32,WYBlog.Dtos.CreateOrEditGuestBookDto)">
+            <summary>
+            编辑留言
+            </summary>
+            <param name="id"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.DeleteGuestBook(System.Int32)">
+            <summary>
+            删除留言
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:WYBlog.Controllers.CommonController.GetBingAsync">

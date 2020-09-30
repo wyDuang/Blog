@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using WYBlog.Dtos;
@@ -7,6 +8,12 @@ namespace WYBlog.IAppServices
 {
     public interface ICategoryService : IApplicationService
     {
+        /// <summary>
+        /// 查询所有分类列表
+        /// </summary>
+        /// <returns></returns>
+        Task<List<CategoryDto>> GetAllListAsync();
+
         /// <summary>
         /// 分页查询文章分类列表
         /// </summary>

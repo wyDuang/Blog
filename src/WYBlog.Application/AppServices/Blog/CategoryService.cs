@@ -20,6 +20,12 @@ namespace WYBlog.AppServices.Blog
             _repository = repository;
         }
 
+        public async Task<List<CategoryDto>> GetAllListAsync()
+        {
+            var allList = await _repository.GetListAsync();
+            return ObjectMapper.Map<List<Category>, List<CategoryDto>>(allList);
+        }
+
         public async Task<CategoryDto> CreateAsync(CreateOrEditCategoryDto input)
         {
             var categoryEntity = ObjectMapper.Map<CreateOrEditCategoryDto, Category>(input);

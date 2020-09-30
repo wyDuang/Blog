@@ -421,6 +421,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:WYBlog.IAppServices.ICategoryService.GetAllListAsync">
+            <summary>
+            查询所有分类列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WYBlog.IAppServices.ICategoryService.GetPagedListAsync(WYBlog.Dtos.QueryCategoryDto)">
             <summary>
             分页查询文章分类列表
@@ -541,6 +547,12 @@
             分页查询标签列表
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.IAppServices.ITagService.GetAllListAsync">
+            <summary>
+            查询所有标签列表
+            </summary>
             <returns></returns>
         </member>
         <member name="M:WYBlog.IAppServices.ITagService.GetAsync(System.Int32)">
