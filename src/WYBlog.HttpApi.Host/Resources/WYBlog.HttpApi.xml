@@ -4,6 +4,39 @@
         <name>WYBlog.HttpApi</name>
     </assembly>
     <members>
+        <member name="T:WYBlog.Controllers.AuthController">
+            <summary>
+            Auth Api
+            </summary>
+            <returns>JSON Web Token</returns>
+        </member>
+        <member name="M:WYBlog.Controllers.AuthController.GetLoginAddressAsync">
+            <summary>
+            获取登录地址(GitHub)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.AuthController.GetAccessTokenAsync(System.String)">
+            <summary>
+            获取AccessToken
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.AuthController.GenerateTokenAsync(System.String)">
+            <summary>
+            登录成功，生成Token
+            </summary>
+            <param name="access_token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.AuthController.VerifyToken(System.String)">
+            <summary>
+            验证Token是否合法
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="M:WYBlog.Controllers.BlogController.QueryArticlesAsync">
             <summary>
             查询文章列表

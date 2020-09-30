@@ -8,6 +8,7 @@ using System.Text;
 
 namespace WYBlog.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class UploadController: BaseController
     {
         private readonly IWebHostEnvironment _env;

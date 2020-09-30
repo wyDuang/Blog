@@ -6,6 +6,10 @@ using WYBlog.IAppServices;
 
 namespace WYBlog.Controllers
 {
+    /// <summary>
+    /// Auth Api
+    /// </summary>
+    /// <returns>JSON Web Token</returns>
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]//默认是false，当为true表示不显示到swaggerUI
     public class AuthController : BaseController

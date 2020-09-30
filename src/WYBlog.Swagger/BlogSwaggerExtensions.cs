@@ -73,7 +73,7 @@ namespace WYBlog
                 ApiInfos.ForEach(x =>
                 {
                     options.SwaggerDoc(x.UrlPrefix, x.OpenApiInfo);
-                    options.OrderActionsBy(o => o.RelativePath);
+                    options.OrderActionsBy(o => o.RelativePath);//按照URL排序
                 });
 
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Resources/WYBlog.HttpApi.xml"));
