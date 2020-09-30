@@ -179,6 +179,11 @@
             创建时间
             </summary>
         </member>
+        <member name="T:WYBlog.Entities.ArticleTag">
+            <summary>
+            文章标签表
+            </summary>
+        </member>
         <member name="P:WYBlog.Entities.ArticleTag.ArticleId">
             <summary>
             文章Id
@@ -187,6 +192,11 @@
         <member name="P:WYBlog.Entities.ArticleTag.TagId">
             <summary>
             标签Id
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.Category">
+            <summary>
+            分类表
             </summary>
         </member>
         <member name="P:WYBlog.Entities.Category.CategoryName">
@@ -202,6 +212,11 @@
         <member name="P:WYBlog.Entities.Category.Sort">
             <summary>
             排序
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.FriendLink">
+            <summary>
+            友情链接表
             </summary>
         </member>
         <member name="P:WYBlog.Entities.FriendLink.Title">
@@ -277,6 +292,11 @@
         <member name="P:WYBlog.Entities.GuestBook.IsDeleted">
             <summary>
             伪删除
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.Tag">
+            <summary>
+            标签表
             </summary>
         </member>
         <member name="P:WYBlog.Entities.Tag.TagName">

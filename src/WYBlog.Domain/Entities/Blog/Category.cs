@@ -2,6 +2,9 @@
 
 namespace WYBlog.Entities
 {
+    /// <summary>
+    /// 分类表
+    /// </summary>
     public class Category : Entity<int>
     {
         /// <summary>

@@ -5,46 +5,39 @@ using WYBlog.Dtos;
 
 namespace WYBlog.IAppServices
 {
-    public interface IArticleService : IApplicationService
+    public interface IGuestBookService : IApplicationService
     {
         /// <summary>
-        /// 分页查询文章列表
+        /// 分页查询留言列表
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultDto<ArticleDto>> GetPagedListAsync(QueryArticleDto input);
+        Task<PagedResultDto<GuestBookDto>> GetPagedListAsync(QueryGuestBookDto input);
 
         /// <summary>
-        /// 通过Id获取文章
+        /// 通过Id获取留言
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<ArticleDto> GetAsync(int id);
+        Task<GuestBookDto> GetAsync(int id);
 
         /// <summary>
-        /// 通过Key获取文章
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        Task<ArticleDto> GetByKeyAsync(string key);
-
-        /// <summary>
-        /// 新增文章
+        /// 新增留言
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<ArticleDto> CreateAsync(CreateOrEditArticleDto input);
+        Task<GuestBookDto> CreateAsync(CreateOrEditGuestBookDto input);
 
         /// <summary>
-        /// 编辑文章
+        /// 编辑留言
         /// </summary>
         /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateAsync(int id, CreateOrEditArticleDto input);
+        Task UpdateAsync(int id, CreateOrEditGuestBookDto input);
 
         /// <summary>
-        /// 删除文章
+        /// 删除留言
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

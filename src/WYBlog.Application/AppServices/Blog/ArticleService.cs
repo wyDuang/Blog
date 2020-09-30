@@ -1,31 +1,75 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Volo.Abp;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Uow;
 using WYBlog.Dtos;
 using WYBlog.Entities;
 using WYBlog.IAppServices;
+using WYBlog.IRepository;
 
 namespace WYBlog.AppServices
 {
     public class ArticleService : ApplicationService, IArticleService
     {
-        private readonly IRepository<Article> _repository;
-        private readonly IUnitOfWorkManager _unitOfWork;
+        private readonly IArticleRepository _repository;
 
-        public ArticleService(IRepository<Article> repository, IUnitOfWorkManager unitOfWork)
+        public ArticleService(IArticleRepository repository)
         {
             _repository = repository;
-            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<ArticleDto>> GetListAsync()
+        /// <summary>
+        /// 分页查询文章列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultDto<ArticleDto>> GetPagedListAsync(QueryArticleDto input)
         {
-            var entities = await _repository.GetListAsync();
+            if (input.Sorting.IsNullOrWhiteSpace())
+            {
+                input.Sorting = nameof(Article.CreateTime);
+            }
 
-            return ObjectMapper.Map<List<Article>, List<ArticleDto>>(entities);
+            var tagList = await _repository.GetPagedListAsync(
+                input.SkipCount,
+                input.MaxResultCount,
+                input.Sorting,
+                input.Filter
+            );
+
+            var totalCount = await AsyncExecuter.CountAsync(
+                _repository.WhereIf(!input.Filter.IsNullOrWhiteSpace(), x => x.Title.Contains(input.Filter)
+                )
+            );
+
+            return new PagedResultDto<ArticleDto>(
+                totalCount,
+                ObjectMapper.Map<List<Article>, List<ArticleDto>>(tagList)
+            );
+        }
+
+        /// <summary>
+        /// 通过Id获取文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ArticleDto> GetAsync(int id)
+        {
+            var articleEntity = await _repository.GetAsync(x => x.Id == id);
+            return ObjectMapper.Map<Article, ArticleDto>(articleEntity);
+        }
+
+        /// <summary>
+        /// 通过Key获取文章
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public async Task<ArticleDto> GetByKeyAsync(string key)
+        {
+            var articleEntity = await _repository.GetAsync(x => x.ArticleKey == key);
+            return ObjectMapper.Map<Article, ArticleDto>(articleEntity);
         }
 
         /// <summary>
@@ -44,6 +88,7 @@ namespace WYBlog.AppServices
         /// <summary>
         /// 编辑文章
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task UpdateAsync(int id, CreateOrEditArticleDto input)

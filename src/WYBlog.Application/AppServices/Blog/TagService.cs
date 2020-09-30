@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
-using Volo.Abp.ObjectMapping;
-using Volo.Abp.Uow;
 using WYBlog.Dtos;
 using WYBlog.Entities;
 using WYBlog.IAppServices;
@@ -20,6 +18,16 @@ namespace WYBlog.AppServices
         public TagService(ITagRepository repository)
         {
             _repository = repository;
+        }
+
+        /// <summary>
+        /// 查询所有标签列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<TagDto>> GetAllListAsync()
+        {
+            var allList = await _repository.GetListAsync();
+            return ObjectMapper.Map<List<Tag>, List<TagDto>>(allList);
         }
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace WYBlog.AppServices
         /// <summary>
         /// 通过Key获取标签
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
         public async Task<TagDto> GetByKeyAsync(string key)
         {
@@ -90,13 +98,12 @@ namespace WYBlog.AppServices
         /// <summary>
         /// 编辑标签
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task UpdateAsync(int id, CreateOrEditTagDto input)
         {
             var tagEntity = await _repository.GetAsync(x => x.Id == id);
-
-            //ObjectMapper.Map(input, tagEntity);
 
             tagEntity.TagName = input.TagName;
             tagEntity.TagKey = input.TagKey;

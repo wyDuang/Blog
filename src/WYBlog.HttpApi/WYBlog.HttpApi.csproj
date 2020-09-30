@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>H:\GithubProjects\wyDuang\Blog\src\WYBlog.HttpApi.Host\Resources\WYBlog.HttpApi.xml</DocumentationFile>
+    <DocumentationFile>..\WYBlog.HttpApi.Host\Resources\WYBlog.HttpApi.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="3.1.2" />

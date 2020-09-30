@@ -3,6 +3,9 @@ using Volo.Abp.Domain.Entities;
 
 namespace WYBlog.Entities
 {
+    /// <summary>
+    /// 友情链接表
+    /// </summary>
     public class FriendLink : Entity<int>
     {
         /// <summary>

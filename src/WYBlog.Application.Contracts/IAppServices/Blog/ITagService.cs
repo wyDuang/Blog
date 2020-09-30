@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using WYBlog.Dtos;
@@ -13,6 +14,12 @@ namespace WYBlog.IAppServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultDto<TagDto>> GetPagedListAsync(QueryTagDto input);
+
+        /// <summary>
+        /// 查询所有标签列表
+        /// </summary>
+        /// <returns></returns>
+        Task<List<TagDto>> GetAllListAsync();
 
         /// <summary>
         /// 通过Id获取标签

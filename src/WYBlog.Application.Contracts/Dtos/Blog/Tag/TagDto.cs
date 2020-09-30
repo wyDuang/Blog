@@ -2,7 +2,7 @@
 
 namespace WYBlog.Dtos
 {
-    public class TagDto: EntityDto<int>
+    public class TagDto : EntityDto<int>
     {
         /// <summary>
         /// 标签名称

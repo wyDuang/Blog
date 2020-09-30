@@ -2,6 +2,9 @@
 
 namespace WYBlog.Entities
 {
+    /// <summary>
+    /// 标签表
+    /// </summary>
     public class Tag : Entity<int>
     {
         /// <summary>
