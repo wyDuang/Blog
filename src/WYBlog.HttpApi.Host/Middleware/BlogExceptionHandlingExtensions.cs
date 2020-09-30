@@ -5,7 +5,7 @@ namespace WYBlog.Middleware
 {
     public static class BlogExceptionHandlingExtensions
     {
-        public static IApplicationBuilder UseBlogExceptionPage(this IApplicationBuilder app)
+        public static IApplicationBuilder UseBlogExceptionHandling(this IApplicationBuilder app)
         {
             if (app == null)
             {

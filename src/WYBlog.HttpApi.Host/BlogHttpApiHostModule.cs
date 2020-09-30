@@ -48,14 +48,6 @@ namespace WYBlog
         {
             var app = context.GetApplicationBuilder();
             var env = context.GetEnvironment();
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseBlogExceptionPage();
-            }
 
             app.UseHsts();
 
@@ -66,8 +58,8 @@ namespace WYBlog
             });
 
             app.UseRouting();
-            app.UseCors(BlogAppConsts.DefaultCorsPolicyName);            
-            app.UseMiddleware<BlogExceptionHandlerMiddleware>();// 异常处理中间件
+            app.UseCors(BlogAppConsts.DefaultCorsPolicyName);
+            app.UseBlogExceptionHandling();// 异常处理中间件
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
@@ -90,8 +82,8 @@ namespace WYBlog
                 {
                     options.Filters.RemoveAt(index);
                 }
-                //再添加自定义的
-                options.Filters.Add(typeof(BlogGlobalExceptionFilter));
+                //再添加自定义的 -- 这里改用中间件
+                //options.Filters.Add(typeof(BlogGlobalExceptionFilter));
             });
         }
 

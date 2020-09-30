@@ -43,11 +43,10 @@ namespace WYBlog.Controllers
 
         [AllowAnonymous]
         [HttpPost("tag", Name = "GetTag")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> AddTag([FromBody] CreateOrEditTagDto input)
         {
+            if (null == input) return BadRequest();
+
             var result = await _tagService.CreateAsync(input);
             return Ok(result);
         }
