@@ -144,11 +144,6 @@
             作者
             </summary>
         </member>
-        <member name="P:WYBlog.Entities.Article.LinkUrl">
-            <summary>
-            链接
-            </summary>
-        </member>
         <member name="P:WYBlog.Entities.Article.Remark">
             <summary>
             备注

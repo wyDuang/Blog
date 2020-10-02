@@ -76,11 +76,6 @@
             作者
             </summary>
         </member>
-        <member name="P:WYBlog.Dtos.ArticleDto.LinkUrl">
-            <summary>
-            链接
-            </summary>
-        </member>
         <member name="P:WYBlog.Dtos.ArticleDto.Remark">
             <summary>
             备注
@@ -139,11 +134,6 @@
         <member name="P:WYBlog.Dtos.CreateOrEditArticleDto.Author">
             <summary>
             作者
-            </summary>
-        </member>
-        <member name="P:WYBlog.Dtos.CreateOrEditArticleDto.LinkUrl">
-            <summary>
-            链接
             </summary>
         </member>
         <member name="P:WYBlog.Dtos.CreateOrEditArticleDto.Remark">

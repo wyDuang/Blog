@@ -44,11 +44,6 @@ namespace WYBlog.Entities
         public string Author { get; set; }
 
         /// <summary>
-        /// 链接
-        /// </summary>
-        public string LinkUrl { get; set; }
-
-        /// <summary>
         /// 备注
         /// </summary>
         public string Remark { get; set; }

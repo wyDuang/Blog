@@ -19,7 +19,6 @@ namespace WYBlog.EntityFrameworkCore
             builder.Property(x => x.Title).HasMaxLength(256).IsRequired().HasDefaultValue("");
             builder.Property(x => x.Html).HasColumnType("text").IsRequired();
             builder.Property(x => x.Markdown).HasColumnType("text").IsRequired();
-            builder.Property(x => x.LinkUrl).HasMaxLength(512).IsRequired().HasDefaultValue("");
             builder.Property(x => x.Remark).HasMaxLength(1024).IsRequired().HasDefaultValue("");
             builder.Property(x => x.ClickCount).IsRequired().HasDefaultValue(0);
             builder.Property(x => x.CommentCount).IsRequired().HasDefaultValue(0);

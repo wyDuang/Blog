@@ -35,13 +35,12 @@ namespace WYBlog.Migrations
                     Html = table.Column<string>(type: "text", nullable: false),
                     Markdown = table.Column<string>(type: "text", nullable: false),
                     Author = table.Column<string>(maxLength: 64, nullable: false, defaultValue: ""),
-                    LinkUrl = table.Column<string>(maxLength: 512, nullable: false, defaultValue: ""),
                     Remark = table.Column<string>(maxLength: 1024, nullable: false, defaultValue: ""),
                     ClickCount = table.Column<int>(nullable: false, defaultValue: 0),
                     CommentCount = table.Column<int>(nullable: false, defaultValue: 0),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     IsTop = table.Column<bool>(nullable: false, defaultValue: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2020, 9, 25, 14, 39, 40, 102, DateTimeKind.Local).AddTicks(7761))
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2020, 10, 2, 22, 3, 48, 900, DateTimeKind.Local).AddTicks(5270))
                 },
                 constraints: table =>
                 {
@@ -73,7 +72,7 @@ namespace WYBlog.Migrations
                     LinkUrl = table.Column<string>(maxLength: 512, nullable: false, defaultValue: ""),
                     Avatar = table.Column<string>(maxLength: 128, nullable: false, defaultValue: ""),
                     Description = table.Column<string>(maxLength: 256, nullable: false, defaultValue: ""),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2020, 9, 25, 14, 39, 40, 112, DateTimeKind.Local).AddTicks(19)),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2020, 10, 2, 22, 3, 48, 916, DateTimeKind.Local).AddTicks(3498)),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
@@ -93,7 +92,7 @@ namespace WYBlog.Migrations
                     MobilePhone = table.Column<string>(maxLength: 32, nullable: false, defaultValue: ""),
                     Email = table.Column<string>(maxLength: 64, nullable: false, defaultValue: ""),
                     Content = table.Column<string>(type: "text", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2020, 9, 25, 14, 39, 40, 114, DateTimeKind.Local).AddTicks(6721)),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2020, 10, 2, 22, 3, 48, 924, DateTimeKind.Local).AddTicks(83)),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>

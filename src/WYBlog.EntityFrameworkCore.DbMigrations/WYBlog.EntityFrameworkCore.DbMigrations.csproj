@@ -7,5 +7,4 @@
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.EntityFrameworkCore\WYBlog.EntityFrameworkCore.csproj" />
   </ItemGroup>
-
 </Project>

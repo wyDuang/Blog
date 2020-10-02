@@ -37,6 +37,20 @@
             <param name="token"></param>
             <returns></returns>
         </member>
+        <member name="M:WYBlog.Controllers.BlogController.GetArticleAsync(System.Int32)">
+            <summary>
+            根据Id获取文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.BlogController.GetArticleAsync(System.String)">
+            <summary>
+            根据key获取文章
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="M:WYBlog.Controllers.BlogController.QueryArticlesAsync(WYBlog.Dtos.QueryArticleDto)">
             <summary>
             查询文章列表

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using WYBlog.Dtos;
@@ -32,18 +33,57 @@ namespace WYBlog.Controllers
         #region Article
 
         /// <summary>
+        /// 根据Id获取文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("articles/{id:min(1)}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<IActionResult> GetArticleAsync(int id)
+        {
+            if (0 >= id) return BadRequest();
+
+            var result = await _articleService.GetAsync(id);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 根据key获取文章
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        [HttpGet("articles/{key:String}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<IActionResult> GetArticleAsync(string key)
+        {
+            if (key.IsNullOrWhiteSpace()) return BadRequest();
+
+            var result = await _articleService.GetByKeyAsync(key);
+            return Ok(result);
+        }
+
+
+        /// <summary>
         /// 查询文章列表
         /// </summary>
         /// <returns></returns>
         [HttpGet("articles")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]        
         public async Task<IActionResult> QueryArticlesAsync(QueryArticleDto input)
         {
+            if (null == input) return BadRequest();
+
             var result = await _articleService.GetPagedListAsync(input);
             return Ok(result);
         }
+
+
 
         /// <summary>
         /// 新增文章

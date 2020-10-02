@@ -16,7 +16,7 @@ namespace WYBlog.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("WYBlog.Entities.Article", b =>
@@ -62,7 +62,7 @@ namespace WYBlog.Migrations
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2020, 9, 25, 14, 39, 40, 102, DateTimeKind.Local).AddTicks(7761));
+                        .HasDefaultValue(new DateTime(2020, 10, 2, 22, 3, 48, 900, DateTimeKind.Local).AddTicks(5270));
 
                     b.Property<string>("Html")
                         .IsRequired()
@@ -77,13 +77,6 @@ namespace WYBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
-
-                    b.Property<string>("LinkUrl")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varchar(512) CHARACTER SET utf8mb4")
-                        .HasMaxLength(512)
-                        .HasDefaultValue("");
 
                     b.Property<string>("Markdown")
                         .IsRequired()
@@ -175,7 +168,7 @@ namespace WYBlog.Migrations
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2020, 9, 25, 14, 39, 40, 112, DateTimeKind.Local).AddTicks(19));
+                        .HasDefaultValue(new DateTime(2020, 10, 2, 22, 3, 48, 916, DateTimeKind.Local).AddTicks(3498));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -226,7 +219,7 @@ namespace WYBlog.Migrations
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2020, 9, 25, 14, 39, 40, 114, DateTimeKind.Local).AddTicks(6721));
+                        .HasDefaultValue(new DateTime(2020, 10, 2, 22, 3, 48, 924, DateTimeKind.Local).AddTicks(83));
 
                     b.Property<string>("Email")
                         .IsRequired()
