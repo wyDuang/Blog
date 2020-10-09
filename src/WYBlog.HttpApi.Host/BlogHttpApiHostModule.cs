@@ -58,8 +58,8 @@ namespace WYBlog
             app.UseRouting();
             app.UseCors(BlogAppConsts.DefaultCorsPolicyName);
             app.UseBlogExceptionHandling();// 异常处理中间件
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

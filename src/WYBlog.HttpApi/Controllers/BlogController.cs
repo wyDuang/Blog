@@ -54,7 +54,7 @@ namespace WYBlog.Controllers
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        [HttpGet("articles/{key:String}")]
+        [HttpGet("articles/{key}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

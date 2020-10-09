@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace WYBlog.Controllers
 {
-    //[ApiExplorerSettings(GroupName = ApiGroupingConsts.GroupName_v2)]
+    [ApiExplorerSettings(GroupName = ApiGroupingConsts.GroupName_v2)]
     public class SignatureController : BaseController
     {
         /// <summary>
