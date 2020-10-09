@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using WYBlog.Entities;
@@ -12,5 +13,7 @@ namespace WYBlog.IRepository
         Task<Article> FindByTitleAsync(string title);
 
         Task<Article> FindByKeyAsync(string key);
+
+        Task<IQueryable<Article>> QueryableListAsync();
     }
 }

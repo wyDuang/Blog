@@ -44,9 +44,9 @@ namespace WYBlog.Controllers
         [HttpGet("ip")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetIp2ReginAsync(string ip)
+        public async Task<IActionResult> GetIp2ReginAsync([FromQuery]string ip)
         {
-            return Ok();
+            return Ok(ip);
         }
     }
 }

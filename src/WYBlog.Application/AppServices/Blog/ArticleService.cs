@@ -14,10 +14,34 @@ namespace WYBlog.AppServices
     public class ArticleService : ApplicationService, IArticleService
     {
         private readonly IArticleRepository _repository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ArticleService(IArticleRepository repository)
+        public ArticleService(IArticleRepository repository, ICategoryRepository categoryRepository)
         {
             _repository = repository;
+            _categoryRepository = categoryRepository;
+        }
+
+        /// <summary>
+        /// 通过分类名称查询文章列表
+        /// </summary>
+        /// <param name="displayKey"></param>
+        /// <returns></returns>
+        public async Task<ListResultDto<ArticleDto>> GetListByCategoryAsync(string displayKey)
+        {
+            var categoryEntity = await _categoryRepository.FindByKeyAsync(displayKey);
+            if(categoryEntity == null)
+            {
+                throw new Exception("此分类不存在");
+            }
+            var articleList = (await _repository.QueryableListAsync())?
+                .Where(x => x.CategoryId == categoryEntity.Id)
+                .ToList();
+
+            return new ListResultDto<ArticleDto>()
+            {
+                Items = ObjectMapper.Map<List<Article>, List<ArticleDto>>(articleList)
+            };
         }
 
         /// <summary>
@@ -32,7 +56,7 @@ namespace WYBlog.AppServices
                 input.Sorting = nameof(Article.CreateTime);
             }
 
-            var tagList = await _repository.GetPagedListAsync(
+            var articleList = await _repository.GetPagedListAsync(
                 input.SkipCount,
                 input.MaxResultCount,
                 input.Sorting,
@@ -46,7 +70,7 @@ namespace WYBlog.AppServices
 
             return new PagedResultDto<ArticleDto>(
                 totalCount,
-                ObjectMapper.Map<List<Article>, List<ArticleDto>>(tagList)
+                ObjectMapper.Map<List<Article>, List<ArticleDto>>(articleList)
             );
         }
 

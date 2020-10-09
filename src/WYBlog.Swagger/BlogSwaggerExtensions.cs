@@ -60,7 +60,7 @@ namespace WYBlog
         };
 
         /// <summary>
-        /// AddSwagger
+        /// AddCustomSwagger
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>

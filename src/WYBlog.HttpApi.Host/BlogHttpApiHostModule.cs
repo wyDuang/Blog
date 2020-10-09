@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Linq;
@@ -17,6 +18,7 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using WYBlog.Configurations;
 using WYBlog.EntityFrameworkCore;
+using WYBlog.Jobs;
 using WYBlog.Middleware;
 
 namespace WYBlog
@@ -28,6 +30,7 @@ namespace WYBlog
         typeof(BlogSwaggerModule),
         typeof(BlogHttpApiModule),
         typeof(BlogApplicationModule),
+        typeof(BlogBackgroundJobsModule),
         typeof(BlogEntityFrameworkCoreModule),
         typeof(BlogEntityFrameworkCoreDbMigrationsModule)
         )]
@@ -40,6 +43,8 @@ namespace WYBlog
             ConfigureRouting(context.Services);
             ConfigureCors(context.Services);
             ConfigureAuthentication(context.Services);
+
+            //context.Services.AddTransient<IHostedService, HelloWorldJob>();
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -58,8 +63,8 @@ namespace WYBlog
             app.UseRouting();
             app.UseCors(BlogAppConsts.DefaultCorsPolicyName);
             app.UseBlogExceptionHandling();// 异常处理中间件
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

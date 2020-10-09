@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
-using System.Text;
-using Microsoft.Extensions.Configuration;
 
 namespace WYBlog.Configurations
 {
@@ -112,6 +110,18 @@ namespace WYBlog.Configurations
             public static string ApplicationName => _config["Github:ApplicationName"];
 
             public static string Scope => _config["Github:Scope"];
+        }
+
+        /// <summary>
+        /// Hangfire
+        /// </summary>
+        public static class Hangfire
+        {
+            public static string ConnectionString => _config["Hangfire:ConnectionString"];
+
+            public static string Login => _config["Hangfire:Login"];
+            
+            public static string Password => _config["Hangfire:Password"];
         }
 
         ///// <summary>

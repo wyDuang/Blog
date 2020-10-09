@@ -38,5 +38,10 @@ namespace WYBlog.Repository
                 .Take(maxResultCount)
                 .ToListAsync();
         }
+
+        public Task<IQueryable<Article>> QueryableListAsync()
+        {
+            return Task.Run(() => DbSet.AsQueryable());
+        }
     }
 }

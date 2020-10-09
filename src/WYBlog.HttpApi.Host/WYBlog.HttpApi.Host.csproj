@@ -4,11 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Resources\WYBlog.Application.Contracts.xml" />
-    <None Remove="Resources\WYBlog.Domain.xml" />
-    <None Remove="Resources\WYBlog.HttpApi.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\WYBlog.Application.Contracts.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -22,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.Application\WYBlog.Application.csproj" />
+    <ProjectReference Include="..\WYBlog.BackgroundJobs\WYBlog.BackgroundJobs.csproj" />
     <ProjectReference Include="..\WYBlog.EntityFrameworkCore.DbMigrations\WYBlog.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\WYBlog.HttpApi\WYBlog.HttpApi.csproj" />
     <ProjectReference Include="..\WYBlog.Swagger\WYBlog.Swagger.csproj" />

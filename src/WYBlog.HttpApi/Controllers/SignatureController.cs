@@ -13,7 +13,7 @@ namespace WYBlog.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok();
+            return Ok("获取签名成功");
         }
     }
 }
