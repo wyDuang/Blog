@@ -1,15 +1,19 @@
 ﻿using Hangfire;
 using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MySql.Core;
+using MailKit.Security;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
 using Volo.Abp.BackgroundJobs.Hangfire;
+using Volo.Abp.MailKit;
 using Volo.Abp.Modularity;
 using WYBlog.Configurations;
 
 namespace WYBlog
 {
     [DependsOn(
+        typeof(AbpMailKitModule),
         typeof(AbpBackgroundJobsHangfireModule),
         typeof(BlogApplicationContractsModule)
     )]
@@ -17,7 +21,28 @@ namespace WYBlog
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddHangfire(config =>
+            ConfigureMailKit();
+            ConfigureHangfire(context.Services);
+        }
+
+        /// <summary>
+        /// MailKit
+        /// </summary>
+        private void ConfigureMailKit()
+        {
+            Configure<AbpMailKitOptions>(options =>
+            {
+                options.SecureSocketOption = SecureSocketOptions.StartTls;
+            });
+        }
+
+        /// <summary>
+        /// Hangfire面板
+        /// </summary>
+        /// <param name="services"></param>
+        private void ConfigureHangfire(IServiceCollection services)
+        {
+            services.AddHangfire(config =>
             {
                 config.UseStorage(
                             new MySqlStorage(AppSettings.Hangfire.ConnectionString,
@@ -35,34 +60,30 @@ namespace WYBlog
 
             app.UseHangfireServer();
 
-            if (env.IsDevelopment())
+            app.UseHangfireDashboard(options: new DashboardOptions
             {
-                app.UseHangfireDashboard();
-            }
-            else
-            {
-                app.UseHangfireDashboard(options: new DashboardOptions
-                {
-                    Authorization = new[]
-                {
-                    new BasicAuthAuthorizationFilter(new BasicAuthAuthorizationFilterOptions
+                Authorization = new[]
                     {
-                        RequireSsl = false,
-                        SslRedirect = false,
-                        LoginCaseSensitive = true,
-                        Users = new []
+                        new BasicAuthAuthorizationFilter(new BasicAuthAuthorizationFilterOptions
                         {
-                            new BasicAuthAuthorizationUser
+                            RequireSsl = false,
+                            SslRedirect = false,
+                            LoginCaseSensitive = true,
+                            Users = new []
                             {
-                                Login = AppSettings.Hangfire.Login,
-                                PasswordClear =  AppSettings.Hangfire.Password
+                                new BasicAuthAuthorizationUser
+                                {
+                                    Login = AppSettings.Hangfire.Login,
+                                    PasswordClear =  AppSettings.Hangfire.Password
+                                }
                             }
-                        }
-                    })
-                },
-                    DashboardTitle = "任务调度中心"
-                });
-            }
+                        })
+                    },
+                DashboardTitle = "任务调度中心"
+            });
+
+            var service = context.ServiceProvider;
+            service.UseHangfireTest();
         }
     }
 }

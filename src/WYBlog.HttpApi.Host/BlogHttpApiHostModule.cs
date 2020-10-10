@@ -130,15 +130,20 @@ namespace WYBlog
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,// 是否验证颁发者
-                    ValidateAudience = true,// 是否验证访问群体
-                    ValidateLifetime = true,// 是否验证生存期
                     ValidateIssuerSigningKey = true,// 是否验证安全密钥
-                    ClockSkew = TimeSpan.FromSeconds(30),// 验证Token的时间偏移量
-                    ValidAudience = AppSettings.JwtAuth.Audience,// 访问群体
-                    ValidIssuer = AppSettings.JwtAuth.Issuer,// 颁发者
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey)),// 安全密钥
-                    RequireExpirationTime = true
+
+                    ValidateIssuer = true,// 是否验证颁发者
+                    ValidIssuer = AppSettings.JwtAuth.Issuer,// 颁发者
+
+                    ValidateAudience = true,// 是否验证访问群体
+                    ValidAudience = AppSettings.JwtAuth.Audience,// 访问群体
+
+                    ValidateLifetime = true,// 是否验证生存期
+                    RequireExpirationTime = true, //设置必须要有超时时间
+
+                    ClockSkew = TimeSpan.FromSeconds(30)// 验证Token的有效时间的缓冲区
+                    //TimeSpan.Zero 设置为0时，表示到期马上失效
                 };
 
                 // 应用程序提供的对象，用于处理承载引发的事件，身份验证处理程序

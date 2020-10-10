@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/src/WYBlog.HttpApi.Host/Properties
+Logs

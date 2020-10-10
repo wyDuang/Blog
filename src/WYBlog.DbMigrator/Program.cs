@@ -21,7 +21,7 @@ namespace WYBlog
                 .MinimumLevel.Override("WYBlog", LogEventLevel.Information)
 #endif
                 .Enrich.FromLogContext()
-                .WriteTo.File(Path.Combine(Directory.GetCurrentDirectory(), "Logs/logs.txt"))
+                .WriteTo.File(Path.Combine(Directory.GetCurrentDirectory(), "Logs/logs_.txt"), rollingInterval: RollingInterval.Day)
                 .WriteTo.Console()
                 .CreateLogger();
 

@@ -19,15 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.EntityFrameworkCore.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.DbMigrator", "src\WYBlog.DbMigrator\WYBlog.DbMigrator.csproj", "{F9D7F11B-C0B3-497D-960C-C660560DED43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.HttpApi", "src\WYBlog.HttpApi\WYBlog.HttpApi.csproj", "{93CCA80F-E55D-4F01-BB47-AB755092EB29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.HttpApi", "src\WYBlog.HttpApi\WYBlog.HttpApi.csproj", "{93CCA80F-E55D-4F01-BB47-AB755092EB29}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.HttpApi.Host", "src\WYBlog.HttpApi.Host\WYBlog.HttpApi.Host.csproj", "{E2ABCD4A-2808-4F5B-B3E6-42DA56CE8185}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.Swagger", "src\WYBlog.Swagger\WYBlog.Swagger.csproj", "{261300C5-9F03-441B-81B9-F6C0DAC23F77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.Swagger", "src\WYBlog.Swagger\WYBlog.Swagger.csproj", "{261300C5-9F03-441B-81B9-F6C0DAC23F77}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FAE30B3B-6A8F-47E0-BCF3-649E04B155DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WYBlog.BackgroundJobs", "src\WYBlog.BackgroundJobs\WYBlog.BackgroundJobs.csproj", "{F1C20121-5BF3-435E-A1BE-D110FAB68A39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYBlog.BackgroundJobs", "src\WYBlog.BackgroundJobs\WYBlog.BackgroundJobs.csproj", "{F1C20121-5BF3-435E-A1BE-D110FAB68A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

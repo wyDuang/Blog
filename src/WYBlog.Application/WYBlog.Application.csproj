@@ -4,13 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="3.1.2" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="3.2.1" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="3.2.1" />
     <PackageReference Include="Caching.CSRedis" Version="3.6.5" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.6" />
-    <PackageReference Include="Volo.Abp.Caching" Version="3.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.8" />
+    <PackageReference Include="Volo.Abp.Caching" Version="3.2.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.8" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="3.2.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj" />

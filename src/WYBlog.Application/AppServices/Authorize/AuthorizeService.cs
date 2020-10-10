@@ -107,9 +107,9 @@ namespace WYBlog.AppServices
                         var claims = new[] {
                             new Claim(ClaimTypes.Name, user.Name),
                             new Claim(ClaimTypes.Email, user.Email),
-                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.Nbf, $"{nbf}"),
-                            new Claim(JwtRegisteredClaimNames.Exp, $"{exp}")
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),//唯一编号
+                            new Claim(JwtRegisteredClaimNames.Nbf, $"{nbf}"),//生效时间
+                            new Claim(JwtRegisteredClaimNames.Exp, $"{exp}")//过期时间
                         };
 
                         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey));

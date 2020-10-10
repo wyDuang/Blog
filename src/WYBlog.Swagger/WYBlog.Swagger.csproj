@@ -3,11 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\31huiyi\.nuget\packages\volo.abp.aspnetcore\3.2.1\contentFiles\any\netcoreapp3.1\Properties\launchSettings.json" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore" Version="3.0.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore" Version="3.2.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

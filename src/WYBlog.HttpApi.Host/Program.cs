@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 
 namespace WYBlog
 {
@@ -13,7 +11,33 @@ namespace WYBlog
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
+#if DEBUG
+                .MinimumLevel.Override("WYBlog", LogEventLevel.Debug)
+#else
+                .MinimumLevel.Override("WYBlog", LogEventLevel.Information)
+#endif          
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.File(Path.Combine(Directory.GetCurrentDirectory(), "Logs/logs_.txt"), rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting web host. - 正在启动web主机。");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly! - 主机意外终止！");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,6 +46,7 @@ namespace WYBlog
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-            .UseAutofac();
+            .UseAutofac()
+            .UseSerilog();
     }
 }
