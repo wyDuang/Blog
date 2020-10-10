@@ -12,6 +12,9 @@ namespace WYBlog
             var job = service.GetService<HangfireTestJob>();
 
             RecurringJob.AddOrUpdate("定时任务测试", () => job.ExecuteAsync(), CronType.Minute(10));
+
+            //还有别的方法：Enqueue、Schedule、ContinueJobWith
+            //Hangfire官方文档：https://docs.hangfire.io/en/latest/
         }
     }
 }
