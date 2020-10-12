@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace WYBlog.Controllers
-{    
-    [ApiController]
+{
+    [Authorize]
+    [ApiController]    
     [Route("[controller]")]
-    //[Produces("application/json")]
+    [Produces("application/json")]
     public abstract class BaseController : AbpController
     {
     }

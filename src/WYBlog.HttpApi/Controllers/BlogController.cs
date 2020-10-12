@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using WYBlog.Dtos;
 using WYBlog.IAppServices;
+using WYBlog.Permissions;
 
 namespace WYBlog.Controllers
 {
@@ -41,6 +42,7 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Authorize(BlogPermissions.Articles.Default)]
         public async Task<IActionResult> GetArticleAsync(int id)
         {
             if (0 >= id) return BadRequest();
@@ -58,6 +60,7 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Authorize(BlogPermissions.Articles.Default)]
         public async Task<IActionResult> GetArticleAsync(string key)
         {
             if (key.IsNullOrWhiteSpace()) return BadRequest();
@@ -74,7 +77,8 @@ namespace WYBlog.Controllers
         [HttpGet("articles")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]        
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Authorize(BlogPermissions.Articles.Default)]
         public async Task<IActionResult> QueryArticlesAsync(QueryArticleDto input)
         {
             if (null == input) return BadRequest();
@@ -82,8 +86,6 @@ namespace WYBlog.Controllers
             var result = await _articleService.GetPagedListAsync(input);
             return Ok(result);
         }
-
-
 
         /// <summary>
         /// 新增文章
@@ -95,6 +97,7 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+        [Authorize(BlogPermissions.Articles.Create)]
         public async Task<IActionResult> AddArticle([FromBody] CreateOrEditArticleDto input)
         {
             if (null == input) return BadRequest();
@@ -114,7 +117,8 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-        public async Task<IActionResult> EditCategory(int id, [FromBody] CreateOrEditArticleDto input)
+        [Authorize(BlogPermissions.Articles.Edit)]
+        public async Task<IActionResult> EditArticle(int id, [FromBody] CreateOrEditArticleDto input)
         {
             await _articleService.UpdateAsync(id, input);
             return Ok();
@@ -129,6 +133,7 @@ namespace WYBlog.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Authorize(BlogPermissions.Articles.Delete)]
         public async Task<IActionResult> DeleteArticle(int id)
         {
             await _articleService.DeleteAsync(id);

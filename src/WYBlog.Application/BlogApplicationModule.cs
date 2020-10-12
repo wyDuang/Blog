@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
 using WYBlog.Configurations;
 
 namespace WYBlog
@@ -11,8 +13,10 @@ namespace WYBlog
     [DependsOn(
         typeof(BlogDomainModule),
         typeof(BlogApplicationContractsModule),
+        typeof(AbpCachingModule),
         typeof(AbpAutoMapperModule),
-        typeof(AbpCachingModule)
+        typeof(AbpPermissionManagementApplicationModule),
+        typeof(AbpAspNetCoreAuthenticationJwtBearerModule)
         )]
     public class BlogApplicationModule : AbpModule
     {

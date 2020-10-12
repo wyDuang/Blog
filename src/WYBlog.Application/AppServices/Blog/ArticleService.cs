@@ -30,7 +30,7 @@ namespace WYBlog.AppServices
         public async Task<ListResultDto<ArticleDto>> GetListByCategoryAsync(string displayKey)
         {
             var categoryEntity = await _categoryRepository.FindByKeyAsync(displayKey);
-            if(categoryEntity == null)
+            if (categoryEntity == null)
             {
                 throw new Exception("此分类不存在");
             }
