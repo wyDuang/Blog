@@ -82,6 +82,7 @@ namespace WYBlog
 
                 #region 小绿锁，JWT身份认证配置
 
+                //添加保护api资源的描述
                 var security = new OpenApiSecurityScheme
                 {
                     Description = "JWT模式授权，请输入 Bearer {Token} 进行身份验证",
@@ -94,8 +95,10 @@ namespace WYBlog
                     { security, Array.Empty<string>() }
                 });
 
+                //开启加权锁
                 options.OperationFilter<AddResponseHeadersFilter>();
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                //添加请求头的Header中的token,传递到后台
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
 
                 #endregion

@@ -82,8 +82,8 @@ namespace WYBlog
                 DashboardTitle = "任务调度中心"
             });
 
-            var service = context.ServiceProvider;
-            service.UseHangfireTest();
+            //var service = context.ServiceProvider;
+            //service.UseHangfireTest();
         }
     }
 }

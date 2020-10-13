@@ -22,7 +22,9 @@ namespace WYBlog
 #endif          
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.File(Path.Combine(Directory.GetCurrentDirectory(), "Logs/logs_.txt"), rollingInterval: RollingInterval.Day)
+                .WriteTo.Async(x => x.File(Path.Combine(Directory.GetCurrentDirectory(), "Logs/logs_.txt"),
+                    rollingInterval: RollingInterval.Day,
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {SourceContext} {NewLine}{Message} {NewLine}{Exception}{NewLine}"))
                 .CreateLogger();
 
             try

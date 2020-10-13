@@ -64,7 +64,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:WYBlog.Controllers.BlogController.EditCategory(System.Int32,WYBlog.Dtos.CreateOrEditArticleDto)">
+        <member name="M:WYBlog.Controllers.BlogController.EditArticle(System.Int32,WYBlog.Dtos.CreateOrEditArticleDto)">
             <summary>
             编辑文章
             </summary>
