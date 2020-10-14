@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.EventBus.Distributed;
 using WYBlog.Dtos;
 using WYBlog.Entities;
 using WYBlog.IAppServices;
@@ -15,11 +16,15 @@ namespace WYBlog.AppServices
     {
         private readonly IArticleRepository _repository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IDistributedEventBus _distributedEventBus;
 
-        public ArticleService(IArticleRepository repository, ICategoryRepository categoryRepository)
+        public ArticleService(IArticleRepository repository, 
+            ICategoryRepository categoryRepository,
+            IDistributedEventBus distributedEventBus)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
+            _distributedEventBus = distributedEventBus;
         }
 
         /// <summary>

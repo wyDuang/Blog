@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WYBlog
 {
-    public class UserResponse
+    public class GitHubUserResponse
     {
         public string Login { get; set; }
 

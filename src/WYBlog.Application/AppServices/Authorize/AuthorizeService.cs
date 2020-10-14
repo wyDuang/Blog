@@ -149,7 +149,7 @@ namespace WYBlog.AppServices
                 if (httpResponse.StatusCode == HttpStatusCode.OK)
                 {
                     var content = await httpResponse.Content.ReadAsStringAsync();
-                    var user = JsonConvert.DeserializeObject<UserResponse>(content);
+                    var user = JsonConvert.DeserializeObject<GitHubUserResponse>(content);
                     if (user?.Id == AppSettings.GitHub.UserId)
                     {
                         var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
