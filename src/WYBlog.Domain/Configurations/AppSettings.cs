@@ -43,12 +43,24 @@ namespace WYBlog.Configurations
         /// </summary>
         public static class JwtAuth
         {
+            /// <summary>
+            /// 接受者
+            /// </summary>
             public static string Audience => _config["JwtAuth:Audience"];
 
+            /// <summary>
+            /// 签发者
+            /// </summary>
             public static string Issuer => _config["JwtAuth:Issuer"];
 
+            /// <summary>
+            /// 密匙
+            /// </summary>
             public static string SecurityKey => _config["JwtAuth:SecurityKey"];
 
+            /// <summary>
+            /// 过期时间
+            /// </summary>
             public static int Expires => Convert.ToInt32(_config["JwtAuth:Expires"]);
         }
 

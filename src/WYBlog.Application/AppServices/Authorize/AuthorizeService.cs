@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using WYBlog.Configurations;
+using WYBlog.Dtos;
 using WYBlog.IAppServices;
 
 namespace WYBlog.AppServices
@@ -30,6 +31,58 @@ namespace WYBlog.AppServices
         public AuthorizeService(IHttpClientFactory httpClient)
         {
             _httpClient = httpClient;
+        }
+
+        /// <summary>
+        /// 根据账户密码得到 Token
+        /// </summary>
+        /// <param name="accountInputDto"></param>
+        /// <returns></returns>
+        public async Task<string> GenerateTokenAsync(AccountInputDto accountInputDto)
+        {
+            if (accountInputDto.UserName == "wuyang" && accountInputDto.Password == "123456")
+            {
+                var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
+                var expiresAt = authTime.Add(TimeSpan.FromMinutes(AppSettings.JwtAuth.Expires));//Exp 过期时间，在此之后不可用
+
+                var nbf = new DateTimeOffset(authTime).ToUnixTimeSeconds();
+                var exp = new DateTimeOffset(expiresAt).ToUnixTimeSeconds();
+
+                var claims = new[] {
+                    new Claim(ClaimTypes.Name, accountInputDto.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),//唯一编号
+                    new Claim(JwtRegisteredClaimNames.Nbf, $"{nbf}"),//生效时间
+                    new Claim(JwtRegisteredClaimNames.Exp, $"{exp}")//过期时间
+                };
+
+                var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey));
+
+                var securityToken = new JwtSecurityToken(
+                    issuer: AppSettings.JwtAuth.Issuer,
+                    audience: AppSettings.JwtAuth.Audience,
+                    claims: claims,
+                    notBefore: authTime,
+                    expires: expiresAt,
+                    signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256));
+
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(securityToken);
+
+                var result = new
+                {
+                    access_token = tokenString,
+                    token_type = "Bearer",
+                    profile = new
+                    {
+                        name = accountInputDto.UserName,
+                        auth_time = nbf,
+                        expires_at = exp
+                    }
+                };
+
+                return await Task.FromResult(JsonConvert.SerializeObject(result));
+            }
+
+            return await Task.FromResult("");
         }
 
         /// <summary>
@@ -155,7 +208,7 @@ namespace WYBlog.AppServices
             var claims = new JwtSecurityToken(token).Claims;
 
             var name = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
-            var email = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+            var email = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
             if (name == AppSettings.GitHub.ApplicationName && !email.IsNullOrWhiteSpace())
             {

@@ -10,6 +10,13 @@
             </summary>
             <returns>JSON Web Token</returns>
         </member>
+        <member name="M:WYBlog.Controllers.AuthController.GenerateTokenAsync(WYBlog.Dtos.AccountInputDto)">
+            <summary>
+            根据账号密码生成Token
+            </summary>
+            <param name="accountInputDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:WYBlog.Controllers.AuthController.GetLoginAddressAsync">
             <summary>
             获取登录地址(GitHub)

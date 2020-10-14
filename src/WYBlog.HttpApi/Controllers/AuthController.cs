@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NUglify.Helpers;
 using System.Threading.Tasks;
+using WYBlog.Dtos;
 using WYBlog.IAppServices;
 
 namespace WYBlog.Controllers
@@ -19,6 +20,24 @@ namespace WYBlog.Controllers
         public AuthController(IAuthorizeService authorizeService)
         {
             _authorizeService = authorizeService;
+        }
+
+        /// <summary>
+        /// 根据账号密码生成Token
+        /// </summary>
+        /// <param name="accountInputDto"></param>
+        /// <returns></returns>
+        [HttpGet("token")]
+        public async Task<IActionResult> GenerateTokenAsync(AccountInputDto accountInputDto)
+        {
+            if (null == accountInputDto) return BadRequest();
+
+            var token = await _authorizeService.GenerateTokenAsync(accountInputDto);
+            if (!token.IsNullOrWhiteSpace())
+            {
+                return Ok(token);
+            }
+            return NotFound("token不存在！");
         }
 
         /// <summary>

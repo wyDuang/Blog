@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
+using WYBlog.Dtos;
 
 namespace WYBlog.IAppServices
 {
     public interface IAuthorizeService : IApplicationService
     {
+        /// <summary>
+        /// 根据账户密码得到 Token
+        /// </summary>
+        /// <param name="accountInputDto"></param>
+        /// <returns></returns>
+        Task<string> GenerateTokenAsync(AccountInputDto accountInputDto);
+
         /// <summary>
         /// 获取登录地址(GitHub)
         /// </summary>

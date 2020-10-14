@@ -341,6 +341,13 @@
             标签Key
             </summary>
         </member>
+        <member name="M:WYBlog.IAppServices.IAuthorizeService.GenerateTokenAsync(WYBlog.Dtos.AccountInputDto)">
+            <summary>
+            根据账户密码得到 Token
+            </summary>
+            <param name="accountInputDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:WYBlog.IAppServices.IAuthorizeService.GetLoginAddressAsync">
             <summary>
             获取登录地址(GitHub)
