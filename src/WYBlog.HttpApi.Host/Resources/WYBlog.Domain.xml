@@ -59,6 +59,21 @@
             GitHub
             </summary>
         </member>
+        <member name="P:WYBlog.Configurations.AppSettings.GitHub.API_Authorize">
+            <summary>
+            GET请求，跳转GitHub登录界面，获取用户授权，得到code
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.AppSettings.GitHub.API_AccessToken">
+            <summary>
+            POST请求，根据code得到access_token
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.AppSettings.GitHub.API_User">
+            <summary>
+            GET请求，根据access_token得到用户信息
+            </summary>
+        </member>
         <member name="T:WYBlog.Configurations.AppSettings.Hangfire">
             <summary>
             Hangfire
@@ -107,6 +122,36 @@
         <member name="F:WYBlog.Configurations.GitHubConfig.Scope">
             <summary>
             Scope
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.Advertisement">
+            <summary>
+            广告表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Advertisement.ImgUrl">
+            <summary>
+            广告图片
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Advertisement.Title">
+            <summary>
+            广告标题
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Advertisement.Url">
+            <summary>
+            广告链接
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Advertisement.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Advertisement.CreateTime">
+            <summary>
+            创建时间
             </summary>
         </member>
         <member name="T:WYBlog.Entities.Article">
@@ -337,6 +382,106 @@
         <member name="P:WYBlog.Entities.Signature.CreateTime">
             <summary>
             创建时间
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.Role">
+            <summary>
+            角色表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.OrderSort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.Enabled">
+            <summary>
+            是否激活
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.CreateId">
+            <summary>
+            创建ID
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.ModifyId">
+            <summary>
+            修改ID
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.Role.ModifyTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="T:WYBlog.Entities.UserInfo">
+            <summary>
+            用户信息表
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.RealName">
+            <summary>
+            真实姓名
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.IsDeleted">
+            <summary>
+            伪删除
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:WYBlog.Entities.UserInfo.Age">
+            <summary>
+            年龄
             </summary>
         </member>
     </members>

@@ -139,7 +139,7 @@ namespace WYBlog
                     ValidateAudience = true,// 是否验证访问群体
                     ValidAudience = AppSettings.JwtAuth.Audience,// 访问群体
 
-                    ValidateLifetime = true,// 是否验证生存期
+                    ValidateLifetime = true,// 设置必须验证超时时间
                     RequireExpirationTime = true, //设置必须要有超时时间
 
                     ClockSkew = TimeSpan.FromSeconds(30)// 验证Token的有效时间的缓冲区

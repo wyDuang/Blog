@@ -3,8 +3,8 @@ using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MySql.Core;
 using MailKit.Security;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Volo.Abp;
+using Volo.Abp.AspNetCore;
 using Volo.Abp.BackgroundJobs.Hangfire;
 using Volo.Abp.MailKit;
 using Volo.Abp.Modularity;
@@ -14,7 +14,9 @@ namespace WYBlog
 {
     [DependsOn(
         typeof(AbpMailKitModule),
+        typeof(AbpAspNetCoreModule),
         typeof(AbpBackgroundJobsHangfireModule),
+        typeof(BlogDomainModule),
         typeof(BlogApplicationContractsModule)
     )]
     public class BlogBackgroundJobsModule : AbpModule

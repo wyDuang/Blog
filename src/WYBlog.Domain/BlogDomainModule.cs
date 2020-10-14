@@ -1,10 +1,11 @@
-﻿using Volo.Abp.Modularity;
+﻿using Volo.Abp.BackgroundJobs;
+using Volo.Abp.Modularity;
 
 namespace WYBlog
 {
     [DependsOn(
-        typeof(BlogDomainSharedModule)
-
+        typeof(BlogDomainSharedModule),
+        typeof(AbpBackgroundJobsDomainModule)
         )]
     public class BlogDomainModule : AbpModule
     {

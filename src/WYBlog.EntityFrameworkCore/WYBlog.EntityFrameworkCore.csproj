@@ -9,4 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntityFrameworkCore\EntityTypeConfigurations\System\" />
+  </ItemGroup>
 </Project>

@@ -8,10 +8,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.BackgroundJobs.HangFire" Version="3.2.1" />
+    <PackageReference Include="Volo.Abp.MailKit" Version="3.2.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore" Version="3.2.1" />
     <PackageReference Include="Hangfire.MySql.Core" Version="2.2.5" />
     <PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore" Version="3.2.1" />
-    <PackageReference Include="Volo.Abp.MailKit" Version="3.2.1" />
     <PackageReference Include="AngleSharp" Version="1.0.0-alpha-827" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.4" />
   </ItemGroup>
@@ -19,5 +19,4 @@
     <ProjectReference Include="..\WYBlog.Application.Contracts\WYBlog.Application.Contracts.csproj" />
     <ProjectReference Include="..\WYBlog.Domain\WYBlog.Domain.csproj" />
   </ItemGroup>
-
 </Project>

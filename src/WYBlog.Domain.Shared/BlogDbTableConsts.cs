@@ -32,6 +32,11 @@
         /// </summary>
         public const string GuestBooks = "guestBooks";
 
+        // <summary>
+        /// 广告表
+        /// </summary>
+        public const string Advertisements = "advertisement";
+
         /// <summary>
         /// 个性签名记录表
         /// </summary>

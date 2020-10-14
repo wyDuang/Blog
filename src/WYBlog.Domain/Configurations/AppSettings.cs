@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace WYBlog.Configurations
 {
@@ -82,7 +83,7 @@ namespace WYBlog.Configurations
 
                     public static string HostName => _config["RabbitMQ:Connections:Default:HostName"];
 
-                    public static int Port => Convert.ToInt32(_config["RabbitMQ:Connections:Default:Port"]);
+                    public static int Port => _config.GetSection("RabbitMQ:Connections:Default:Port").Get<int>();
                 }
             }
 
@@ -99,7 +100,22 @@ namespace WYBlog.Configurations
         /// </summary>
         public static class GitHub
         {
-            public static int UserId => Convert.ToInt32(_config["Github:UserId"]);
+            /// <summary>
+            /// GET请求，跳转GitHub登录界面，获取用户授权，得到code
+            /// </summary>
+            public static string API_Authorize => _config["Github:API_Authorize"];
+
+            /// <summary>
+            /// POST请求，根据code得到access_token
+            /// </summary>
+            public static string API_AccessToken => _config["Github:API_AccessToken"];
+
+            /// <summary>
+            /// GET请求，根据access_token得到用户信息
+            /// </summary>
+            public static string API_User => _config["Github:API_User"];
+
+            public static int UserId => _config.GetSection("Github:UserId").Get<int>();
 
             public static string Client_ID => _config["Github:ClientID"];
 
@@ -124,13 +140,25 @@ namespace WYBlog.Configurations
             public static string Password => _config["Hangfire:Password"];
         }
 
-        ///// <summary>
-        ///// UploadConfig
-        ///// </summary>
-        //public static class UploadConfig
-        //{
-        //    public static string UploadFile => _config["UploadConfig:UploadFile"];
-        //    public static string Domain => _config["UploadConfig:Domain"];
-        //}
+        /// <summary>
+        /// FileUpload
+        /// </summary>
+        public static class FileUpload
+        {
+            /// <summary>
+            /// 文件上传目录
+            /// </summary>
+            public static string FileUploadLocalFolder => _config["UploadFile:FileUploadLocalFolder"];
+
+            /// <summary>
+            /// 允许的文件最大大小
+            /// </summary>
+            public static int MaxFileSize => _config.GetSection("UploadFile:MaxFileSize ").Get<int>();
+
+            /// <summary>
+            /// 允许的文件类型
+            /// </summary>
+            public static string[] AllowedUploadFormats => _config.GetSection("UploadFile:MaxFileSize").Get<string[]>();
+        }
     }
 }

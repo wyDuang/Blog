@@ -90,10 +90,13 @@ namespace WYBlog
                     In = ParameterLocation.Header, //jwt默认存放Authorization信息的位置(请求头中)
                     Type = SecuritySchemeType.ApiKey
                 };
+                //指定名称必须为oauth2，因为SecurityRequirementsOperationFilter默认的securitySchemaName=oauth2
                 options.AddSecurityDefinition("oauth2", security);
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { security, Array.Empty<string>() }
-                });
+                
+                //注释这部分，让不需要token的接口不显示闭合绿锁
+                //options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                //    { security, Array.Empty<string>() }
+                //});
 
                 //开启加权锁
                 options.OperationFilter<AddResponseHeadersFilter>();
