@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
-using Volo.Abp.AspNetCore.Mvc;
 
 namespace WYBlog
 {
@@ -12,7 +11,6 @@ namespace WYBlog
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddHttpClient();
         }
     }
 }

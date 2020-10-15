@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\WYBlog.EntityFrameworkCore\WYBlog.EntityFrameworkCore.csproj" />
   </ItemGroup>

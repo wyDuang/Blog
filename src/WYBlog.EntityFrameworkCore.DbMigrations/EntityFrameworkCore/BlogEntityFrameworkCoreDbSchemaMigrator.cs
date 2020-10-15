@@ -8,8 +8,7 @@ namespace WYBlog.EntityFrameworkCore
 {
     [Dependency(ServiceLifetime.Transient, ReplaceServices = true)]
     [ExposeServices(typeof(IBlogDbSchemaMigrator))]
-    public class BlogEntityFrameworkCoreDbSchemaMigrator
-        : IBlogDbSchemaMigrator
+    public class BlogEntityFrameworkCoreDbSchemaMigrator : IBlogDbSchemaMigrator
     {
         private readonly BlogMigrationsDbContext _dbContext;
 

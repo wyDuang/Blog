@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Linq;
@@ -18,7 +17,6 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using WYBlog.Configurations;
 using WYBlog.EntityFrameworkCore;
-using WYBlog.Jobs;
 using WYBlog.Middleware;
 
 namespace WYBlog
@@ -43,8 +41,6 @@ namespace WYBlog
             ConfigureRouting(context.Services);
             ConfigureCors(context.Services);
             ConfigureAuthentication(context.Services);
-
-            //context.Services.AddTransient<IHostedService, HelloWorldJob>();
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -121,6 +117,8 @@ namespace WYBlog
         /// <param name="services"></param>
         private void ConfigureAuthentication(IServiceCollection services)
         {
+            var jwtAuthConfig = services.GetConfiguration().GetSection("JwtAuth");
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -131,13 +129,13 @@ namespace WYBlog
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,// 是否验证安全密钥
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey)),// 安全密钥
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAuthConfig["SecurityKey"])),// 安全密钥
 
                     ValidateIssuer = true,// 是否验证颁发者
-                    ValidIssuer = AppSettings.JwtAuth.Issuer,// 颁发者
+                    ValidIssuer = jwtAuthConfig["Issuer"],// 颁发者
 
                     ValidateAudience = true,// 是否验证访问群体
-                    ValidAudience = AppSettings.JwtAuth.Audience,// 访问群体
+                    ValidAudience = jwtAuthConfig["Audience"],// 访问群体
 
                     ValidateLifetime = true,// 设置必须验证超时时间
                     RequireExpirationTime = true, //设置必须要有超时时间

@@ -20,6 +20,8 @@ namespace WYBlog.EntityFrameworkCore
         public DbSet<FriendLink> FriendLinks { get; set; }
         public DbSet<GuestBook> GuestBooks { get; set; }
         public DbSet<Signature> Signatures { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<UserInfo> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

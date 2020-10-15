@@ -19,14 +19,23 @@ namespace WYBlog.Controllers
             _fileService = fileService;
         }
 
-        [HttpGet]
-        [Route("{name:required}")]
+        /// <summary>
+        /// 根据文件名得到文件
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpGet("{name:required}")]
         public async Task<FileResult> GetAsync(string name)
         {
             var bytes = await _fileService.GetAsync(name);
             return File(bytes, MimeTypes.GetByExtension(Path.GetExtension(name)));
         }
 
+        /// <summary>
+        /// 创建文件
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost("upload")]
         public async Task<JsonResult> UploadFile(IFormFile file)
         {

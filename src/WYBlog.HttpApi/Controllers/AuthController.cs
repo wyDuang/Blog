@@ -44,7 +44,7 @@ namespace WYBlog.Controllers
         /// 获取登录地址(GitHub)
         /// </summary>
         /// <returns></returns>
-        [HttpGet("url")]
+        [HttpGet("github/url")]
         public async Task<IActionResult> GetLoginAddressAsync()
         {
             return Ok(await _authorizeService.GetLoginAddressAsync());
@@ -55,7 +55,7 @@ namespace WYBlog.Controllers
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        [HttpGet("access_token")]
+        [HttpGet("github/access_token")]
         public async Task<IActionResult> GetAccessTokenAsync(string code)
         {
             if (code.IsNullOrWhiteSpace()) return BadRequest();
@@ -73,7 +73,7 @@ namespace WYBlog.Controllers
         /// </summary>
         /// <param name="access_token"></param>
         /// <returns></returns>
-        [HttpGet("token")]
+        [HttpGet("github/token")]
         public async Task<IActionResult> GenerateTokenAsync(string access_token)
         {
             if (access_token.IsNullOrWhiteSpace()) return BadRequest();
@@ -91,7 +91,6 @@ namespace WYBlog.Controllers
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpGet("verify_token")]
         public async Task<IActionResult> VerifyToken(string token)
         {

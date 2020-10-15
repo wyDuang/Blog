@@ -22,6 +22,7 @@
     <ProjectReference Include="..\WYBlog.EntityFrameworkCore.DbMigrations\WYBlog.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\WYBlog.HttpApi\WYBlog.HttpApi.csproj" />
     <ProjectReference Include="..\WYBlog.Swagger\WYBlog.Swagger.csproj" />
+    <ProjectReference Include="..\WYBlog.ToolKits\WYBlog.ToolKits.csproj" />
   </ItemGroup>
 
   <ItemGroup>

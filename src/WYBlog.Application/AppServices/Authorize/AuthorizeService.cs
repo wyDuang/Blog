@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
@@ -25,12 +26,18 @@ namespace WYBlog.AppServices
         private const string KEY_GenerateToken = Authorize_Prefix + ":GenerateToken-{0}";
 
         public IDistributedCache Cache { get; set; }
-
         private readonly IHttpClientFactory _httpClient;
+        private readonly GitHubConfig gitHubConfig;
+        private readonly JwtAuthConfig jwtAuthConfig;
 
-        public AuthorizeService(IHttpClientFactory httpClient)
+        public AuthorizeService(
+            IHttpClientFactory httpClient,
+            IOptionsSnapshot<GitHubConfig> gitHubOptions,
+            IOptionsSnapshot<JwtAuthConfig> jwtAuthOptions)
         {
             _httpClient = httpClient;
+            gitHubConfig = gitHubOptions.Value;
+            jwtAuthConfig = jwtAuthOptions.Value;
         }
 
         /// <summary>
@@ -43,7 +50,7 @@ namespace WYBlog.AppServices
             if (accountInputDto.UserName == "wuyang" && accountInputDto.Password == "123456")
             {
                 var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
-                var expiresAt = authTime.Add(TimeSpan.FromMinutes(AppSettings.JwtAuth.Expires));//Exp 过期时间，在此之后不可用
+                var expiresAt = authTime.Add(TimeSpan.FromMinutes(jwtAuthConfig.Expires));//Exp 过期时间，在此之后不可用
 
                 var nbf = new DateTimeOffset(authTime).ToUnixTimeSeconds();
                 var exp = new DateTimeOffset(expiresAt).ToUnixTimeSeconds();
@@ -55,11 +62,11 @@ namespace WYBlog.AppServices
                     new Claim(JwtRegisteredClaimNames.Exp, $"{exp}")//过期时间
                 };
 
-                var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey));
+                var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAuthConfig.SecurityKey));
 
                 var securityToken = new JwtSecurityToken(
-                    issuer: AppSettings.JwtAuth.Issuer,
-                    audience: AppSettings.JwtAuth.Audience,
+                    issuer: jwtAuthConfig.Issuer,
+                    audience: jwtAuthConfig.Audience,
                     claims: claims,
                     notBefore: authTime,
                     expires: expiresAt,
@@ -96,11 +103,11 @@ namespace WYBlog.AppServices
             {
                 var address = string.Concat(new string[]
                 {
-                    AppSettings.GitHub.API_Authorize,
-                    "?client_id=", AppSettings.GitHub.Client_ID,
-                    "&scope=", AppSettings.GitHub.Scope,
+                    gitHubConfig.API_Authorize,
+                    "?client_id=", gitHubConfig.Client_ID,
+                    "&scope=", gitHubConfig.Scope,
                     "&state=", Guid.NewGuid().ToString("N"),
-                    "&redirect_uri=", AppSettings.GitHub.Redirect_Uri
+                    "&redirect_uri=", gitHubConfig.Redirect_Uri
                 });
                 return await Task.FromResult(address);
             },
@@ -116,11 +123,11 @@ namespace WYBlog.AppServices
         {
             return await Cache.GetOrCreateAsync(string.Format(KEY_GetAccessToken, code), async () =>
             {
-                var content = new StringContent($"code={code}&client_id={AppSettings.GitHub.Client_ID}&redirect_uri={AppSettings.GitHub.Redirect_Uri}&client_secret={AppSettings.GitHub.Client_Secret}");
+                var content = new StringContent($"code={code}&client_id={gitHubConfig.Client_ID}&redirect_uri={gitHubConfig.Redirect_Uri}&client_secret={gitHubConfig.Client_Secret}");
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
                 using var client = _httpClient.CreateClient();
-                var httpResponse = await client.PostAsync(AppSettings.GitHub.API_AccessToken, content);
+                var httpResponse = await client.PostAsync(gitHubConfig.API_AccessToken, content);
 
                 var response = await httpResponse.Content.ReadAsStringAsync();
                 if (response.StartsWith("access_token"))
@@ -141,7 +148,7 @@ namespace WYBlog.AppServices
         {
             return await Cache.GetOrCreateAsync(string.Format(KEY_GenerateToken, access_token), async () =>
             {
-                var url = $"{AppSettings.GitHub.API_User}?access_token={access_token}";
+                var url = $"{gitHubConfig.API_User}?access_token={access_token}";
 
                 using var client = _httpClient.CreateClient();
                 client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.14 Safari/537.36 Edg/83.0.478.13");
@@ -150,10 +157,10 @@ namespace WYBlog.AppServices
                 {
                     var content = await httpResponse.Content.ReadAsStringAsync();
                     var user = JsonConvert.DeserializeObject<GitHubUserResponse>(content);
-                    if (user?.Id == AppSettings.GitHub.UserId)
+                    if (user?.Id == gitHubConfig.UserId)
                     {
                         var authTime = DateTime.Now;//Nbf 生效时间，在此之前不可用
-                        var expiresAt = authTime.Add(TimeSpan.FromMinutes(AppSettings.JwtAuth.Expires));//Exp 过期时间，在此之后不可用
+                        var expiresAt = authTime.Add(TimeSpan.FromMinutes(jwtAuthConfig.Expires));//Exp 过期时间，在此之后不可用
 
                         var nbf = new DateTimeOffset(authTime).ToUnixTimeSeconds();
                         var exp = new DateTimeOffset(expiresAt).ToUnixTimeSeconds();
@@ -166,11 +173,11 @@ namespace WYBlog.AppServices
                             new Claim(JwtRegisteredClaimNames.Exp, $"{exp}")//过期时间
                         };
 
-                        var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppSettings.JwtAuth.SecurityKey));
+                        var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAuthConfig.SecurityKey));
 
                         var securityToken = new JwtSecurityToken(
-                            issuer: AppSettings.JwtAuth.Issuer,
-                            audience: AppSettings.JwtAuth.Audience,
+                            issuer: jwtAuthConfig.Issuer,
+                            audience: jwtAuthConfig.Audience,
                             claims: claims,
                             notBefore: authTime,
                             expires: expiresAt,
@@ -210,7 +217,7 @@ namespace WYBlog.AppServices
             var name = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
             var email = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
-            if (name == AppSettings.GitHub.ApplicationName && !email.IsNullOrWhiteSpace())
+            if (name == gitHubConfig.ApplicationName && !email.IsNullOrWhiteSpace())
             {
                 return await Task.FromResult(true);
             }

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace WYBlog.Extensions
 {
@@ -16,7 +15,7 @@ namespace WYBlog.Extensions
         public static string GetClientUserIp(this HttpContext context)
         {
             var ip = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
-            if (string.IsNullOrEmpty(ip))
+            if (ip.IsNullOrWhiteSpace())
             {
                 ip = context.Connection.RemoteIpAddress.ToString();
             }

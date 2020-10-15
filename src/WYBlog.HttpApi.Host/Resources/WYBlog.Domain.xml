@@ -29,74 +29,9 @@
             允许跨域访问地址
             </summary>
         </member>
-        <member name="T:WYBlog.Configurations.AppSettings.JwtAuth">
-            <summary>
-            JwtAuth
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.JwtAuth.Audience">
-            <summary>
-            接受者
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.JwtAuth.Issuer">
-            <summary>
-            签发者
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.JwtAuth.SecurityKey">
-            <summary>
-            密匙
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.JwtAuth.Expires">
-            <summary>
-            过期时间
-            </summary>
-        </member>
-        <member name="T:WYBlog.Configurations.AppSettings.Caching">
-            <summary>
-            Caching
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.Caching.RedisConnectionString">
-            <summary>
-            RedisConnectionString
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.Caching.IsOpen">
-            <summary>
-            是否开启
-            </summary>
-        </member>
         <member name="T:WYBlog.Configurations.AppSettings.RabbitMQ">
             <summary>
             RabbitMQ
-            </summary>
-        </member>
-        <member name="T:WYBlog.Configurations.AppSettings.GitHub">
-            <summary>
-            GitHub
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.GitHub.API_Authorize">
-            <summary>
-            GET请求，跳转GitHub登录界面，获取用户授权，得到code
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.GitHub.API_AccessToken">
-            <summary>
-            POST请求，根据code得到access_token
-            </summary>
-        </member>
-        <member name="P:WYBlog.Configurations.AppSettings.GitHub.API_User">
-            <summary>
-            GET请求，根据access_token得到用户信息
-            </summary>
-        </member>
-        <member name="T:WYBlog.Configurations.AppSettings.Hangfire">
-            <summary>
-            Hangfire
             </summary>
         </member>
         <member name="T:WYBlog.Configurations.AppSettings.FileUpload">
@@ -117,6 +52,66 @@
         <member name="P:WYBlog.Configurations.AppSettings.FileUpload.AllowedUploadFormats">
             <summary>
             允许的文件类型
+            </summary>
+        </member>
+        <member name="T:WYBlog.Configurations.CacheConfig">
+            <summary>
+            Redis 缓存
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.CacheConfig.RedisConnectionString">
+            <summary>
+            RedisConnectionString
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.CacheConfig.IsOpen">
+            <summary>
+            是否开启
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.GitHubConfig.API_Authorize">
+            <summary>
+            GET请求，跳转GitHub登录界面，获取用户授权，得到code
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.GitHubConfig.API_AccessToken">
+            <summary>
+            POST请求，根据code得到access_token
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.GitHubConfig.API_User">
+            <summary>
+            GET请求，根据access_token得到用户信息
+            </summary>
+        </member>
+        <member name="T:WYBlog.Configurations.HangfireConfig">
+            <summary>
+            Hangfire
+            </summary>
+        </member>
+        <member name="T:WYBlog.Configurations.JwtAuthConfig">
+            <summary>
+            JwtAuth
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.JwtAuthConfig.Audience">
+            <summary>
+            接受者
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.JwtAuthConfig.Issuer">
+            <summary>
+            签发者
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.JwtAuthConfig.SecurityKey">
+            <summary>
+            密匙
+            </summary>
+        </member>
+        <member name="P:WYBlog.Configurations.JwtAuthConfig.Expires">
+            <summary>
+            过期时间
             </summary>
         </member>
         <member name="T:WYBlog.Entities.Advertisement">

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Caching;
@@ -27,6 +27,8 @@ namespace WYBlog
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            context.Services.AddHttpClient();
+
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<BlogApplicationModule>();
@@ -43,14 +45,16 @@ namespace WYBlog
         /// <param name="services"></param>
         private void ConfigureCaching(IServiceCollection services)
         {
-            if (AppSettings.Caching.IsOpen)
+            var cacheConfig = services.GetConfiguration().GetSection("Caching");
+            var isOpen = cacheConfig.GetSection("IsOpen").Get<bool>();
+            if (isOpen)
             {
                 services.AddStackExchangeRedisCache(options =>
                 {
-                    options.Configuration = AppSettings.Caching.RedisConnectionString;
+                    options.Configuration = cacheConfig["RedisConnectionString"];
                 });
 
-                var csredis = new CSRedis.CSRedisClient(AppSettings.Caching.RedisConnectionString);
+                var csredis = new CSRedis.CSRedisClient(cacheConfig["RedisConnectionString"]);
                 RedisHelper.Initialization(csredis);
 
                 services.AddSingleton<IDistributedCache>(new CSRedisCache(RedisHelper.Instance));

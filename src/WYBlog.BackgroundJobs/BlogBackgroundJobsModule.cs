@@ -5,10 +5,10 @@ using MailKit.Security;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 using Volo.Abp.AspNetCore;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.BackgroundJobs.Hangfire;
 using Volo.Abp.MailKit;
 using Volo.Abp.Modularity;
-using WYBlog.Configurations;
 
 namespace WYBlog
 {
@@ -23,6 +23,8 @@ namespace WYBlog
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
+
             ConfigureMailKit();
             ConfigureHangfire(context.Services);
         }
@@ -44,10 +46,12 @@ namespace WYBlog
         /// <param name="services"></param>
         private void ConfigureHangfire(IServiceCollection services)
         {
+            var hangfireConfig = services.GetConfiguration().GetSection("Hangfire");
+
             services.AddHangfire(config =>
             {
                 config.UseStorage(
-                            new MySqlStorage(AppSettings.Hangfire.ConnectionString,
+                            new MySqlStorage(hangfireConfig["ConnectionString"],
                             new MySqlStorageOptions
                             {
                                 TablePrefix = ""
@@ -59,6 +63,7 @@ namespace WYBlog
         {
             var env = context.GetEnvironment();
             var app = context.GetApplicationBuilder();
+            var hangfireConfig = context.GetConfiguration().GetSection("Hangfire");
 
             app.UseHangfireServer();
 
@@ -75,8 +80,8 @@ namespace WYBlog
                             {
                                 new BasicAuthAuthorizationUser
                                 {
-                                    Login = AppSettings.Hangfire.Login,
-                                    PasswordClear =  AppSettings.Hangfire.Password
+                                    Login = hangfireConfig["Login"],
+                                    PasswordClear =  hangfireConfig["Password"]
                                 }
                             }
                         })

@@ -6,7 +6,7 @@ namespace WYBlog
 {
     [DependsOn(
        typeof(AbpAutofacModule),
-       typeof(BlogDomainModule),
+       typeof(BlogApplicationContractsModule),
        typeof(BlogEntityFrameworkCoreDbMigrationsModule)
        )]
     public class BlogDbMigratorModule : AbpModule

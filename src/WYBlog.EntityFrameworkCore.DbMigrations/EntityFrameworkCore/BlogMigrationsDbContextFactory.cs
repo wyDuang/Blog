@@ -20,8 +20,10 @@ namespace WYBlog.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
+                //.SetBasePath(Directory.GetCurrentDirectory())
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../WYBlog.DbMigrator/"))
                 .AddJsonFile("appsettings.json", optional: false);
+                //.AddJsonFile("appsettings.Production.json", optional: true);
 
             return builder.Build();
         }

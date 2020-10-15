@@ -211,6 +211,20 @@
             <param name="ip"></param>
             <returns></returns>
         </member>
+        <member name="M:WYBlog.Controllers.FileController.GetAsync(System.String)">
+            <summary>
+            根据文件名得到文件
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WYBlog.Controllers.FileController.UploadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            创建文件
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
         <member name="M:WYBlog.Controllers.SignatureController.GetAsync">
             <summary>
             获取签名

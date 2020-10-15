@@ -2,6 +2,8 @@
 {
     public static class BlogDbTableConsts
     {
+        #region Blog
+
         /// <summary>
         /// 文章表
         /// </summary>
@@ -36,6 +38,20 @@
         /// 广告表
         /// </summary>
         public const string Advertisements = "advertisement";
+
+        #endregion Blog
+
+        #region System
+        // <summary>
+        /// 用户表
+        /// </summary>
+        public const string SysUsers = "sys_users";
+
+        // <summary>
+        /// 角色表
+        /// </summary>
+        public const string SysRoles = "sys_roles";
+        #endregion System
 
         /// <summary>
         /// 个性签名记录表
